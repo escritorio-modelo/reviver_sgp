@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home - Projeto Reviver</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/themify-icons/themify-icons.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/ion-icon/css/ionicons.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mCustomScrollbar.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/pcoded-horizontal.min.css}">
+</head>
+
+<body>
+	<!-- Pre-loader start -->
+	<div class="theme-loader" th:fragment="theme-loader">
+		<div class="loader-track">
+			<div class="preloader-wrapper">
+				<div class="spinner-layer spinner-blue">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+				<div class="spinner-layer spinner-red">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Pre-loader end -->
+
+	<div id="pcoded" class="pcoded">
+
+		<div class="pcoded-container">
+			<nav class="navbar header-navbar pcoded-header" th:fragment="header">
+				<div class="navbar-wrapper">
+					<div class="navbar-logo">
+						<a class="mobile-menu waves-light" id="mobile-collapse" href="#!">
+							<i class="ti-menu"></i>
+						</a>
+						<a href="index.html">
+							<img class="img-fluid" th:src="@{/images/logo.png}" alt="Reviver " />
+						</a>
+						<a class="mobile-options waves-light">
+							<i class="ti-more"></i>
+						</a>
+					</div>
+
+					<div class="navbar-container container-fluid">
+
+						<ul class="nav-right">
+							<li class="user-profile header-notification">
+								<a href="#!">
+									<img th:src="@{/images/avatar-4.jpg}" class="img-radius" alt="Foto do usuário">
+									<span>John Doe</span>
+									<i class="ti-angle-down"></i>
+								</a>
+								<ul class="show-notification profile-notification">
+									<li>
+										<a href="user-profile.html">
+											<i class="ti-user"></i> Perfil
+										</a>
+									</li>
+									<li>
+										<a href="auth-normal-sign-in.html">
+											<i class="ti-layout-sidebar-left"></i> Sair
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<div class="pcoded-main-container">
+				<!-- main header-navigation start -->
+				<nav class="pcoded-navbar" th:fragment="navbar">
+					<div class="pcoded-inner-navbar">
+						<ul class="pcoded-item pcoded-left-item">
+							<li class="pcoded-hasmenu">
+								<a href="javascript:void(0)">
+									<span class="pcoded-micon"><i class="ion-edit"></i><b>N</b></span>
+									<span class="pcoded-mtext">Cadastros</span>
+									<span class="pcoded-mcaret"></span>
+								</a>
+								<ul class="pcoded-submenu">
+									<li>
+										<a href="/chamadas/listar">
+											<span class="nav-submenu-icon"><i class="ion-speakerphone"></i></span>
+											<span class="pcoded-mtext" data-i18n="nav.navigate.main">Chamadas</span>
+											<span class="pcoded-mcaret"></span>
+										</a>
+									</li>
+
+									<li>
+										<a href="/templates/patient/list.html">
+											<span class="nav-submenu-icon"><i class="ion-person"></i></span>
+											<span class="pcoded-mtext" data-i18n="nav.navigate.main">Pacientes</span>
+											<span class="pcoded-mcaret"></span>
+										</a>
+									</li>
+
+									<li>
+										<a href="/templates/caregiver/list.html">
+											<span class="nav-submenu-icon"><i class="ion-person-stalker"></i></span>
+											<span class="pcoded-mtext" data-i18n="nav.navigate.main">Cuidadores</span>
+											<span class="pcoded-mcaret"></span>
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="pcoded-hasmenu">
+								<a href="javascript:void(0)">
+									<span class="pcoded-micon"><i class="ti-archive"></i><b>N</b></span>
+									<span class="pcoded-mtext">Movimentos</span>
+									<span class="pcoded-mcaret"></span>
+								</a>
+								<ul class="pcoded-submenu">
+									<li>
+										<a href="#">
+											<span class="nav-submenu-icon"><i class="ion-ios-copy"></i></span>
+											<span class="pcoded-mtext" data-i18n="nav.navigate.main">Incrições</span>
+											<span class="pcoded-mcaret"></span>
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				<!-- main header-navigation end -->
+
+				<div class="pcoded-wrapper">
+					<div class="pcoded-content">
+						<div class="pcoded-inner-content">
+
+							<!-- Main-body start -->
+							<div class="main-body">
+								<div class="page-wrapper">
+
+									<!-- Page body start -->
+									<div class="page-body">
+										<div class="row m-t-40">
+											<div class="col-lg">
+												<!-- Default card start -->
+												<div class="card">
+													<div class="card-header">
+														<h5>Painel de controle do Projeto Reviver &#127774</h5>
+													</div>
+													<div class="card-block">
+														<p>Esse é o painel principal feito para a administradora do
+															sistema
+															do projeto.
+														</p>
+													</div>
+												</div>
+												<!-- Default card end -->
+											</div>
+										</div>
+									</div>
+									<!-- Page body end -->
+								</div>
+							</div>
+							<!-- Main-body end -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/jquery/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/popper.js/js/popper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/css/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/pcoded.min.js}"></script>
+	<script th:src="@{/js/menu-hori-fixed.js}"></script>
+	<script type="text/javascript" th:src="@{/js/script.js}"></script>
+</body>
+</html>
