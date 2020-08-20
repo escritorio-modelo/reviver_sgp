@@ -49,7 +49,7 @@ public class ChamadaController {
 	@GetMapping("/{id}/alterar")
 	public ModelAndView alterar(@PathVariable("id") Long id) {
 		ModelAndView mv = new ModelAndView("chamadas/alterar");
-		mv.addObject("chamadas", chamadaService.getChamadaById(id));
+		mv.addObject("chamada", chamadaService.getChamadaById(id));
 		return mv;
 	}
 	
@@ -66,6 +66,6 @@ public class ChamadaController {
 	public ModelAndView excluir(@PathVariable("id") Long id) {
 		Chamada chamada = chamadaService.getChamadaById(id);
 		chamadaService.toRemove(chamada);
-		return new ModelAndView("redirect:/chamadas/pesquisar");
+		return new ModelAndView("redirect:/chamadas/listar");
 	}
 }

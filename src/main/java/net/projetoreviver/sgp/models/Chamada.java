@@ -25,11 +25,11 @@ public class Chamada implements Serializable{
 	private String descricao;
 	
 	@Column(name = "data_inicio", nullable = false)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataInicio;
 	
 	@Column(name = "data_termino", nullable = false)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataTermino;
 
 	public Long getId() {
