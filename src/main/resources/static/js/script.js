@@ -1,4 +1,4 @@
-"use strict";
+'use strict'
 $(document).ready(function() {
     // card js start
     $(".card-header-right .close-card").on('click', function() {
@@ -414,3 +414,38 @@ $('#styleSelector').append('' +
     '</div>' +
 '</div>' +
 '');
+
+/** script do modal de deletar cadastros */
+$('#delete-modal2').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+
+	var id = button.data('whateverid');
+	var name = button.data('whatevername');
+	var controller = button.data('whateverctrl');
+
+	var modal = $(this);
+
+	modal.find('.register').text(name);
+	modal.find('#delete-confirm').attr("href", controller);
+});
+
+/** script do dataTables */
+$('#example').dataTable({
+	"language": {
+		"url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json"
+	}
+});
+
+/** script do tooltip do template */
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+$(document).ready(function () {
+    $('[data-toggle="popover"]').popover({
+        html: true,
+        content: function () {
+            return $('#primary-popover-content').html();
+        }
+    });
+});

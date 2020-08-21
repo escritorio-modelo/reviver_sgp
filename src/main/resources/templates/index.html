@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Home - Projeto Reviver</title>
-	<th:block th:include="fragmentos/general.html :: headerfiles">
-  </th:block>
+<title>Home - Projeto Reviver</title>
+<th:block th:include="fragmentos/general.html :: headerfiles">
+</th:block>
 </head>
 
 <body>
 	<div th:replace="fragmentos/componentes :: theme-loader "></div>
+
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-container">
+
 			<div th:replace="fragmentos/componentes :: header"></div>
+
 			<div class="pcoded-main-container">
+
 				<div th:replace="fragmentos/componentes :: navbar"></div>
+
 				<div class="pcoded-wrapper">
 					<div class="pcoded-content">
 						<div class="pcoded-inner-content">
@@ -26,7 +31,8 @@
 														<h5>Principal</h5>
 													</div>
 													<div class="card-block">
-														<p>Esse é o painel principal feito para a administradora do sistema do projeto.</p>
+														<p>Esse é o painel principal feito para a
+															administradora do sistema do projeto.</p>
 													</div>
 												</div>
 											</div>
@@ -40,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-		<!-- chamada para os arquivos e scripts js -->
-	<th:block th:include="fragmentos/scripts"></th:block>
+
+	<th:block th:include="fragmentos/general.html :: scripts-imports"></th:block>
 </body>
 </html>
