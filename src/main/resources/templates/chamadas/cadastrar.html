@@ -1,79 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Home - Projeto Reviver</title>
-	<th:block th:include="fragmentos/general.html :: headerfiles">
+<title>Home - Projeto Reviver</title>
+<th:block th:include="fragmentos/general.html :: headerfiles">
 </head>
 <body>
 
 	<div th:replace="fragmentos/componentes :: theme-loader "></div>
-	
+
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-container">
-		
+
 			<div th:replace="fragmentos/componentes :: header"></div>
-			
+
 			<div class="pcoded-main-container">
-			
+
 				<div th:replace="fragmentos/componentes :: navbar"></div>
-				
+
 				<div class="pcoded-wrapper">
 					<div class="pcoded-content">
 						<div class="pcoded-inner-content">
 							<div class="main-body">
 								<div class="page-wrapper">
 									<div class="page-body">
-                    <div class="row m-t-40">
-                      <div class="col-lg">
+										<div class="row m-t-40">
+											<div class="col-lg">
 
 
-                        <!-- Default card start -->
-                        <div class="card">
-                          <div class="card-header">
-                            <h5>Cadastrar nova chamada</h5>
-                            <span>
-                              Crie uma nova chamada do Projeto Reviver &#127774
-                            </span>
-                          </div>
-                          <div class="card-block">
-                            <form method="post" action="/chamadas/cadastrar" th:object="${chamada}" autocomplete="off">
-	                        <div class="alert alert-danger background-danger" role="alert" th:if="${#fields.hasErrors('*')}">
-	                          <strong th:each="error : ${#fields.errors('*')}" th:text="${error}"></strong>
-	                        </div>
-                              <h4 class="sub-title">Dados da nova chamada</h4>
+												<!-- Default card start -->
+												<div class="card">
+													<div class="card-header">
+														<h5>Cadastrar nova chamada</h5>
+														<span> Crie uma nova chamada do Projeto Reviver
+															&#127774 </span>
+													</div>
+													<div class="card-block">
+														<form method="post" action="/chamadas/cadastrar"
+															th:object="${chamada}" autocomplete="off">
+															<div class="alert alert-danger background-danger"
+																role="alert" th:if="${#fields.hasErrors('*')}">
+																<strong th:each="error : ${#fields.errors('*')}"
+																	th:text="${error}"></strong>
+															</div>
+															<h4 class="sub-title">Dados da nova chamada</h4>
 
-                              <div class="form-group row">
-                                <label class="col-xl-2 col-sm-2 col-form-label">Data de início</label>
-                                <div class="col-xl-3 col-lg-5 col-sm-10">
-                                  <input class="form-control form-control-lg" th:field="${chamada.dataInicio}" type="date">
-                                </div>
+															<div class="form-group row">
+																<label class="col-xl-2 col-sm-2 col-form-label">Data
+																	de início</label>
+																<div class="col-xl-3 col-lg-5 col-sm-10">
+																	<input class="form-control form-control-lg"
+																		th:field="${chamada.dataInicio}" type="date">
+																</div>
 
-                                <div class="col-xl-2"></div>
+																<div class="col-xl-2"></div>
 
-                                <label class="col-xl-2 col-sm-2 col-form-label">Data de término</label>
-                                <div class="col-xl-3 col-lg-6 col-sm-10">
-                                  <input class="form-control form-control-lg" th:field="${chamada.dataTermino}" type="date">
-                                </div>
-                              </div>
+																<label class="col-xl-2 col-sm-2 col-form-label">Data
+																	de término</label>
+																<div class="col-xl-3 col-lg-6 col-sm-10">
+																	<input class="form-control form-control-lg"
+																		th:field="${chamada.dataTermino}" type="date">
+																</div>
+															</div>
 
-                              <div class="form-group row">
-                                <label class="col-xl-2 col-sm-2 col-form-label">Descrição</label>
-                                <div class="col-sm-10">
-                                  <textarea rows="5" cols="5" class="form-control form-control-lg"
-                                    placeholder="Escreva um pouco sobre a nova chamada" th:field="${chamada.descricao}"></textarea>
-                                </div>
-                              </div>
+															<div class="form-group row">
+																<label class="col-xl-2 col-sm-2 col-form-label">Descrição</label>
+																<div class="col-sm-10">
+																	<textarea rows="5" cols="5"
+																		class="form-control form-control-lg"
+																		placeholder="Escreva um pouco sobre a nova chamada"
+																		th:field="${chamada.descricao}"></textarea>
+																</div>
+															</div>
 
-                              <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Cadastrar</button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                        <!-- Default card end -->
-                      </div>
-                    </div>
-                  </div>
+															<div class="card-footer">
+																<button type="submit" class="btn btn-primary">Cadastrar</button>
+															</div>
+														</form>
+													</div>
+												</div>
+												<!-- Default card end -->
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -82,7 +90,7 @@
 			</div>
 		</div>
 	</div>
-		<!-- chamada para os arquivos e scripts js -->
-	<th:block th:include="fragmentos/scripts"></th:block>
+
+	<th:block th:include="fragmentos/general :: scripts-imports"></th:block>
 </body>
 </html>
