@@ -39,7 +39,7 @@
 															th:object="${chamada}" autocomplete="off">
 															<div class="alert alert-danger background-danger"
 																role="alert" th:if="${#fields.hasErrors('*')}">
-																<strong th:each="error : ${#fields.errors('*')}"
+																<strong style="display: block;" th:each="error : ${#fields.errors('*')}"
 																	th:text="${error}"></strong>
 															</div>
 															<h4 class="sub-title">Dados da nova chamada</h4>
