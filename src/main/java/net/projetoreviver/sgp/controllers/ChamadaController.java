@@ -1,5 +1,7 @@
 package net.projetoreviver.sgp.controllers;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,9 @@ public class ChamadaController {
 	
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Chamada chamada) {
-		return new ModelAndView("chamadas/cadastrar");
+		ModelAndView mv = new ModelAndView("chamadas/cadastrar");
+		mv.addObject("minDate", LocalDate.now());
+		return mv;
 	}
 	
 	@PostMapping("/cadastrar")
