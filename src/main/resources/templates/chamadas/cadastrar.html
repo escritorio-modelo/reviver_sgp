@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>Home - Projeto Reviver</title>
-<th:block th:include="fragmentos/general.html :: headerfiles">
+	<title>Home - Projeto Reviver</title>
+	<th:block th:include="fragmentos/general.html :: headerfiles">
 </head>
+
 <body>
 
 	<div th:replace="fragmentos/componentes :: theme-loader "></div>
@@ -48,7 +50,7 @@
 																<label class="col-xl-2 col-sm-2 col-form-label">Data
 																	de início</label>
 																<div class="col-xl-3 col-lg-5 col-sm-10">
-																	<input class="form-control form-control-lg"
+																	<input id="dataInicio" class="form-control form-control-lg"
 																		th:field="${chamada.dataInicio}" th:min="${minDate}" type="date">
 																</div>
 
@@ -57,7 +59,7 @@
 																<label class="col-xl-2 col-sm-2 col-form-label">Data
 																	de término</label>
 																<div class="col-xl-3 col-lg-6 col-sm-10">
-																	<input class="form-control form-control-lg"
+																	<input id="dataTermino" class="form-control form-control-lg"
 																		th:field="${chamada.dataTermino}" th:min="${minDate}" type="date">
 																</div>
 															</div>
@@ -92,5 +94,25 @@
 	</div>
 
 	<th:block th:include="fragmentos/general :: scripts-imports"></th:block>
+	<script>
+		selectElement = document.getElementById('dataInicio');
+		selectElement.addEventListener('change', (event) => {
+			const result = document.querySelector('#dataTermino');
+			let date = new Date(event.target.value);
+			date.setDate(date.getDate() + 2);
+			let dd = date.getDate();
+			let mm = date.getMonth() + 1; //January is 0!
+			let yyyy = date.getFullYear();
+			if (dd < 10) {
+				dd = '0' + dd
+			}
+			if (mm < 10) {
+				mm = '0' + mm
+			}
+
+			dateTerminoMin = yyyy + '-' + mm + '-' + dd;
+			result.min = dateTerminoMin;
+		});
+	</script>
 </body>
 </html>
