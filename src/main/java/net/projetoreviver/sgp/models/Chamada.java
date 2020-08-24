@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -22,14 +26,18 @@ public class Chamada implements Serializable{
 	private Long id;
 	
 	@Column(length = 75, nullable = false)
+	@NotBlank(message = "O campo descrição não pode estar em branco.")
+	@Length(max = 75, message = "O campo descrição deve conter no máximo 75 caracteres.")
 	private String descricao;
 	
 	@Column(name = "data_inicio", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "A chamada deve conter uma data de início.")
 	private Date dataInicio;
 	
 	@Column(name = "data_termino", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "A chamada deve conter uma data de término.")
 	private Date dataTermino;
 
 	public Long getId() {
