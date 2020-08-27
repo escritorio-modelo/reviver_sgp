@@ -1,5 +1,6 @@
 package net.projetoreviver.sgp.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,8 +30,10 @@ import net.projetoreviver.sgp.annotations.ValidEmail;
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuario {
-    
+public abstract class Usuario implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "usu_id")
@@ -86,6 +89,10 @@ public abstract class Usuario {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getId(){
+        return this.id;
     }
 
     public int getAtivo() {
