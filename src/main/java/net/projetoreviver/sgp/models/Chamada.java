@@ -14,7 +14,10 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import net.projetoreviver.sgp.annotations.ValidChamadaDate;
+
 @Entity
+@ValidChamadaDate
 public class Chamada implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

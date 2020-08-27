@@ -1,10 +1,12 @@
-package net.projetoreviver.sgp.annotations;
+package net.projetoreviver.sgp.annotations.AnnotationImpl;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import net.projetoreviver.sgp.annotations.ValidEmail;
 
 public class EmailValidator implements ConstraintValidator<ValidEmail, String>{
     private Pattern pattern;

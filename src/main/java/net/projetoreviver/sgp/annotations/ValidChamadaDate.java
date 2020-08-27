@@ -9,16 +9,14 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import net.projetoreviver.sgp.annotations.AnnotationImpl.EmailValidator;
+import net.projetoreviver.sgp.annotations.AnnotationImpl.ChamadaDateValidator;
 
-
-
-@Target({ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = EmailValidator.class)
+@Constraint(validatedBy = ChamadaDateValidator.class)
 @Documented
-public @interface ValidEmail {
-    String message() default "Email inválido";
+public @interface ValidChamadaDate {
+    String message() default "Data de término tem que ser maior que a data de início";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
