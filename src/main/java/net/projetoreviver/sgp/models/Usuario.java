@@ -16,7 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -24,6 +23,8 @@ import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import net.projetoreviver.sgp.annotations.ValidEmail;
 
 @Entity
 @Table(name = "usuario")
@@ -55,7 +56,7 @@ public abstract class Usuario {
     private Date dataRegistro;
 
     @Column(name="usu_email")
-    @Email(message = "Email deve ser válido")
+    @ValidEmail
     private String email;
     
     @Column(name = "usu_genero", nullable = false, columnDefinition = "char(1)")
