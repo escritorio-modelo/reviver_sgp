@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -35,11 +36,13 @@ public class Chamada implements Serializable{
 	@Column(name = "data_inicio", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "A chamada deve conter uma data de início.")
+	@FutureOrPresent(message = "Data de Inicio Inválida.")
 	private Date dataInicio;
 	
 	@Column(name = "data_termino", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "A chamada deve conter uma data de término.")
+	@FutureOrPresent(message = "Data de Término Inválida.")
 	private Date dataTermino;
 
 	public Long getId() {
