@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -66,9 +68,12 @@ public abstract class Usuario implements Serializable{
 	@NotNull(message = "O campo gênero deve estar selecionado.")
 	private Character genero;
 
-    /*
-    private Status status;
+    @Column(name = "usu_estado_civil", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Estado Civil é obrigatório.")
+    private EstadoCivil estadoCivil;
 
+    /*
     @Column(name="usu_endereco")
     private Endereco endereco;
 
