@@ -132,14 +132,14 @@ public abstract class Usuario implements Serializable{
         this.genero = genero;
     }
 
-   /* public Status getStatus() {
-        return status;
+    public EstadoCivil getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(EstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
-
+/*
     public Endereco getEndereco() {
         return endereco;
     }
@@ -155,5 +155,7 @@ public abstract class Usuario implements Serializable{
     public void setTelefone(List<String> telefone) {
         this.telefone = telefone;
     }
+
+    
 
 }
