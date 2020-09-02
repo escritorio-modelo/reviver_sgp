@@ -7,5 +7,4 @@ import net.projetoreviver.sgp.models.Chamada;
 
 @Repository
 public interface ChamadaRepository extends JpaRepository<Chamada, Long>{
-
 }

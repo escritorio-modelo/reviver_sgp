@@ -8,9 +8,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "paciente")
+@Table(name = "tbl_paciente")
 @PrimaryKeyJoinColumn(name="usu_id")
-public class Paciente extends Usuario implements Serializable{
+public class Paciente extends Usuario{
 
     private static final long serialVersionUID = 1L;
     
@@ -19,5 +19,34 @@ public class Paciente extends Usuario implements Serializable{
 
     @Column(name = "pac_parkinson")
     private boolean parkinson;
+
+
+    /**
+     * @return boolean return the alzheimer
+     */
+    public boolean isAlzheimer() {
+        return alzheimer;
+    }
+
+    /**
+     * @param alzheimer the alzheimer to set
+     */
+    public void setAlzheimer(boolean alzheimer) {
+        this.alzheimer = alzheimer;
+    }
+
+    /**
+     * @return boolean return the parkinson
+     */
+    public boolean isParkinson() {
+        return parkinson;
+    }
+
+    /**
+     * @param parkinson the parkinson to set
+     */
+    public void setParkinson(boolean parkinson) {
+        this.parkinson = parkinson;
+    }
 
 }

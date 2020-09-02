@@ -2,8 +2,8 @@ package net.projetoreviver.sgp.repositories;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import net.projetoreviver.sgp.models.Paciente;
+import net.projetoreviver.sgp.models.Cuidador;
 
 @Repository
-public interface PacienteRepository extends JpaRepository<Paciente, Long>{
+public interface CuidadorRepository extends JpaRepository<Cuidador, Long> {
 }

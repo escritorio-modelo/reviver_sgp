@@ -30,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import net.projetoreviver.sgp.annotations.ValidEmail;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "tbl_usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario implements Serializable{
 
