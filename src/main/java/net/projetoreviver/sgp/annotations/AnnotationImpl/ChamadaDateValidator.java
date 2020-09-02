@@ -18,7 +18,11 @@ public class ChamadaDateValidator implements ConstraintValidator<ValidChamadaDat
         Chamada chamada = (Chamada) obj;
         Date dateInicio = chamada.getDataInicio();
         Date dateFinal = chamada.getDataTermino();
+        if (dateInicio == null || dateFinal == null){
+            return true;
+        }
         int comparacaoDates = dateInicio.compareTo(dateFinal);
+       
         if(comparacaoDates >= 0){
             return false;
         }
