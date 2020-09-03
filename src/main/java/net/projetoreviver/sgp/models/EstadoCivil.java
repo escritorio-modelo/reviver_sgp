@@ -12,7 +12,7 @@ public enum EstadoCivil {
         this.displayValue = displayValue;
     }
 
-    private String getDisplayValue(){
+    public String getDisplayValue(){
         return displayValue;
     }
 }
