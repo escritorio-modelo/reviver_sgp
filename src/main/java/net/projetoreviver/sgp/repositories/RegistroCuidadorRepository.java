@@ -3,8 +3,8 @@ package net.projetoreviver.sgp.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import net.projetoreviver.sgp.models.Chamada;
+import net.projetoreviver.sgp.models.RegistroCuidador;
 
 @Repository
-public interface ChamadaRepository extends JpaRepository<Chamada, Long>{
+public interface RegistroCuidadorRepository extends JpaRepository<RegistroCuidador, Long>{   
 }
