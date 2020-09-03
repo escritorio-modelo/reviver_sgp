@@ -1,9 +1,10 @@
 package net.projetoreviver.sgp.models;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -20,33 +21,37 @@ public class Paciente extends Usuario{
     @Column(name = "pac_parkinson")
     private boolean parkinson;
 
+    @OneToMany(mappedBy = "paciente")
+    private List<RegistroChamadaPaciente> registroChamadaPacientes;
 
-    /**
-     * @return boolean return the alzheimer
-     */
+
     public boolean isAlzheimer() {
         return alzheimer;
     }
 
-    /**
-     * @param alzheimer the alzheimer to set
-     */
+
     public void setAlzheimer(boolean alzheimer) {
         this.alzheimer = alzheimer;
     }
 
-    /**
-     * @return boolean return the parkinson
-     */
+
     public boolean isParkinson() {
         return parkinson;
     }
 
-    /**
-     * @param parkinson the parkinson to set
-     */
+
     public void setParkinson(boolean parkinson) {
         this.parkinson = parkinson;
+    }
+
+
+    public List<RegistroChamadaPaciente> getRegistroChamadaPacientes() {
+        return registroChamadaPacientes;
+    }
+
+    
+    public void setRegistroChamadaPacientes(List<RegistroChamadaPaciente> registroChamadaPacientes) {
+        this.registroChamadaPacientes = registroChamadaPacientes;
     }
 
 }
