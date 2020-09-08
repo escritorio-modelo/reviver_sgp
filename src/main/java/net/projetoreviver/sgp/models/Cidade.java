@@ -9,25 +9,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="tbl_endereco")
-public class Endereco {
+@Table(name = "tbl_cidade")
+public class Cidade {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "end_id")
+	@Column(name = "cid_id")
     private Long id;
-    
-    @Column(name = "end_numero")
-    private String numero;
 
-    @Column(name = "end_cep")
-    private String cep;
+    @Column(name = "cid_nome")
+    private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "rua_fk")
-    private Rua rua;
-    
-    @Column(name = "end_complemento")
-    private String complemento;
+    @JoinColumn(name = "estado_fk")
+    private Estado estado;
 }

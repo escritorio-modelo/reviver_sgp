@@ -9,6 +9,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Entity;
@@ -73,12 +74,10 @@ public abstract class Usuario implements Serializable{
     @NotNull(message = "Estado Civil é obrigatório.")
     private EstadoCivil estadoCivil;
 
-    /*
-    @Column(name="usu_endereco")
+    
+    @OneToOne
+    @JoinColumn(name = "endereco_fk")
     private Endereco endereco;
-
-    */
-
 
     @ElementCollection
     @CollectionTable(name = "usu_tel", 
