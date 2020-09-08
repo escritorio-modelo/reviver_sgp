@@ -138,15 +138,7 @@ public abstract class Usuario implements Serializable{
     public void setStatus(EstadoCivil estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
-/*
-    public Endereco getEndereco() {
-        return endereco;
-    }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-*/
     public List<String> getTelefone() {
         return telefone;
     }
@@ -155,6 +147,31 @@ public abstract class Usuario implements Serializable{
         this.telefone = telefone;
     }
 
-    
+    public String getCpf() {
+        return cpf;
+    }
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public void setEstadoCivil(EstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }
