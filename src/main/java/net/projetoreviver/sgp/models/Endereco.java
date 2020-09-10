@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 
 @Entity
@@ -18,22 +21,27 @@ public class Endereco {
 	@Column(name = "end_id")
     private Long id;
     
-    @Column(name = "end_numero")
+    @Column(name = "end_numero", length = 10)
+    @NotBlank(message = "Número é obrigatório.")
     private String numero;
 
-    @Column(name = "end_cep")
+    @Column(name = "end_cep", length = 8)
+    @Length(min = 8, max = 8, message = "CEP deve conter 8 caracteres.")
+    @NotBlank(message = "Insira um CEP.")
     private String cep;
 
     @ManyToOne
     @JoinColumn(name = "rua_fk")
     private Rua rua;
     
-    @Column(name = "end_complemento")
+    @Column(name = "end_complemento", length = 75)
+    @Length(max = 75, message = "Complemento deve conter no máximo 75 caracteres.")
     private String complemento;
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tbl_cidade")
@@ -17,7 +20,9 @@ public class Cidade {
 	@Column(name = "cid_id")
     private Long id;
 
-    @Column(name = "cid_nome")
+    @Column(name = "cid_nome", length = 45)
+    @Length(max = 45, message = "Nome da cidade deve conter no máximo 45 caracteres.")
+    @NotBlank(message = "Insira uma cidade.")
     private String nome;
 
     @ManyToOne
@@ -25,7 +30,6 @@ public class Cidade {
     private Estado estado;
 
     
-
     /**
      * @return Long return the id
      */

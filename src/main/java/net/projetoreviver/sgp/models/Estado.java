@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tbl_estado")
@@ -14,7 +19,9 @@ public class Estado {
 	@Column(name = "est_id")
     private Long id;
 
-    @Column(name = "est_nome")
+    @Column(name = "est_nome", length = 20)
+    @Length(max = 20, message = "Nome do estado deve conter no máximo 20 caracteres.")
+    @NotBlank(message = "Insira um estado.")
     private String nome;
 
     /**
