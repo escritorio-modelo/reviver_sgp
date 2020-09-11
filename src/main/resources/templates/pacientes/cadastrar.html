@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<title>Cadastrar Paciente - Projeto Reviver</title>
+<th:block th:include="fragmentos/general.html :: headerfiles">
+
+</head>
+<body>
+
+	<div th:replace="fragmentos/componentes :: theme-loader "></div>
+
+	<div id="pcoded" class="pcoded">
+		<div class="pcoded-container">
+			
+			<div th:replace="fragmentos/componentes :: header"></div>
+			
+			<div class="pcoded-main-container">
+				<div th:replace="fragmentos/componentes :: navbar"></div>
+				
+				<div class="pcoded-wrapper">
+					<div class="pcoded-content">
+						<div class="pcoded-inner-content">
+							<div class="main-body">
+								<div class="page-wrapper">
+									<div class="page-body">
+										<div class="row m-t-40">
+											<div class="col-lg">
+											
+												<!-- Default card start -->
+                          <div class="card">
+                            <div class="card-header">
+                              <h5>Cadastrar novo paciente</h5>
+                              <span>
+                                Adicione um novo paciente ao Projeto Reviver através do formulário abaixo.
+                              </span>
+                            </div>
+                            <div class="card-block">
+                              <form method="post" action="/pacientes/cadastrar"
+															th:object="${paciente}" autocomplete="off">
+	                              <div class="alert alert-danger background-danger"
+																	role="alert" th:if="${#fields.hasErrors('*')}">
+																	<strong style="display: block;" th:each="error : ${#fields.errors('*')}"
+																		th:text="${error}"></strong>
+																</div>
+																
+                                <h4 class="sub-title">Dados pessoais</h4>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">CPF</label>
+                                  <div class="col-xl-3 col-lg-5 col-sm-10">
+                                    <input type="text" class="form-control form-control-lg"
+                                      placeholder="Ex.: 36017344005">
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Nome completo</label>
+                                  <div class="col-xl-5 col-lg-9 col-sm-10">
+                                    <input type="text" class="form-control form-control-lg"
+                                      placeholder="Nome e sobrenome completo">
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Gênero</label>
+                                  <div class="col-xl-2 col-lg-5 col-sm-10">
+                                    <select id="genero" class="form-control">
+                                      <option>Escolha</option>
+                                      <option value="masculino">Masculino</option>
+                                      <option value="feminino">Feminino</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Data de nascimento</label>
+                                  <div class="col-xl-3 col-lg-5 col-sm-10">
+                                    <input class="form-control form-control-lg" type="date">
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Portador de:</label>
+                                  <div class="col-xl-10 col-lg-10 col-sm-10">
+                                    <label class="checkbox-style">
+                                      <input id="Parkinson" type="checkbox" value="parkinson">
+                                      <span class="checkmark"></span>
+                                      <span class="checkmark-label">Parkinson</span>
+                                    </label>
+                                    <br />
+                                    <label class="checkbox-style">
+                                      <input id="Alzheimer" type="checkbox" value="parkinson">
+                                      <span class="checkmark"></span>
+                                      <span class="checkmark-label">Alzheimer</span>
+                                    </label>
+                                  </div>
+                                </div>
+
+                                <h4 class="sub-title">Contato</h4>
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">E-mail</label>
+                                  <div class="col-xl-4 col-lg-9 col-sm-10">
+                                    <input type="email" class="form-control form-control-lg"
+                                      placeholder="exemplo@mail.com">
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Telefone</label>
+                                  <div class="col-xl-3 col-lg-6 col-sm-10">
+                                    <input type="text" class="form-control form-control-lg"
+                                      placeholder="Ex.: 96 991910101">
+                                  </div>
+                                </div>
+
+                                <h4 class="sub-title">Endereço</h4>
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">CEP</label>
+                                  <div class="col-xl-3 col-lg-4 col-sm-10">
+                                    <input type="text" id="cep" class="form-control form-control-lg" placeholder="Ex.: 68903000" onblur="pesquisacep(this.value);">
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Rua</label>
+                                  <div class="col-xl-6 col-lg-10 col-sm-10">
+                                    <input type="text" id="rua" class="form-control form-control-lg"
+                                      placeholder="Ex.: Rod. Juscelino Kubitschek">
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Bairro</label>
+                                  <div class="col-xls-4 col-lg-7 col-sm-10">
+                                    <input type="text" id="bairro" class="form-control form-control-lg"
+                                      placeholder="Ex.: Jardim Marco Zero">
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Cidade</label>
+                                  <div class="col-xls-4 col-lg-7 col-sm-10">
+                                    <input type="text" id="cidade" class="form-control form-control-lg"
+                                      placeholder="Ex.: Santana">
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Número</label>
+                                  <div class="col-xl-2 col-lg-3 col-sm-10">
+                                    <input type="text" class="form-control form-control-lg" placeholder="Ex.: 1919">
+                                  </div>
+                                </div>
+
+                                <div class="card-footer">
+                                  <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                          <!-- Default card end -->
+											
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<th:block th:include="fragmentos/general :: scripts-imports"></th:block>
+</body>
+</html>
