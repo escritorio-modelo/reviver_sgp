@@ -9,6 +9,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Entity;
@@ -73,12 +74,10 @@ public abstract class Usuario implements Serializable{
     @NotNull(message = "Estado Civil é obrigatório.")
     private EstadoCivil estadoCivil;
 
-    /*
-    @Column(name="usu_endereco")
+    
+    @OneToOne
+    @JoinColumn(name = "endereco_fk")
     private Endereco endereco;
-
-    */
-
 
     @ElementCollection
     @CollectionTable(name = "usu_tel", 
@@ -139,15 +138,7 @@ public abstract class Usuario implements Serializable{
     public void setStatus(EstadoCivil estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
-/*
-    public Endereco getEndereco() {
-        return endereco;
-    }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-*/
     public List<String> getTelefone() {
         return telefone;
     }
@@ -156,6 +147,31 @@ public abstract class Usuario implements Serializable{
         this.telefone = telefone;
     }
 
-    
+    public String getCpf() {
+        return cpf;
+    }
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public void setEstadoCivil(EstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }
