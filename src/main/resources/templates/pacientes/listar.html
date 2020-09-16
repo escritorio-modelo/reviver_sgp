@@ -49,7 +49,7 @@
 																	</thead>
 																	<tbody>
 																		<tr th:each="paciente : ${pacientes}">
-																			<td><a th:href="@{/pacientes/detalhes/{id}(id=${paciente.id})}" th:text="${paciente.nome}"></a></td>
+																			<td><a th:href="@{/pacientes/detalhes/{id}(id=${paciente.id})}" th:text="${paciente.email}"></a></td>
 																			<td th:text="${paciente.cpf}"></td>
 																			<td>Alzheimer, Parkinson</td>
 																			<td>
@@ -58,8 +58,8 @@
 																						data-original-title="Editar paciente">
 																						<i class="icofont ion-edit" style="margin-left: 5px"></i></button></a>
 																				<!-- Configurar botão de excluir -->
-																				<a th:href="" data-toggle="modal" data-target="#delete-modal"
-																					th:data-whateverid="" th:data-whatevername="" th:data-whateverctrl=""><button
+																				<a th:href="@{/pacientes/{id}/excluir(id=${paciente.id})}" data-toggle="modal" data-target="#delete-modal"
+																					th:data-whateverid="${paciente.id}" th:data-whateverctrl="@{/pacientes/{id}/excluir(id=${paciente.id})}"><button
 																						class="btn btn-danger btn-outline-danger btn-icon" data-toggle="tooltip"
 																						data-placement="top" data-original-title="Deletar paciente">
 																						<i class="icofont ion-trash-a" style="margin-left: 5px"></i></button></a>

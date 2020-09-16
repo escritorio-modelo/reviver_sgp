@@ -53,5 +53,4 @@ public class Paciente extends Usuario{
     public void setRegistroChamadaPacientes(List<RegistroChamadaPaciente> registroChamadaPacientes) {
         this.registroChamadaPacientes = registroChamadaPacientes;
     }
-
 }

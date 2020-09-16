@@ -46,10 +46,6 @@ public class PacienteController {
 			return this.cadastrar(paciente);
 		}
 		pacienteService.toPersist(paciente);
-		return new ModelAndView("redirect:/paciente/listar");
+		return new ModelAndView("redirect:/pacientes/listar");
 	}
-	
-	
-	
-	
 }

@@ -51,25 +51,25 @@
                                   <label class="col-sm-2 col-form-label">CPF</label>
                                   <div class="col-xl-3 col-lg-5 col-sm-10">
                                     <input type="text" class="form-control form-control-lg"
-                                      placeholder="Ex.: 36017344005">
+                                      placeholder="Ex.: 36017344005" th:field="${paciente.cpf}">
                                   </div>
                                 </div>
 
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Nome completo</label>
                                   <div class="col-xl-5 col-lg-9 col-sm-10">
                                     <input type="text" class="form-control form-control-lg"
-                                      placeholder="Nome e sobrenome completo">
+                                      placeholder="Nome e sobrenome completo" th:field="${paciente.nome}">
                                   </div>
-                                </div>
+                                </div>  -->
 
                                 <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Gênero</label>
                                   <div class="col-xl-2 col-lg-5 col-sm-10">
-                                    <select id="genero" class="form-control">
-                                      <option>Escolha</option>
-                                      <option value="masculino">Masculino</option>
-                                      <option value="feminino">Feminino</option>
+                                    <select id="genero" class="form-control" th:field="${paciente.genero}">
+                                      <option th:value="NULL">**Selecione**</option>
+                                      <option th:value="'M'">Masculino</option>
+                                      <option th:value="'F'">Feminino</option>
                                     </select>
                                   </div>
                                 </div>
@@ -77,7 +77,20 @@
                                 <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Data de nascimento</label>
                                   <div class="col-xl-3 col-lg-5 col-sm-10">
-                                    <input class="form-control form-control-lg" type="date">
+                                    <input class="form-control form-control-lg" type="date" th:field="${paciente.dataNascimento}">
+                                  </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Estado civil</label>
+                                  <div class="col-xl-2 col-lg-5 col-sm-10">
+                                    <select id="genero" class="form-control" th:field="${paciente.estadoCivil}">
+                                      <option th:value="NULL">**Selecione**</option>
+                                      <option th:value="'SOLTEIRO'">Solteiro</option>
+                                      <option th:value="'CASADO'">Casado</option>
+                                      <option th:value="'DIVORCIADO'">Divorciado</option>
+                                      <option th:value="'VIÚVO'">Viúvo</option>
+                                    </select>
                                   </div>
                                 </div>
 
@@ -85,13 +98,13 @@
                                   <label class="col-sm-2 col-form-label">Portador de:</label>
                                   <div class="col-xl-10 col-lg-10 col-sm-10">
                                     <label class="checkbox-style">
-                                      <input id="Parkinson" type="checkbox" value="parkinson">
+                                      <input id="Parkinson" type="checkbox" name="Parkinson" th:checked="${paciente.parkinson}">
                                       <span class="checkmark"></span>
                                       <span class="checkmark-label">Parkinson</span>
                                     </label>
                                     <br />
                                     <label class="checkbox-style">
-                                      <input id="Alzheimer" type="checkbox" value="parkinson">
+                                      <input id="Alzheimer" type="checkbox" name="Alzheimer" th:checked="${paciente.alzheimer}">
                                       <span class="checkmark"></span>
                                       <span class="checkmark-label">Alzheimer</span>
                                     </label>
@@ -103,7 +116,7 @@
                                   <label class="col-sm-2 col-form-label">E-mail</label>
                                   <div class="col-xl-4 col-lg-9 col-sm-10">
                                     <input type="email" class="form-control form-control-lg"
-                                      placeholder="exemplo@mail.com">
+                                      placeholder="exemplo@mail.com" th:field="${paciente.email}">
                                   </div>
                                 </div>
 
@@ -111,7 +124,7 @@
                                   <label class="col-sm-2 col-form-label">Telefone</label>
                                   <div class="col-xl-3 col-lg-6 col-sm-10">
                                     <input type="text" class="form-control form-control-lg"
-                                      placeholder="Ex.: 96 991910101">
+                                      placeholder="Ex.: 96 991910101" th:field="${paciente.telefone}">
                                   </div>
                                 </div>
 
@@ -119,7 +132,7 @@
                                 <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">CEP</label>
                                   <div class="col-xl-3 col-lg-4 col-sm-10">
-                                    <input type="text" id="cep" class="form-control form-control-lg" placeholder="Ex.: 68903000" onblur="pesquisacep(this.value);">
+                                    <input type="text" id="cep" class="form-control form-control-lg" placeholder="Ex.: 68903000" onblur="pesquisacep(this.value);" th:field="${paciente.endereco.cep}">
                                   </div>
                                 </div>
 
@@ -127,7 +140,7 @@
                                   <label class="col-sm-2 col-form-label">Rua</label>
                                   <div class="col-xl-6 col-lg-10 col-sm-10">
                                     <input type="text" id="rua" class="form-control form-control-lg"
-                                      placeholder="Ex.: Rod. Juscelino Kubitschek">
+                                      placeholder="Ex.: Rod. Juscelino Kubitschek" th:field="${paciente.endereco.rua.nome}">
                                   </div>
                                 </div>
 
@@ -135,7 +148,7 @@
                                   <label class="col-sm-2 col-form-label">Bairro</label>
                                   <div class="col-xls-4 col-lg-7 col-sm-10">
                                     <input type="text" id="bairro" class="form-control form-control-lg"
-                                      placeholder="Ex.: Jardim Marco Zero">
+                                      placeholder="Ex.: Jardim Marco Zero" th:field="${paciente.endereco.rua.bairro.nome}">
                                   </div>
                                 </div>
 
@@ -143,14 +156,22 @@
                                   <label class="col-sm-2 col-form-label">Cidade</label>
                                   <div class="col-xls-4 col-lg-7 col-sm-10">
                                     <input type="text" id="cidade" class="form-control form-control-lg"
-                                      placeholder="Ex.: Santana">
+                                      placeholder="Ex.: Santana" th:field="${paciente.endereco.rua.bairro.cidade.nome}">
+                                  </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                  <label class="col-sm-2 col-form-label">Estado</label>
+                                  <div class="col-xls-4 col-lg-7 col-sm-10">
+                                    <input type="text" id="cidade" class="form-control form-control-lg"
+                                      placeholder="Ex.: Amapá" th:field="${paciente.endereco.rua.bairro.cidade.estado.nome}">
                                   </div>
                                 </div>
 
                                 <div class="form-group row">
                                   <label class="col-sm-2 col-form-label">Número</label>
                                   <div class="col-xl-2 col-lg-3 col-sm-10">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Ex.: 1919">
+                                    <input type="text" class="form-control form-control-lg" placeholder="Ex.: 1919" th:field="${paciente.endereco.numero}">
                                   </div>
                                 </div>
 

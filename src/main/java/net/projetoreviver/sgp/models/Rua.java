@@ -1,5 +1,6 @@
 package net.projetoreviver.sgp.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Rua {
     @NotBlank(message = "Insira um endereço.")
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "bairro_fk")
     private Bairro bairro;
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.projetoreviver.sgp.exceptions.RegistroNaoEncontradoException;
+import net.projetoreviver.sgp.exceptions.TransacaoNaoRealizadaException;
 import net.projetoreviver.sgp.models.Paciente;
 import net.projetoreviver.sgp.repositories.PacienteRepository;
 
@@ -17,7 +18,9 @@ public class PacienteService {
 
     @Transactional
     public void toPersist(Paciente paciente){
-        
+    	if(pacienteRepository.save(paciente) == null) {
+			throw new TransacaoNaoRealizadaException("Não foi possível salvar essa chamada");
+		}
     }
 
     public Paciente getPacienteById(Long id){

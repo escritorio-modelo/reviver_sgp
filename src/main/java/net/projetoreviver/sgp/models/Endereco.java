@@ -1,5 +1,6 @@
 package net.projetoreviver.sgp.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Endereco {
     @NotBlank(message = "Insira um CEP.")
     private String cep;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "rua_fk")
     private Rua rua;
     

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -75,14 +76,14 @@ public abstract class Usuario implements Serializable{
     private EstadoCivil estadoCivil;
 
     
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "endereco_fk")
     private Endereco endereco;
 
     @ElementCollection
     @CollectionTable(name = "usu_tel", 
         joinColumns = @JoinColumn(name= "usu_id"))
-    @Column(name = "usu_tel", length = 12, nullable = false)
+    @Column(name = "usu_telefone", length = 12, nullable = false)
     private List<String> telefone=  new ArrayList<>();
 
 
