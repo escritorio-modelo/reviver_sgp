@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -29,6 +30,7 @@ public class Endereco {
     @Column(name = "end_cep", length = 8)
     @Length(min = 8, max = 8, message = "CEP deve conter 8 caracteres.")
     @NotBlank(message = "Insira um CEP.")
+    @Pattern(regexp = "\\d{8}", message = "CEP inválido.")
     private String cep;
 
     @ManyToOne(cascade=CascadeType.PERSIST)
