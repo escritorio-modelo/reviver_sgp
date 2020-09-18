@@ -43,8 +43,12 @@ public abstract class Usuario implements Serializable{
 	@Column(name = "usu_id")
     private Long id;
 
+    @Column(name = "usu_nome", nullable = false)
+    @NotBlank(message = "Insira um nome.")
+    private String nome;
+
     @Column(name = "usu_cpf", columnDefinition = "char(11)", nullable = false, unique = true)
-	@CPF(message = "CPF Inválido")
+	@CPF(message = "Insira um CPF válido")
 	@NotBlank(message = "O campo CPF é obrigatório")
 	@Length(min = 11, max = 11, message = "O campo CPF deve conter 11 caracteres.")
 	private String cpf;
@@ -76,12 +80,12 @@ public abstract class Usuario implements Serializable{
     private EstadoCivil estadoCivil;
 
     
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "endereco_fk")
     private Endereco endereco;
 
     @ElementCollection
-    @CollectionTable(name = "usu_tel", 
+    @CollectionTable(name = "tbl_usu_tel", 
         joinColumns = @JoinColumn(name= "usu_id"))
     @Column(name = "usu_telefone", length = 12, nullable = false)
     private List<String> telefone=  new ArrayList<>();
@@ -100,6 +104,15 @@ public abstract class Usuario implements Serializable{
         return this.id;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    
     public int getAtivo() {
         return ativo;
     }

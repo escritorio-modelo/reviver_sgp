@@ -49,7 +49,7 @@
 																	</thead>
 																	<tbody>
 																		<tr th:each="paciente : ${pacientes}">
-																			<td><a th:href="@{/pacientes/detalhes/{id}(id=${paciente.id})}" th:text="${paciente.email}"></a></td>
+																			<td><a th:href="@{/pacientes/detalhes/{id}(id=${paciente.id})}" th:text="${paciente.nome}"></a></td>
 																			<td th:text="${paciente.cpf}"></td>
 																			<td>Alzheimer, Parkinson</td>
 																			<td>
