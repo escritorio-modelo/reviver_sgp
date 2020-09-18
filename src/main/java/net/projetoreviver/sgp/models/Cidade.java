@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
@@ -28,6 +29,7 @@ public class Cidade {
 
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "estado_fk")
+    @Valid
     private Estado estado;
 
     

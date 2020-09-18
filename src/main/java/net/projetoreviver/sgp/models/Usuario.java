@@ -21,6 +21,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -82,6 +83,7 @@ public abstract class Usuario implements Serializable{
     
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "endereco_fk")
+    @Valid
     private Endereco endereco;
 
     @ElementCollection

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -35,6 +36,7 @@ public class Endereco {
 
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "rua_fk")
+    @Valid
     private Rua rua;
     
     @Column(name = "end_complemento", length = 75)
