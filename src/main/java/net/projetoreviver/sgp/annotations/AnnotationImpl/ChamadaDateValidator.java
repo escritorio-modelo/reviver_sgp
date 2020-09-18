@@ -1,7 +1,6 @@
 package net.projetoreviver.sgp.annotations.AnnotationImpl;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

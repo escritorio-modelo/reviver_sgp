@@ -1,6 +1,7 @@
 package net.projetoreviver.sgp.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ public abstract class Usuario implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "O campo data de nascimento é obrigatório.")
     @Past(message = "A data de nascimento tem que ser anterior a data atual.")
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
     @Column(name = "usu_data_registro", nullable = false)
     private LocalDateTime dataRegistro;
@@ -122,11 +123,11 @@ public abstract class Usuario implements Serializable{
         this.ativo = ativo;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
