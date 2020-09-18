@@ -1,6 +1,7 @@
 package net.projetoreviver.sgp.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,17 @@ public class Chamada implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	public Chamada() {
+	}
+
+	public Chamada(Long id, String descricao, LocalDate dataInicio, LocalDate dataTermino) {
+		this.id = id;
+		this.descricao = descricao;
+		this.dataInicio = dataInicio;
+		this.dataTermino = dataTermino;
+	}
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -41,13 +53,13 @@ public class Chamada implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "A chamada deve conter uma data de início.")
 	@FutureOrPresent(message = "Data de Inicio Inválida.")
-	private Date dataInicio;
+	private LocalDate dataInicio;
 	
 	@Column(name = "data_termino", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "A chamada deve conter uma data de término.")
 	@FutureOrPresent(message = "Data de Término Inválida.")
-	private Date dataTermino;
+	private LocalDate dataTermino;
 
 	@OneToMany(mappedBy = "chamada")
 	private List<RegistroChamadaPaciente> registrosPacientes;
@@ -68,19 +80,19 @@ public class Chamada implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public Date getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public Date getDataTermino() {
+	public LocalDate getDataTermino() {
 		return dataTermino;
 	}
 
-	public void setDataTermino(Date dataTermino) {
+	public void setDataTermino(LocalDate dataTermino) {
 		this.dataTermino = dataTermino;
 	}
 

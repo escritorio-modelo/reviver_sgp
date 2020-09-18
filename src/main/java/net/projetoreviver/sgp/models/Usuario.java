@@ -1,8 +1,8 @@
 package net.projetoreviver.sgp.models;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -64,8 +64,7 @@ public abstract class Usuario implements Serializable{
     private Date dataNascimento;
 
     @Column(name = "usu_data_registro", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dataRegistro;
+    private LocalDateTime dataRegistro;
 
     @Column(name="usu_email")
     @ValidEmail
@@ -95,7 +94,7 @@ public abstract class Usuario implements Serializable{
 
     @PrePersist
     protected void onCreate(){
-        dataRegistro = new Date();
+        dataRegistro = LocalDateTime.now();
     }
 
     public void setId(Long id) {
@@ -171,11 +170,11 @@ public abstract class Usuario implements Serializable{
         this.cpf = cpf;
     }
 
-    public Date getDataRegistro() {
+    public LocalDateTime getDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(Date dataRegistro) {
+    public void setDataRegistro(LocalDateTime dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
