@@ -2,26 +2,27 @@ package net.projetoreviver.sgp.services;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import net.projetoreviver.sgp.exceptions.RegistroNaoEncontradoException;
 import net.projetoreviver.sgp.exceptions.TransacaoNaoRealizadaException;
 import net.projetoreviver.sgp.models.Chamada;
 import net.projetoreviver.sgp.repositories.ChamadaRepository;
 
 @Service
+@RequiredArgsConstructor
 public class ChamadaService {
 	
-	@Autowired
-	private ChamadaRepository chamadaRepository;
+	private final ChamadaRepository chamadaRepository;
 	
 	@Transactional
-	public void toPersist(Chamada chamada) {
+	public Chamada toPersist(Chamada chamada) {
 		if(chamadaRepository.save(chamada) == null) {
 			throw new TransacaoNaoRealizadaException("Não foi possível salvar essa chamada");
 		}
+		return chamada;
 	}
 	
 	public Chamada getChamadaById(Long id) {

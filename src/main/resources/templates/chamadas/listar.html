@@ -53,9 +53,9 @@
 																	<tbody>
 																		<tr th:each="chamada : ${chamadas}">
 																			<td
-																				th:text="${#dates.format(chamada.dataInicio, 'dd/MM/yyyy')}"></td>
+																				th:text="${#temporals.format(chamada.dataInicio, 'dd/MM/yyyy')}"></td>
 																			<td
-																				th:text="${#dates.format(chamada.dataTermino, 'dd/MM/yyyy')}"></td>
+																				th:text="${#temporals.format(chamada.dataTermino, 'dd/MM/yyyy')}"></td>
 																			<td th:text="${chamada.descricao}"></td>
 																			<td><a
 																				th:href="@{/chamadas/{id}/alterar(id=${chamada.id})}"

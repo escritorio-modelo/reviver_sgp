@@ -1,6 +1,6 @@
 package net.projetoreviver.sgp.annotations.AnnotationImpl;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -16,8 +16,8 @@ public class ChamadaDateValidator implements ConstraintValidator<ValidChamadaDat
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
         Chamada chamada = (Chamada) obj;
-        Date dateInicio = chamada.getDataInicio();
-        Date dateFinal = chamada.getDataTermino();
+        LocalDate dateInicio = chamada.getDataInicio();
+        LocalDate dateFinal = chamada.getDataTermino();
         if (dateInicio == null || dateFinal == null){
             return true;
         }
