@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +40,14 @@ public class Chamada implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long id;
+
+	@Column(name = "titulo", nullable = false)
+	@NotBlank(message = "Título Obrigatório.")
+	private String titulo;
+
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private StatusChamada status;
 
 	@Column(length = 75, nullable = false)
 	@NotBlank(message = "O campo descrição não pode estar em branco.")
