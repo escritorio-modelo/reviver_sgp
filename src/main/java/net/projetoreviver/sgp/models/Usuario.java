@@ -13,6 +13,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -81,7 +82,7 @@ public abstract class Usuario implements Serializable{
     private EstadoCivil estadoCivil;
 
     
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_fk")
     @Valid
     private Endereco endereco;
@@ -98,6 +99,10 @@ public abstract class Usuario implements Serializable{
         dataRegistro = LocalDateTime.now();
     }
 
+    @PreUpdate
+    protected void onUpdate() {
+        dataRegistro = LocalDateTime.now();
+    }
     public void setId(Long id) {
         this.id = id;
     }

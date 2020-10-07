@@ -39,7 +39,7 @@ public class Endereco implements Serializable{
     @Pattern(regexp = "\\d{8}", message = "CEP inválido.")
     private String cep;
 
-    @ManyToOne(cascade=CascadeType.PERSIST)
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "rua_fk")
     @Valid
     private Rua rua;

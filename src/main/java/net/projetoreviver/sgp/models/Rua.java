@@ -32,7 +32,7 @@ public class Rua implements Serializable{
     @NotBlank(message = "Insira um endereço.")
     private String nome;
 
-    @ManyToOne(cascade=CascadeType.PERSIST)
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "bairro_fk")
     @Valid
     private Bairro bairro;

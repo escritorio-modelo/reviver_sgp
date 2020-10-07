@@ -60,12 +60,9 @@ public class PacienteController {
 	
 	@PostMapping("/alterar")
 	public ModelAndView alterar(@Valid Paciente paciente, BindingResult result) {
-		if(! pacienteRepository.findById(paciente.getId()).isPresent()) {
-			System.out.println("Chamada Inexistente");
-			throw new RegistroNaoEncontradoException("Paciente não registrado");
-		}
 		if(result.hasErrors()) {
-			return this.alterar(paciente.getId());
+			System.out.println("Tem erros");
+			return new ModelAndView("pacientes/alterar").addObject("paciente", paciente);
 		}
 		pacienteService.toPersist(paciente);
 		return new ModelAndView("redirect:/pacientes/listar");
