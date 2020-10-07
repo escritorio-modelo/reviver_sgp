@@ -7,13 +7,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "tbl_cuidador")
 @PrimaryKeyJoinColumn(name = "usu_id")
-public class Cuidador extends Usuario{
+@Setter @Getter
+public class Cuidador extends Usuario {
     private static final long serialVersionUID = 1L;
 
     @OneToMany(mappedBy = "cuidador")
     private List<RegistroCuidador> registros;
-    //Vazio
 }

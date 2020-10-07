@@ -151,10 +151,6 @@ public abstract class Usuario implements Serializable{
         return estadoCivil;
     }
 
-    public void setStatus(EstadoCivil estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
-
     public List<String> getTelefone() {
         return telefone;
     }

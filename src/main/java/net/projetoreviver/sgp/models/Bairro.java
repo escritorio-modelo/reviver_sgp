@@ -1,5 +1,7 @@
 package net.projetoreviver.sgp.models;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +18,10 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tbl_bairro")
-public class Bairro {
+public class Bairro implements Serializable{
+
+    private static final long serialVersionUID = -5236964460701247009L;
+
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "bairro_id")
