@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Abrir nova chamada - Reviver</title>
+    <title>Informações da chamada - Reviver</title>
     <th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
 
 <body>
-
 <div th:replace="components/header/index.html :: header"></div>
 
 <!-- Content -->
@@ -19,7 +18,7 @@
                     <div class="tile is-parent is-vertical is-9">
                         <article class="tile is-child box">
                             <div class="is-pulled-left">
-                                <span class="tag is-primary mb-4 is-spaced is-rounded mb-8" th:text="${chamada.status}">Status</span>
+                                <span th:classappend="${#strings.toString(chamada.status) != 'FECHADO' ? 'is-primary' : 'is-black'}" class="tag mb-4 is-spaced is-rounded mb-8" th:text="${chamada.status.displayValue}">Status</span>
                                 <h2 class="title is-4" th:text="${chamada.titulo}">Chamada</h2>
                                 <nav class="info-chamada-breadcrumb">
                                     <ul>
