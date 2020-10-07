@@ -1,11 +1,13 @@
 package net.projetoreviver.sgp.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,11 +20,18 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import net.projetoreviver.sgp.annotations.ValidChamadaDate;
 
 @Entity
 @ValidChamadaDate
 @Table(name = "tbl_chamada")
+@Getter @Setter  @NoArgsConstructor @AllArgsConstructor
+@ToString(exclude = "id")
 public class Chamada implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -31,58 +40,34 @@ public class Chamada implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long id;
-	
+
+	@Column(name = "titulo", nullable = false)
+	@NotBlank(message = "Título Obrigatório.")
+	private String titulo;
+
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private StatusChamada status;
+
 	@Column(length = 75, nullable = false)
 	@NotBlank(message = "O campo descrição não pode estar em branco.")
 	@Length(max = 75, message = "O campo descrição deve conter no máximo 75 caracteres.")
 	private String descricao;
-	
+
 	@Column(name = "data_inicio", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "A chamada deve conter uma data de início.")
 	@FutureOrPresent(message = "Data de Inicio Inválida.")
-	private Date dataInicio;
-	
+	private LocalDate dataInicio;
+
 	@Column(name = "data_termino", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "A chamada deve conter uma data de término.")
 	@FutureOrPresent(message = "Data de Término Inválida.")
-	private Date dataTermino;
+	private LocalDate dataTermino;
 
 	@OneToMany(mappedBy = "chamada")
 	private List<RegistroChamadaPaciente> registrosPacientes;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Date getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public Date getDataTermino() {
-		return dataTermino;
-	}
-
-	public void setDataTermino(Date dataTermino) {
-		this.dataTermino = dataTermino;
-	}
 
 	@Override
 	public int hashCode() {
@@ -93,14 +78,14 @@ public class Chamada implements Serializable{
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Chamada other = (Chamada) obj;
+		final Chamada other = (Chamada) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

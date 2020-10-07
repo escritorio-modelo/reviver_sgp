@@ -1,5 +1,6 @@
 package net.projetoreviver.sgp.models;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -18,7 +19,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tbl_registro_chamada_paciente")
-public class RegistroChamadaPaciente {
+public class RegistroChamadaPaciente implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,13 +40,8 @@ public class RegistroChamadaPaciente {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-
-    //Um paciente pode ter vários Cuidadores
     @OneToMany(mappedBy = "registroPaciente")
     private List<RegistroCuidador> cuidador;
-
-    //private String termoDeCompromisso;
-
 
     public Long getId() {
         return id;

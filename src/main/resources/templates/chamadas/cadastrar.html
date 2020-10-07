@@ -1,119 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-<title>Cadastrar Chamada - Projeto Reviver</title>
-<th:block th:include="fragmentos/general.html :: headerfiles">
+<title>Abrir nova chamada - Reviver</title>
+	<th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
 
 <body>
+	<div th:replace="components/header/index.html :: header"></div>
 
-	<div th:replace="fragmentos/componentes :: theme-loader "></div>
+	<!-- Content -->
+	<section class="section">
+		<div class="container">
 
-	<div id="pcoded" class="pcoded">
-		<div class="pcoded-container">
+			<div class="columns">
 
-			<div th:replace="fragmentos/componentes :: header"></div>
+				<div class="column box box-section is-9">
 
-			<div class="pcoded-main-container">
+					<form method="post" action="/chamadas/cadastrar" th:object="${chamada}" autocomplete="off">
 
-				<div th:replace="fragmentos/componentes :: navbar"></div>
+						<div class="notification is-danger is-light" role="alert" th:if="${#fields.hasErrors('*')}">
+							<button class="delete"></button>
+							<p class="block" th:each="error : ${#fields.errors('*')}" th:text="${error}"></p>
+						</div>
 
-				<div class="pcoded-wrapper">
-					<div class="pcoded-content">
-						<div class="pcoded-inner-content">
-							<div class="main-body">
-								<div class="page-wrapper">
-									<div class="page-body">
-										<div class="row m-t-40">
-											<div class="col-lg">
+						<h2 class="title is-5">Dados da nova chamada</h2>
 
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+									<label class="label">Título da chamada</label>
+									<div class="control">
+										<input class="input" type="text" placeholder="Ex. Chamada 09" th:field="${chamada.titulo}">
+									</div>
+								</div>
+							</div>
 
-												<!-- Default card start -->
-												<div class="card">
-													<div class="card-header">
-														<h5>Cadastrar nova chamada</h5>
-														<span> Crie uma nova chamada do Projeto Reviver
-															&#127774 </span>
-													</div>
-													<div class="card-block">
-														<form method="post" action="/chamadas/cadastrar"
-															th:object="${chamada}" autocomplete="off">
-															<div class="alert alert-danger background-danger"
-																role="alert" th:if="${#fields.hasErrors('*')}">
-																<strong style="display: block;" th:each="error : ${#fields.errors('*')}"
-																	th:text="${error}"></strong>
-															</div>
-															<h4 class="sub-title">Dados da nova chamada</h4>
-
-															<div class="form-group row">
-																<label class="col-xl-2 col-sm-2 col-form-label">Data
-																	de início</label>
-																<div class="col-xl-3 col-lg-5 col-sm-10">
-																	<input id="dataInicio" class="form-control form-control-lg"
-																		th:field="${chamada.dataInicio}" th:min="${minDate}" type="date">
-																</div>
-
-																<div class="col-xl-2"></div>
-
-																<label class="col-xl-2 col-sm-2 col-form-label">Data
-																	de término</label>
-																<div class="col-xl-3 col-lg-6 col-sm-10">
-																	<input id="dataTermino" class="form-control form-control-lg"
-																		th:field="${chamada.dataTermino}" th:min="${minDate}" type="date">
-																</div>
-															</div>
-
-															<div class="form-group row">
-																<label class="col-xl-2 col-sm-2 col-form-label">Descrição</label>
-																<div class="col-sm-10">
-																	<textarea rows="5" cols="5"
-																		class="form-control form-control-lg"
-																		placeholder="Escreva um pouco sobre a nova chamada"
-																		th:field="${chamada.descricao}"
-																		maxlength="75"></textarea>
-																</div>
-															</div>
-
-															<div class="card-footer">
-																<button type="submit" class="btn btn-primary">Cadastrar</button>
-															</div>
-														</form>
-													</div>
-												</div>
-												<!-- Default card end -->
-											</div>
+							<div class="column">
+								<div class="field">
+									<label class="label">Status</label>
+									<div class="control">
+										<div class="select">
+											<select th:field="${chamada.status}">
+												<option th:each="statusOpt : ${T(net.projetoreviver.sgp.models.StatusChamada).values()}"
+														th:value="${statusOpt}" th:text="${statusOpt.displayValue}"></option>
+											</select>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+									<label class="label">Data de início</label>
+									<div class="control">
+										<input class="input" id="dataInicio" type="date" placeholder="dd/MM/aaaa"
+											   th:field="${chamada.dataInicio}" th:min="${minDate}">
+									</div>
+								</div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									<label class="label">Data de término</label>
+									<div class="control">
+										<input class="input" id="dataTermino" type="date" placeholder="dd/MM/aaaa"
+											   th:field="${chamada.dataTermino}" th:min="${minDate}">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="field">
+							<label class="label">Descrição</label>
+							<div class="control">
+					  <textarea class="textarea" placeholder="Breve anotação sobre a nova chamada"
+								th:field="${chamada.descricao}" maxlength="75"></textarea>
+							</div>
+						</div>
+
+						<div class="field is-pulled-right">
+							<div class="control">
+								<button type="submit" class="button is-primary form-navigation-next">
+									Salvar
+								</button>
+							</div>
+						</div>
+
+					</form>
 				</div>
+
 			</div>
+
 		</div>
-	</div>
+	</section>
 
-	<th:block th:include="fragmentos/general :: scripts-imports"></th:block>
-	<script>
-		selectElement = document.getElementById('dataInicio');
-		selectElement.addEventListener('change', (event) => {
-			const result = document.querySelector('#dataTermino');
-			let date = new Date(event.target.value);
-			date.setDate(date.getDate() + 2);
-			let dd = date.getDate();
-			let mm = date.getMonth() + 1; //January is 0!
-			let yyyy = date.getFullYear();
-			if (dd < 10) {
-				dd = '0' + dd
-			}
-			if (mm < 10) {
-				mm = '0' + mm
-			}
-
-			dateTerminoMin = yyyy + '-' + mm + '-' + dd;
-			result.min = dateTerminoMin;
-		});
-	</script>
+	<th:block th:include="components/geral/index.html :: scripts"></th:block>
 </body>
 </html>

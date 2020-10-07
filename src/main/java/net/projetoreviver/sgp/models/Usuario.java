@@ -1,8 +1,9 @@
 package net.projetoreviver.sgp.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -61,11 +62,10 @@ public abstract class Usuario implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "O campo data de nascimento é obrigatório.")
     @Past(message = "A data de nascimento tem que ser anterior a data atual.")
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
     @Column(name = "usu_data_registro", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dataRegistro;
+    private LocalDateTime dataRegistro;
 
     @Column(name="usu_email")
     @ValidEmail
@@ -95,7 +95,7 @@ public abstract class Usuario implements Serializable{
 
     @PrePersist
     protected void onCreate(){
-        dataRegistro = new Date();
+        dataRegistro = LocalDateTime.now();
     }
 
     public void setId(Long id) {
@@ -123,11 +123,11 @@ public abstract class Usuario implements Serializable{
         this.ativo = ativo;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -151,10 +151,6 @@ public abstract class Usuario implements Serializable{
         return estadoCivil;
     }
 
-    public void setStatus(EstadoCivil estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
-
     public List<String> getTelefone() {
         return telefone;
     }
@@ -171,11 +167,11 @@ public abstract class Usuario implements Serializable{
         this.cpf = cpf;
     }
 
-    public Date getDataRegistro() {
+    public LocalDateTime getDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(Date dataRegistro) {
+    public void setDataRegistro(LocalDateTime dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 

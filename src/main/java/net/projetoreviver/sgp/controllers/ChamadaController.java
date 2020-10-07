@@ -72,4 +72,11 @@ public class ChamadaController {
 		chamadaService.toRemove(chamada);
 		return new ModelAndView("redirect:/chamadas/listar");
 	}
+
+	@GetMapping("/{id}")
+	public ModelAndView detalhes(@PathVariable("id") Long id) {
+		ModelAndView mv = new ModelAndView("chamadas/detalhes");
+		mv.addObject("chamada", chamadaService.getChamadaById(id));
+		return mv;
+	}
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Informações da chamada - Reviver</title>
+    <th:block th:include="components/geral/index.html :: header-files"></th:block>
+</head>
+
+<body>
+<div th:replace="components/header/index.html :: header"></div>
+
+<!-- Content -->
+<section class="section">
+    <div class="container">
+
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-12">
+                <div class="tile">
+                    <div class="tile is-parent is-vertical is-9">
+                        <article class="tile is-child box">
+                            <div class="is-pulled-left">
+                                <span th:classappend="${#strings.toString(chamada.status) != 'FECHADO' ? 'is-primary' : 'is-black'}" class="tag mb-4 is-spaced is-rounded mb-8" th:text="${chamada.status.displayValue}">Status</span>
+                                <h2 class="title is-4" th:text="${chamada.titulo}">Chamada</h2>
+                                <nav class="info-chamada-breadcrumb">
+                                    <ul>
+                                        <li>Pessoas cadastradas: <strong>40/50</strong></li>
+                                        <li>Data de início: <strong th:text="${#temporals.format(chamada.dataInicio, 'dd/MM/yyyy')}">dd/MM/aaaa</strong></li>
+                                        <li>Data de término: <strong th:text="${#temporals.format(chamada.dataTermino, 'dd/MM/yyyy')}">dd/MM/aaaa</strong></li>
+                                    </ul>
+                                </nav>
+
+                                <p th:text="${chamada.descricao}">Descrição da chamada.</p>
+                            </div>
+                            <div class="is-pulled-right">
+                                <a th:href="@{/chamadas/{id}/alterar(id=${chamada.id})}" class="is-primary">Editar chamada</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="tile is-parent">
+                        <article class="tile is-child">
+                            <div class="buttons">
+                                <button class="button is-primary is-medium is-fullwidth">
+                                    <span class="icon">
+                                        <i class="fas fa-user-plus"></i>
+                                    </span>
+                                    <span>Cadastrar paciente</span>
+                                </button>
+                                <button class="button is-primary is-outlined is-medium is-fullwidth">
+                                    <span class="icon">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+                                    <span>Cadastrar cuidador</span>
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <!-- <div class="tile is-parent">
+                  <article class="tile is-child box">
+                    <p class="title is-4">Lista de pacientes</p>
+                    <p class="subtitle">Aligned with the right tile</p>
+                    <div class="content">
+
+                    </div>
+                  </article>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Content End-->
+
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
+</body>
+</html>
