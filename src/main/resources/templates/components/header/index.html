@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<!-- Navbar -->
-<div th:fragment="header">
+  <!-- Navbar -->
+  <div th:fragment="header">
     <div th:replace="components/navegacao/index.html :: navegacao "></div>
 
-    <div th:replace="components/titulo-pagina/index.html :: titulo-pagina"></div>
-</div>
-
+    <section th:fragment="titulo-pagina" class="section title-page">
+      <h1 class="title is-1" th:text="${content}"></h1>
+    </section>
+  </div>
 </html>

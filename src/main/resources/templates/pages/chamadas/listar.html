@@ -1,93 +1,138 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>Todas as chamadas - Reviver</title>
-	<th:block th:include="components/geral/index.html :: header-files"></th:block>
-</head>
+  <head>
+    <title>Todas as chamadas - Reviver</title>
+    <th:block
+      th:include="components/geral/index.html :: header-files"
+    ></th:block>
+  </head>
 
-<body>
-	<div th:replace="components/header/index.html :: header"></div>
+  <body>
+    <div
+      th:replace="components/header/index.html :: header(content='Todas as chamadas')"
+    ></div>
 
-	<!-- PageBody -->
-	<section class="section">
-		<div class="container">
+    <!-- PageBody -->
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-9">
+            <!-- InputSearch -->
+            <div class="control has-icons-left">
+              <input
+                class="input is-medium"
+                type="text"
+                placeholder="Buscar chamada"
+              />
+              <span class="icon is-left">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <!-- InputSearch End -->
+          </div>
 
-			<div class="columns">
-				<div class="column is-9">
-					<!-- InputSearch -->
-					<div class="control has-icons-left">
-						<input class="input is-medium" type="text" placeholder="Buscar chamada">
-						<span class="icon is-left">
-                			<i class="fas fa-search"></i>
-              			</span>
-					</div>
-					<!-- InputSearch End -->
-				</div>
+          <!-- ButtonNewCall -->
+          <div class="column">
+            <a
+              href="/chamadas/cadastrar"
+              class="button is-primary is-medium is-fullwidth"
+            >
+              <span class="icon">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+              <span>Abrir nova chamada</span>
+            </a>
+          </div>
+          <!-- ButtonNewCall End-->
+        </div>
 
-				<!-- ButtonNewCall -->
-				<div class="column">
-					<a href="/chamadas/cadastrar" class="button is-primary is-medium is-fullwidth">
-              		<span class="icon">
-                		<i class="far fa-calendar-alt"></i>
-              		</span>
-					<span>Abrir nova chamada</span>
-					</a>
-				</div>
-				<!-- ButtonNewCall End-->
-			</div>
+        <!-- TableCalls -->
+        <div class="container mt-16">
+          <div class="table-section">
+            <table class="table is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Status</th>
+                  <th>Período</th>
+                  <th>Pacientes cadastrados</th>
+                  <th>Acesso</th>
+                </tr>
+              </thead>
 
-			<!-- TableCalls -->
-			<div class="container mt-16">
-				<div class="table-section">
-					<table class="table is-hoverable is-fullwidth">
-						<thead>
-						<tr>
-							<th>Nome</th>
-							<th>Status</th>
-							<th>Período</th>
-							<th>Pacientes cadastrados</th>
-							<th>Acesso</th>
-						</tr>
-						</thead>
+              <tbody>
+                <tr th:each="chamada : ${chamadas}">
+                  <td>
+                    <a
+                      th:href="@{/chamadas/{id}(id=${chamada.id})}"
+                      class="has-text-weight-medium"
+                      th:text="${chamada.titulo}"
+                      >Chamada</a
+                    >
+                  </td>
+                  <td>
+                    <span
+                      th:classappend="${#strings.toString(chamada.status) != 'FECHADO' ? 'is-primary' : 'is-black'}"
+                      class="tag is-spaced is-rounded"
+                      th:text="${chamada.status.displayValue}"
+                      >Status</span
+                    >
+                  </td>
+                  <td>
+                    <strong
+                      th:text="${#temporals.format(chamada.dataInicio, 'dd/MM/yyyy')}"
+                      >dd/MM/aaaa</strong
+                    >
+                    até
+                    <strong
+                      th:text="${#temporals.format(chamada.dataTermino, 'dd/MM/yyyy')}"
+                      >dd/MM/aaaa</strong
+                    >
+                  </td>
+                  <td>50/50</td>
+                  <td>
+                    <a
+                      th:href="@{/chamadas/{id}(id=${chamada.id})}"
+                      class="has-text-weight-medium"
+                      >Acessar chamada</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-						<tbody>
-						<tr th:each="chamada : ${chamadas}">
-							<td><a th:href="@{/chamadas/{id}(id=${chamada.id})}"
-								   class="has-text-weight-medium" th:text="${chamada.titulo}">Chamada</a></td>
-							<td><span th:classappend="${#strings.toString(chamada.status) != 'FECHADO' ? 'is-primary' : 'is-black'}" class="tag is-spaced is-rounded"
-									  th:text="${chamada.status.displayValue}">Status</span></td>
-							<td><strong th:text="${#temporals.format(chamada.dataInicio, 'dd/MM/yyyy')}">dd/MM/aaaa</strong>
-								até <strong th:text="${#temporals.format(chamada.dataTermino, 'dd/MM/yyyy')}">dd/MM/aaaa</strong></td>
-							<td>50/50</td>
-							<td><a th:href="@{/chamadas/{id}(id=${chamada.id})}"
-								   class="has-text-weight-medium">Acessar chamada</a></td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
+        <nav class="pagination" role="navigation" aria-label="pagination">
+          <a
+            class="pagination-previous"
+            title="Essa é a primeira págia"
+            disabled
+            >Voltar</a
+          >
+          <a class="pagination-next">Próximo</a>
+          <ul class="pagination-list">
+            <li>
+              <a
+                class="pagination-link is-current"
+                aria-label="Página 1"
+                aria-current="page"
+                >1</a
+              >
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Ir para página 2">2</a>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Ir para página 3">3</a>
+            </li>
+          </ul>
+        </nav>
+        <!-- TableCalls End-->
+      </div>
+    </section>
+    <!-- PageBody End -->
 
-			<nav class="pagination" role="navigation" aria-label="pagination">
-				<a class="pagination-previous" title="Essa é a primeira págia" disabled>Voltar</a>
-				<a class="pagination-next">Próximo</a>
-				<ul class="pagination-list">
-					<li>
-						<a class="pagination-link is-current" aria-label="Página 1" aria-current="page">1</a>
-					</li>
-					<li>
-						<a class="pagination-link" aria-label="Ir para página 2">2</a>
-					</li>
-					<li>
-						<a class="pagination-link" aria-label="Ir para página 3">3</a>
-					</li>
-				</ul>
-			</nav>
-			<!-- TableCalls End-->
-
-		</div>
-	</section>
-	<!-- PageBody End -->
-
-	<th:block th:include="components/geral/index.html :: scripts"></th:block>
-</body>
+    <th:block th:include="components/geral/index.html :: scripts"></th:block>
+  </body>
 </html>
