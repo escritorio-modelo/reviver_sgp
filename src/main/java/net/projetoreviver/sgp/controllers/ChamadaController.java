@@ -52,7 +52,7 @@ public class ChamadaController {
 	
 	@GetMapping("/{id}/alterar")
 	public ModelAndView alterar(@PathVariable("id") Long id) {
-		ModelAndView mv = new ModelAndView("chamadas/alterar");
+		ModelAndView mv = new ModelAndView("pages/chamadas/alterar");
 		mv.addObject("chamada", chamadaService.getChamadaById(id));
 		return mv;
 	}
@@ -63,7 +63,7 @@ public class ChamadaController {
 			return this.alterar(chamada.getId());
 		}
 		chamadaService.toPersist(chamada);
-		return new ModelAndView("redirect:/chamadas/listar");
+		return new ModelAndView("redirect:/chamadas/" + chamada.getId());
 	}
 	
 	@GetMapping("/{id}/excluir")
