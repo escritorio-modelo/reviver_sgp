@@ -1,16 +1,18 @@
 package net.projetoreviver.sgp.controllers;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.projetoreviver.sgp.models.Chamada;
@@ -28,10 +30,26 @@ public class ChamadaController {
 	private ChamadaService chamadaService;
 	
 	@GetMapping("/listar")
-	public ModelAndView listar() {
+	public ModelAndView paginaListar() {
 		ModelAndView mv = new ModelAndView("chamadas/listar");
 		mv.addObject("chamadas", chamadaRepository.findAll());
 		return mv;
+	}
+
+	@GetMapping("/")
+	@ResponseBody()
+	public Page<Chamada> listarAll(@RequestParam(value = "titulo", required = false, defaultValue = "") String titulo,
+		@RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
+		@RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho)
+	{
+
+		if(StringUtils.isEmpty(titulo)){
+			PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "id");
+			Page<Chamada> chamadas = chamadaRepository.findAll(pageRequest);
+		}
+
+		PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "titulo");
+		return chamadaRepository.findByTituloContainingIgnoreCase(titulo, pageRequest);
 	}
 	
 	@GetMapping("/cadastrar")
