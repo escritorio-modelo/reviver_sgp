@@ -18,6 +18,11 @@ document.querySelectorAll('input').forEach(function ($input) {
   }
 });
 
+document.querySelector('.detalhes-opcoes-botao').addEventListener('click', function () {
+  var bodyOptions = document.querySelector('.detalhes-opcoes-body');
+  bodyOptions.style.display == 'block' ? bodyOptions.style.display = 'none' : bodyOptions.style.display = 'block';
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
     var $notification = $delete.parentNode;

@@ -29,14 +29,14 @@ public class ChamadaController {
 	
 	@GetMapping("/listar")
 	public ModelAndView listar() {
-		ModelAndView mv = new ModelAndView("chamadas/listar");
+		ModelAndView mv = new ModelAndView("pages/chamadas/listar");
 		mv.addObject("chamadas", chamadaRepository.findAll());
 		return mv;
 	}
 	
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Chamada chamada) {
-		ModelAndView mv = new ModelAndView("chamadas/cadastrar");
+		ModelAndView mv = new ModelAndView("pages/chamadas/cadastrar");
 		mv.addObject("minDate", LocalDate.now());
 		return mv;
 	}
@@ -47,7 +47,7 @@ public class ChamadaController {
 			return this.cadastrar(chamada);
 		}
 		chamadaService.toPersist(chamada);
-		return new ModelAndView("redirect:/chamadas/listar");
+		return new ModelAndView("redirect:/chamadas/" + chamada.getId());
 	}
 	
 	@GetMapping("/{id}/alterar")
@@ -63,7 +63,7 @@ public class ChamadaController {
 			return this.alterar(chamada.getId());
 		}
 		chamadaService.toPersist(chamada);
-		return new ModelAndView("redirect:/chamadas/pesquisar");
+		return new ModelAndView("redirect:/chamadas/listar");
 	}
 	
 	@GetMapping("/{id}/excluir")
@@ -75,7 +75,7 @@ public class ChamadaController {
 
 	@GetMapping("/{id}")
 	public ModelAndView detalhes(@PathVariable("id") Long id) {
-		ModelAndView mv = new ModelAndView("chamadas/detalhes");
+		ModelAndView mv = new ModelAndView("pages/chamadas/detalhes");
 		mv.addObject("chamada", chamadaService.getChamadaById(id));
 		return mv;
 	}

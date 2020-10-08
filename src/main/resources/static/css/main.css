@@ -7170,6 +7170,38 @@ a {
 .info-chamada-breadcrumb > ul > li > strong {
   font-weight: 500; }
 
+.detalhes-opcoes {
+  display: inline-block;
+  position: relative; }
+
+.detalhes-opcoes-botao {
+  padding: 0 8px;
+  margin-left: 10px;
+  font-size: 20px;
+  color: #6D4784;
+  cursor: pointer; }
+
+.detalhes-opcoes-body {
+  position: absolute;
+  display: none;
+  width: 200px;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 0.8px 5px rgba(145, 141, 141, 0.5);
+  padding: 10px 0;
+  right: 25px;
+  top: 0; }
+
+.detalhes-opcoes-body > a {
+  display: block;
+  text-align: center;
+  padding: 5px 0; }
+
+.detalhes-opcoes-body > a:hover {
+  color: #f14668;
+  background-color: #FCEBF0; }
+
 .user-data-section {
   margin-top: 50px; }
 
