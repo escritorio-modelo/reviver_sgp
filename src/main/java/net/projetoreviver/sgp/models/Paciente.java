@@ -1,5 +1,10 @@
 package net.projetoreviver.sgp.models;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbl_paciente")
 @PrimaryKeyJoinColumn(name="usu_id")
+@EqualsAndHashCode @ToString(callSuper = true)
+@Setter @Getter
 public class Paciente extends Usuario{
 
     private static final long serialVersionUID = 1L;
@@ -23,34 +30,4 @@ public class Paciente extends Usuario{
 
     @OneToMany(mappedBy = "paciente")
     private List<RegistroChamadaPaciente> registroChamadaPacientes;
-
-
-    public boolean isAlzheimer() {
-        return alzheimer;
-    }
-
-
-    public void setAlzheimer(boolean alzheimer) {
-        this.alzheimer = alzheimer;
-    }
-
-
-    public boolean isParkinson() {
-        return parkinson;
-    }
-
-
-    public void setParkinson(boolean parkinson) {
-        this.parkinson = parkinson;
-    }
-
-
-    public List<RegistroChamadaPaciente> getRegistroChamadaPacientes() {
-        return registroChamadaPacientes;
-    }
-
-    
-    public void setRegistroChamadaPacientes(List<RegistroChamadaPaciente> registroChamadaPacientes) {
-        this.registroChamadaPacientes = registroChamadaPacientes;
-    }
 }

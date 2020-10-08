@@ -9,10 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tbl_estado")
+@EqualsAndHashCode @ToString
+@Setter @Getter
 public class Estado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,33 +32,5 @@ public class Estado implements Serializable {
     @Length(max = 20, message = "Nome do estado deve conter no máximo 20 caracteres.")
     @NotBlank(message = "Insira um estado.")
     private String nome;
-
-    /**
-     * @return Long return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return String return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
 }
