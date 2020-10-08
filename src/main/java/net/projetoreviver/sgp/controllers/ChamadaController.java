@@ -1,16 +1,14 @@
 package net.projetoreviver.sgp.controllers;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.projetoreviver.sgp.models.Chamada;
@@ -28,7 +26,7 @@ public class ChamadaController {
 	private ChamadaService chamadaService;
 	
 	@GetMapping("/listar")
-	public ModelAndView listar() {
+	public ModelAndView listar(@RequestParam(required = false) Boolean deletada) {
 		ModelAndView mv = new ModelAndView("pages/chamadas/listar");
 		mv.addObject("chamadas", chamadaRepository.findAll());
 		return mv;
@@ -70,7 +68,7 @@ public class ChamadaController {
 	public ModelAndView excluir(@PathVariable("id") Long id) {
 		Chamada chamada = chamadaService.getChamadaById(id);
 		chamadaService.toRemove(chamada);
-		return new ModelAndView("redirect:/chamadas/listar");
+		return new ModelAndView("redirect:/chamadas/listar" + "?deletada=true");
 	}
 
 	@GetMapping("/{id}")

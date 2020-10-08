@@ -12,9 +12,21 @@
       th:replace="components/header/index.html :: header(content='Todas as chamadas')"
     ></div>
 
+    <div th:if="${#request.getParameter('deletada')}" class="container" data-notification="show">
+      <div class="columns is-centered">
+        <div class="column is-half notification-component">
+          <div class="notification is-success is-light">
+            <button class="delete"></button>
+            <p>Chamada excluída com sucesso!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- PageBody -->
     <section class="section">
       <div class="container">
+
         <div class="columns">
           <div class="column is-9">
             <!-- InputSearch -->

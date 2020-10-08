@@ -7202,6 +7202,12 @@ a {
   color: #f14668;
   background-color: #FCEBF0; }
 
+.notification-component {
+  position: absolute;
+  text-align: center;
+  top: -130px;
+  z-index: 5; }
+
 .user-data-section {
   margin-top: 50px; }
 
