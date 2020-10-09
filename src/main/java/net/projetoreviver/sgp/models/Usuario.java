@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -28,6 +29,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,6 +42,8 @@ import net.projetoreviver.sgp.annotations.ValidEmail;
 @Entity
 @Table(name = "tbl_usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode @ToString
+@Getter @Setter
 public abstract class Usuario implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -103,92 +110,5 @@ public abstract class Usuario implements Serializable{
     protected void onUpdate() {
         dataRegistro = LocalDateTime.now();
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId(){
-        return this.id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getNome() {
-        return this.nome;
-    }
-
-    
-    public int getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(int ativo) {
-        this.ativo = ativo;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Character getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Character genero) {
-        this.genero = genero;
-    }
-
-    public EstadoCivil getEstadoCivil() {
-        return estadoCivil;
-    }
-
-    public List<String> getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(List<String> telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public LocalDateTime getDataRegistro() {
-        return dataRegistro;
-    }
-
-    public void setDataRegistro(LocalDateTime dataRegistro) {
-        this.dataRegistro = dataRegistro;
-    }
-
-    public void setEstadoCivil(EstadoCivil estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
+   
 }

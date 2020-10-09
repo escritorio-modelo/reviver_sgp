@@ -1,49 +1,118 @@
 'use strict';
 
-var masks = {
-  cpf: function cpf(value) {
-    return value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})/, '$1-$2').replace(/(-\d{2})\d+?$/, '$1');
-  }
-};
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('Hello Bulma!');
 
-document.querySelectorAll('input').forEach(function ($input) {
-  var campo = $input.dataset.mask;
+  var notification = document.querySelector('[data-notification]');
 
-  if (campo) {
-    $input.addEventListener('input', function (event) {
-      event.target.value = masks[campo](event.target.value);
-    }, false);
-  } else {
-    return;
+  if (notification) {
+    var notificationbody = document.querySelector('.column .notification').parentNode;
+    console.log(notificationbody);
+
+    setTimeout(function () {
+      notificationbody.parentNode.removeChild(notificationbody);
+    }, 5000);
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+document.addEventListener('DOMContentLoaded', function () {
+  (document.querySelectorAll('.notification .delete') || []).forEach(function ($delete) {
     var $notification = $delete.parentNode;
 
-    $delete.addEventListener('click', () => {
+    $delete.addEventListener('click', function () {
       $notification.parentNode.removeChild($notification);
     });
   });
 });
 
-var selectElement = document.getElementById('dataInicio');
-		selectElement.addEventListener('change', (event) => {
-		console.log('entrou')
-			const result = document.querySelector('#dataTermino');
-			let date = new Date(event.target.value);
-			date.setDate(date.getDate() + 2);
-			let dd = date.getDate();
-			let mm = date.getMonth() + 1; //January is 0!
-			let yyyy = date.getFullYear();
-			if (dd < 10) {
-				dd = '0' + dd
-			}
-			if (mm < 10) {
-				mm = '0' + mm
-			}
+document.querySelector('.detalhes-opcoes-botao').addEventListener('click', function () {
+  var bodyOptions = document.querySelector('.detalhes-opcoes-body');
+  bodyOptions.style.display == 'block' ? bodyOptions.style.display = 'none' : bodyOptions.style.display = 'block';
+});
 
-			var dateTerminoMin = yyyy + '-' + mm + '-' + dd;
-			result.min = dateTerminoMin;
-		});
+var currentTab = 0;
+showTab(currentTab);
+
+document.querySelector(".form-navigation-next").addEventListener("click", function () {
+  return nextPrev(1);
+});
+
+document.querySelector(".form-navigation-back").addEventListener("click", function () {
+  return nextPrev(-1);
+});
+
+function showTab(tabWillBeDisplayed) {
+  var tabs = document.getElementsByClassName("tab");
+  tabs[tabWillBeDisplayed].style.display = "block";
+
+  if (tabWillBeDisplayed == 0) {
+    document.querySelector(".form-navigation-back").style.visibility = "hidden";
+  } else {
+    document.querySelector(".form-navigation-back").style.visibility = "visible";
+  }
+
+  if (tabWillBeDisplayed == tabs.length - 1) {
+    document.querySelector(".form-navigation-next").innerHTML = "Finalizar";
+  } else {
+    document.querySelector(".form-navigation-next").innerHTML = "Próximo";
+  }
+
+  fixStepIndicator(tabWillBeDisplayed);
+}
+
+function nextPrev(tabWillBeDisplayed) {
+  var tabs = document.getElementsByClassName("tab");
+  tabs[currentTab].style.display = "none";
+  currentTab = currentTab + tabWillBeDisplayed;
+
+  if (currentTab >= tabs.length) {
+    document.getElementById("regForm").submit();
+    return false;
+  }
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  });
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x,
+      y,
+      i,
+      valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false:
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(tabWillBeDisplayed) {
+  var tabs = document.getElementsByClassName("step-info-section");
+
+  for (var i = 0; i < tabs.length; i++) {
+    if (i > tabWillBeDisplayed) {
+      tabs[i].classList.remove("step-info-checked");
+    } else if (i < tabWillBeDisplayed) {
+      tabs[i].classList.add("step-info-checked");
+    }
+  }
+
+  tabs[tabWillBeDisplayed].classList.add("step-info-checked");
+}

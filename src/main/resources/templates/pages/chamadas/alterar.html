@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Editar chamada - Reviver</title>
+    <th:block
+      th:include="components/geral/index.html :: header-files"
+    ></th:block>
+  </head>
+
+  <body>
+    <div
+      th:replace="components/header/index.html :: header(content='Editar chamada')"
+    ></div>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column box box-section is-9">
+            <div
+              th:replace="components/formulario-chamada/index.html :: formulario-chamada(metodo='alterar')"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <th:block th:include="components/geral/index.html :: scripts"></th:block>
+  </body>
+</html>
