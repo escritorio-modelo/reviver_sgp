@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import net.projetoreviver.sgp.exceptions.RegistroNaoEncontradoException;
 import net.projetoreviver.sgp.models.Paciente;
 import net.projetoreviver.sgp.repositories.PacienteRepository;
 import net.projetoreviver.sgp.services.PacienteService;
@@ -78,6 +77,7 @@ public class PacienteController {
 		Paciente paciente = pacienteService.getPacienteById(id);
 		pacienteService.toRemove(paciente);
 		return new ModelAndView("redirect:/pacientes/listar");
+	}
 
 
 	@PostMapping("/api/cadastrar")
