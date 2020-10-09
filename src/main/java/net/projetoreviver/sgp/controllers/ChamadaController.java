@@ -1,8 +1,7 @@
 package net.projetoreviver.sgp.controllers;
 
 import java.time.LocalDate;
-import java.util.List;
-
+import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,8 @@ public class ChamadaController {
 	private ChamadaService chamadaService;
 	
 	@GetMapping("/listar")
-	public ModelAndView paginaListar() {
-		ModelAndView mv = new ModelAndView("chamadas/listar");
+	public ModelAndView listar(@RequestParam(required = false) Boolean deletada) {
+		ModelAndView mv = new ModelAndView("pages/chamadas/listar");
 		mv.addObject("chamadas", chamadaRepository.findAll());
 		return mv;
 	}
@@ -54,7 +53,7 @@ public class ChamadaController {
 	
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Chamada chamada) {
-		ModelAndView mv = new ModelAndView("chamadas/cadastrar");
+		ModelAndView mv = new ModelAndView("pages/chamadas/cadastrar");
 		mv.addObject("minDate", LocalDate.now());
 		return mv;
 	}
@@ -65,12 +64,12 @@ public class ChamadaController {
 			return this.cadastrar(chamada);
 		}
 		chamadaService.toPersist(chamada);
-		return new ModelAndView("redirect:/chamadas/listar");
+		return new ModelAndView("redirect:/chamadas/" + chamada.getId());
 	}
 	
 	@GetMapping("/{id}/alterar")
 	public ModelAndView alterar(@PathVariable("id") Long id) {
-		ModelAndView mv = new ModelAndView("chamadas/alterar");
+		ModelAndView mv = new ModelAndView("pages/chamadas/alterar");
 		mv.addObject("chamada", chamadaService.getChamadaById(id));
 		return mv;
 	}
@@ -81,19 +80,19 @@ public class ChamadaController {
 			return this.alterar(chamada.getId());
 		}
 		chamadaService.toPersist(chamada);
-		return new ModelAndView("redirect:/chamadas/pesquisar");
+		return new ModelAndView("redirect:/chamadas/" + chamada.getId());
 	}
 	
 	@GetMapping("/{id}/excluir")
 	public ModelAndView excluir(@PathVariable("id") Long id) {
 		Chamada chamada = chamadaService.getChamadaById(id);
 		chamadaService.toRemove(chamada);
-		return new ModelAndView("redirect:/chamadas/listar");
+		return new ModelAndView("redirect:/chamadas/listar" + "?deletada=true");
 	}
 
 	@GetMapping("/{id}")
 	public ModelAndView detalhes(@PathVariable("id") Long id) {
-		ModelAndView mv = new ModelAndView("chamadas/detalhes");
+		ModelAndView mv = new ModelAndView("pages/chamadas/detalhes");
 		mv.addObject("chamada", chamadaService.getChamadaById(id));
 		return mv;
 	}
