@@ -22,7 +22,7 @@ public class CuidadorService {
         }
     }
 
-    public Cuidador getChamadaById(Long id) {
+    public Cuidador getCuidadorById (Long id) {
 		Optional<Cuidador> cuidador = cuidadorRepository.findById(id);
 		if(cuidador.isEmpty()) {
 			throw new RegistroNaoEncontradoException("Chamada não encontrada.");

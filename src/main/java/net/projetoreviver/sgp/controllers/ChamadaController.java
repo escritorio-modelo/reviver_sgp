@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,12 +40,7 @@ public class ChamadaController {
 		@RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho)
 	{
 
-		if(StringUtils.isEmpty(titulo)){
-			PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "id");
-			Page<Chamada> chamadas = chamadaRepository.findAll(pageRequest);
-		}
-
-		PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "titulo");
+		PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "id");
 		return chamadaRepository.findByTituloContainingIgnoreCase(titulo, pageRequest);
 	}
 	

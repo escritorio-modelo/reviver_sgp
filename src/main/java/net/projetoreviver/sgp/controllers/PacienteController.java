@@ -65,7 +65,6 @@ public class PacienteController {
 	@PostMapping("/alterar")
 	public ModelAndView alterar(@Valid Paciente paciente, BindingResult result) {
 		if(result.hasErrors()) {
-			System.out.println("Tem erros");
 			return new ModelAndView("pacientes/alterar").addObject("paciente", paciente);
 		}
 		pacienteService.toPersist(paciente);
