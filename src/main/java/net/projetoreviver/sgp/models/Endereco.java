@@ -15,11 +15,18 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 
 @Entity
 @Table(name="tbl_endereco")
+@EqualsAndHashCode @ToString
+@Getter
+@Setter
 public class Endereco implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -48,44 +55,5 @@ public class Endereco implements Serializable{
     @Length(max = 75, message = "Complemento deve conter no máximo 75 caracteres.")
     private String complemento;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public Rua getRua() {
-        return rua;
-    }
-
-    public void setRua(Rua rua) {
-        this.rua = rua;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
 
 }

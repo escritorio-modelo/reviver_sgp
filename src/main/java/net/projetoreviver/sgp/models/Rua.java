@@ -14,10 +14,16 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tbl_rua")
+@EqualsAndHashCode @ToString
+@Getter @Setter
 public class Rua implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -36,30 +42,5 @@ public class Rua implements Serializable{
     @JoinColumn(name = "bairro_fk")
     @Valid
     private Bairro bairro;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Bairro getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
-    }
 
 }
