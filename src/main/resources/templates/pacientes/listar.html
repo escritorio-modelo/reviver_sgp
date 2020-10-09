@@ -53,7 +53,7 @@
 																			<td th:text="${paciente.cpf}"></td>
 																			<td>Alzheimer, Parkinson</td>
 																			<td>
-																				<a href="edit.html"><button class="btn btn-primary btn-icon"
+																				<a th:href="@{/pacientes/{id}/alterar(id=${paciente.id})}"><button class="btn btn-primary btn-icon"
 																						style="margin-right: 16px" data-toggle="tooltip" data-placement="top"
 																						data-original-title="Editar paciente">
 																						<i class="icofont ion-edit" style="margin-left: 5px"></i></button></a>

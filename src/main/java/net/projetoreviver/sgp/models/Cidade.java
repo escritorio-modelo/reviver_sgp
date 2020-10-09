@@ -38,7 +38,7 @@ public class Cidade implements Serializable {
     @NotBlank(message = "Insira uma cidade.")
     private String nome;
 
-    @ManyToOne(cascade=CascadeType.PERSIST)
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "estado_fk")
     @Valid
     private Estado estado;
