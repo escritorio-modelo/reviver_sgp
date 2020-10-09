@@ -5,12 +5,14 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import net.projetoreviver.sgp.exceptions.RegistroNaoEncontradoException;
 import net.projetoreviver.sgp.exceptions.TransacaoNaoRealizadaException;
 import net.projetoreviver.sgp.models.Cuidador;
 import net.projetoreviver.sgp.repositories.CuidadorRepository;
 
+@Service
 public class CuidadorService {
     @Autowired
     private CuidadorRepository cuidadorRepository;

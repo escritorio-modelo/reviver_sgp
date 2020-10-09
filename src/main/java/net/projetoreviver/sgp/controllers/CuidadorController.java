@@ -83,7 +83,7 @@ public class CuidadorController {
         @RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
         @RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho){
 
-        PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "id");
+        PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "nome");
 		return cuidadorRepository.findByNomeContainingIgnoreCase(nome, pageRequest);
     }
 

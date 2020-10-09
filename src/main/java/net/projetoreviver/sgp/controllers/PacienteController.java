@@ -1,9 +1,11 @@
 package net.projetoreviver.sgp.controllers;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -76,6 +78,18 @@ public class PacienteController {
 		Paciente paciente = pacienteService.getPacienteById(id);
 		pacienteService.toRemove(paciente);
 		return new ModelAndView("redirect:/pacientes/listar");
+	}
+
+
+	@GetMapping("/")
+	@ResponseBody()
+	public Page<Paciente> listarAll(@RequestParam(value = "nome", required = false, defaultValue = "") String nome,
+		@RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
+		@RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho)
+	{
+
+		PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "nome");
+		return pacienteRepository.findByNomeContainingIgnoreCase(nome, pageRequest);
 	}
 
 
