@@ -1,131 +1,133 @@
-'use strict';
+"use strict";
 
 function searchChamada() {
-    let searchInput = document.querySelector('#input-search');
-    if(searchInput) {
-        let searchString = '';
-        let tbody = document.querySelector('#table-content');
-        let pageNext = document.querySelector('.pagination-next');
-        let pageBack = document.querySelector('.pagination-previous');
+  var searchInput = document.querySelector('#input-search');
 
-        requestService('chamadas', searchString, 0).then(data => {
-            let { pageable, totalPages } = data;
+  if (searchInput) {
+    var searchString = '';
+    var tbody = document.querySelector('#table-content');
+    var pageNext = document.querySelector('.pagination-next');
+    var pageBack = document.querySelector('.pagination-previous');
+    requestService('chamadas', searchString, 0).then(function (data) {
+      var pageable = data.pageable,
+          totalPages = data.totalPages;
+      updateTable(data, tbody);
+      pageNext.addEventListener('click', function () {
+        if (pageable.pageNumber < totalPages - 1) {
+          requestService('chamadas', searchString, pageable.pageNumber += 1, tbody, pageNext, pageBack).then(function (data) {
             updateTable(data, tbody);
-
-            pageNext.addEventListener('click', () => {
-                    if (pageable.pageNumber < totalPages-1){
-                        requestService('chamadas', searchString, pageable.pageNumber+=1, tbody, pageNext, pageBack).then(data => {
-                            updateTable(data, tbody);
-                        });
-                    }
-                });
-
-            pageBack.addEventListener('click', () => {
-                    if (pageable.pageNumber > 0){
-                        requestService('chamadas', searchString, pageable.pageNumber-=1, tbody, pageNext, pageBack).then(data => {
-                            updateTable(data, tbody);
-                        });
-                    }
-                });
-        })
-
-        searchInput.addEventListener('input', () => {
-            searchString = searchInput.value;
-            requestService('chamadas', searchString, 0).then((data) => {
-                let { pageable, totalPages } = data;
-                updateTable(data, tbody);
-
-                pageNext.addEventListener('click', () => {
-                    if (pageable.pageNumber < totalPages-1){
-                        requestService('chamadas', searchString, pageable.pageNumber+=1, tbody).then(data => {
-                            updateTable(data, tbody);
-                        });
-                    }
-                });
-
-                pageBack.addEventListener('click', () => {
-                    if (pageable.pageNumber > 0){
-                        equestService('chamadas', searchString, pageable.pageNumber-=1, tbody).then(data => {
-                            updateTable(data, tbody);
-                         });
-                    }
-                });
-            })
-        })
-    }
+          });
+        }
+      });
+      pageBack.addEventListener('click', function () {
+        if (pageable.pageNumber > 0) {
+          requestService('chamadas', searchString, pageable.pageNumber -= 1, tbody, pageNext, pageBack).then(function (data) {
+            updateTable(data, tbody);
+          });
+        }
+      });
+    });
+    searchInput.addEventListener('input', function () {
+      searchString = searchInput.value;
+      requestService('chamadas', searchString, 0).then(function (data) {
+        var pageable = data.pageable,
+            totalPages = data.totalPages;
+        updateTable(data, tbody);
+        pageNext.addEventListener('click', function () {
+          if (pageable.pageNumber < totalPages - 1) {
+            requestService('chamadas', searchString, pageable.pageNumber += 1, tbody).then(function (data) {
+              updateTable(data, tbody);
+            });
+          }
+        });
+        pageBack.addEventListener('click', function () {
+          if (pageable.pageNumber > 0) {
+            equestService('chamadas', searchString, pageable.pageNumber -= 1, tbody).then(function (data) {
+              updateTable(data, tbody);
+            });
+          }
+        });
+      });
+    });
+  }
 }
 
 function requestService(tipo, searchString, page) {
-        let url = `http://localhost:8080/${tipo}/?titulo=${searchString}&pagina=${page}`;
-        console.log(url)
-        return new Promise(function(resolve, reject) {
-        let xhr = new XMLHttpRequest();
-        xhr.onload = function() {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    resolve(JSON.parse(this.responseText));
-                }
-            }
+  var url = "http://localhost:8080/".concat(tipo, "/?titulo=").concat(searchString, "&pagina=").concat(page);
+  console.log(url);
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          resolve(JSON.parse(this.responseText));
         }
-        xhr.onerror = reject;
-        xhr.open('GET', url, true);
-        xhr.send();
-    })
+      }
+    };
+
+    xhr.onerror = reject;
+    xhr.open('GET', url, true);
+    xhr.send();
+  });
 }
 
 function updateTable(data, tbody) {
-    let {content} = data;
-    var urlId = '';
-    tbody.innerHTML = '';
+  var content = data.content;
+  var urlId = '';
+  tbody.innerHTML = '';
 
-    if (content.length  == 0) {
-        tbody.innerHTML = `<p>Nada encontrado.</p>`
-    } else {
-        content.map(chamada => {
-            urlId = `/chamadas/${chamada.id}`;
-            let row = `<tr>
-                <td><a href="${urlId}" class="has-text-weight-medium">${chamada.titulo}</a></td>
-                <td><span class="${chamada.status !== 'FECHADO' ? 'tag is-spaced is-rounded is-primary' : 'tag is-spaced is-rounded is-black'}">${chamada.status}</span></td>
-                <td><strong>${chamada.dataInicio}</strong> até <strong>${chamada.dataTermino}</strong>
-                <td>41/50</td>
-                <td><a href="${urlId}" class="has-text-weight-medium">Acessar chamada</a></td>
-            </tr>`
-            tbody.innerHTML += row;
-        });
-    }
+  if (content.length == 0) {
+    tbody.innerHTML = "<p>Nada encontrado.</p>";
+  } else {
+    content.map(function (chamada) {
+      urlId = "/chamadas/".concat(chamada.id);
+      var row = "<tr>\n                <td><a href=\"".concat(urlId, "\" class=\"has-text-weight-medium\">").concat(chamada.titulo, "</a></td>\n                <td><span class=\"").concat(chamada.status !== 'FECHADO' ? 'tag is-spaced is-rounded is-primary' : 'tag is-spaced is-rounded is-black', "\">").concat(chamada.status, "</span></td>\n                <td><strong>").concat(chamada.dataInicio, "</strong> at\xE9 <strong>").concat(chamada.dataTermino, "</strong>\n                <td>41/50</td>\n                <td><a href=\"").concat(urlId, "\" class=\"has-text-weight-medium\">Acessar chamada</a></td>\n            </tr>");
+      tbody.innerHTML += row;
+    });
+  }
 }
 
 function loadDOM() {
-    console.log('Hello Bulma!');
+  console.log('Hello Bulma!');
+  document.addEventListener('DOMContentLoaded', function () {
+    var notification = document.querySelector('[data-notification]');
+    var notificationDelete = document.querySelectorAll('.notification .delete');
 
-    document.addEventListener('DOMContentLoaded', function () {
-      var notification = document.querySelector('[data-notification]');
+    if (notification) {
+      var notificationbody = document.querySelector('.column .notification').parentNode;
+      console.log(notificationbody);
+      setTimeout(function () {
+        notificationbody.parentNode.removeChild(notificationbody);
+      }, 5000);
+    }
 
-      if (notification) {
-        var notificationbody = document.querySelector('.column .notification').parentNode;
-        console.log(notificationbody);
-
-        setTimeout(function () {
-          notificationbody.parentNode.removeChild(notificationbody);
-        }, 5000);
-      }
-    });
+    if (notificationDelete) {
+      (document.querySelectorAll('.notification .delete') || []).forEach(function ($delete) {
+        var $notification = $delete.parentNode;
+        $delete.addEventListener('click', function () {
+          $notification.parentNode.removeChild($notification);
+        });
+      });
+    }
+  });
 }
 
 function detailsOption() {
-    let botaoOpcao = document.querySelector('.detalhes-opcoes-botao');
-    if (botaoOpcao) {
-        botaoOpcao.addEventListener('click', function () {
-          var bodyOptions = document.querySelector('.detalhes-opcoes-body');
-          bodyOptions.style.display == 'block' ? bodyOptions.style.display = 'none' : bodyOptions.style.display = 'block';
-        });
-    }
+  var botaoOpcao = document.querySelector('.detalhes-opcoes-botao');
+
+  if (botaoOpcao) {
+    botaoOpcao.addEventListener('click', function () {
+      var bodyOptions = document.querySelector('.detalhes-opcoes-body');
+      bodyOptions.style.display == 'block' ? bodyOptions.style.display = 'none' : bodyOptions.style.display = 'block';
+    });
+  }
 }
 
 function main() {
-    loadDOM();
-    searchChamada();
-    detailsOption();
+  loadDOM();
+  searchChamada();
+  detailsOption();
 }
 
 main();

@@ -3,9 +3,11 @@
 
 <form th:fragment="formulario-chamada (metodo)" method="post" th:attr="action=${metodo == 'cadastrar' ? '/chamadas/cadastrar' : '/chamadas/alterar'}"
       th:object="${chamada}" autocomplete="off">
-    <div class="notification is-danger is-light" role="alert" th:if="${#fields.hasErrors('*')}">
-        <button class="delete"></button>
-        <p class="block" th:each="error : ${#fields.errors('*')}" th:text="${error}"></p>
+    <div th:if="${#fields.hasErrors('*')}">
+        <div th:each="error : ${#fields.errors('*')}" >
+            <div th:replace="components/notificacao/index.html :: notificacao(tipo='danger', mensagem=${error})">
+            </div>
+        </div>
     </div>
 
     <input th:if="${metodo == 'alterar'}" type="hidden" class="form-control form-control-sm" th:field="${chamada.id}" />

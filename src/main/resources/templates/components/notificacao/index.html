@@ -1,0 +1,9 @@
+<!DOCTYPE>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="notificacao (tipo, mensagem)" class="notification is-light" th:classappend="${tipo == 'danger' ? 'is-danger' : 'is-success'}">
+    <button class="delete"></button>
+    <p th:text="${mensagem}">Mensagem</p>
+</div>
+
+</html>

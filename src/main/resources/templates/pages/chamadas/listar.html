@@ -1,127 +1,122 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Todas as chamadas - Reviver</title>
-  <th:block
-          th:include="components/geral/index.html :: header-files"
-  ></th:block>
+    <title>Todas as chamadas - Reviver</title>
+    <th:block
+            th:include="components/geral/index.html :: header-files"
+    ></th:block>
 </head>
 
 <body>
-<div
-        th:replace="components/header/index.html :: header(content='Todas as chamadas')"
-></div>
+<div th:replace="components/header/index.html :: header(content='Todas as chamadas')"></div>
 
 <div th:if="${#request.getParameter('deletada')}" class="container" data-notification="show">
-  <div class="columns is-centered">
-    <div class="column is-half notification-component">
-      <div class="notification is-success is-light">
-        <button class="delete"></button>
-        <p>Chamada excluída com sucesso!</p>
-      </div>
+    <div class="columns is-centered">
+        <div class="column is-half notification-component">
+            <div th:replace="components/notificacao/index.html :: notificacao(tipo='success', mensagem='A chamada foi deletada com sucesso!')"></div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- PageBody -->
 <section class="section">
-  <div class="container">
+    <div class="container">
 
-    <div class="columns">
-      <div class="column is-9">
-        <!-- InputSearch -->
-        <div class="control has-icons-left">
-          <input
-                  class="input is-medium"
-                  type="text"
-                  placeholder="Buscar chamada"
-                  id="input-search"
-          />
-          <span class="icon is-left">
+        <div class="columns">
+            <div class="column is-9">
+                <!-- InputSearch -->
+                <div class="control has-icons-left">
+                    <input
+                            class="input is-medium"
+                            type="text"
+                            placeholder="Buscar chamada"
+                            id="input-search"
+                    />
+                    <span class="icon is-left">
                 <i class="fas fa-search"></i>
               </span>
-        </div>
-        <!-- InputSearch End -->
-      </div>
+                </div>
+                <!-- InputSearch End -->
+            </div>
 
-      <!-- ButtonNewCall -->
-      <div class="column">
-        <a
-                href="/chamadas/cadastrar"
-                class="button is-primary is-medium is-fullwidth"
-        >
+            <!-- ButtonNewCall -->
+            <div class="column">
+                <a
+                        href="/chamadas/cadastrar"
+                        class="button is-primary is-medium is-fullwidth"
+                >
               <span class="icon">
                 <i class="far fa-calendar-alt"></i>
               </span>
-          <span>Abrir nova chamada</span>
-        </a>
-      </div>
-      <!-- ButtonNewCall End-->
-    </div>
+                    <span>Abrir nova chamada</span>
+                </a>
+            </div>
+            <!-- ButtonNewCall End-->
+        </div>
 
-    <!-- TableCalls -->
-    <div class="container mt-16">
-      <div class="table-section">
-        <table class="table is-hoverable is-fullwidth">
-          <thead>
-          <tr>
-            <th>Título</th>
-            <th>Status</th>
-            <th>Período</th>
-            <th>Pacientes cadastrados</th>
-            <th>Acesso</th>
-          </tr>
-          </thead>
+        <!-- TableCalls -->
+        <div class="container mt-16">
+            <div class="table-section">
+                <table class="table is-hoverable is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Status</th>
+                        <th>Período</th>
+                        <th>Pacientes cadastrados</th>
+                        <th>Acesso</th>
+                    </tr>
+                    </thead>
 
-          <tbody id="table-content">
-          <tr th:each="chamada : ${chamadas}">
-            <td>
-              <a
-                      th:href="@{/chamadas/{id}(id=${chamada.id})}"
-                      class="has-text-weight-medium"
-                      th:text="${chamada.titulo}"
-              >Chamada</a
-              >
-            </td>
-            <td>
+                    <tbody id="table-content">
+                    <tr th:each="chamada : ${chamadas}">
+                        <td>
+                            <a
+                                    th:href="@{/chamadas/{id}(id=${chamada.id})}"
+                                    class="has-text-weight-medium"
+                                    th:text="${chamada.titulo}"
+                            >Chamada</a
+                            >
+                        </td>
+                        <td>
                     <span
                             th:classappend="${#strings.toString(chamada.status) != 'FECHADO' ? 'is-primary' : 'is-black'}"
                             class="tag is-spaced is-rounded"
                             th:text="${chamada.status.displayValue}"
                     >Status</span
                     >
-            </td>
-            <td>
-              <strong
-                      th:text="${#temporals.format(chamada.dataInicio, 'dd/MM/yyyy')}"
-              >dd/MM/aaaa</strong
-              >
-              até
-              <strong
-                      th:text="${#temporals.format(chamada.dataTermino, 'dd/MM/yyyy')}"
-              >dd/MM/aaaa</strong
-              >
-            </td>
-            <td>50/50</td>
-            <td>
-              <a
-                      th:href="@{/chamadas/{id}(id=${chamada.id})}"
-                      class="has-text-weight-medium"
-              >Acessar chamada</a
-              >
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+                        </td>
+                        <td>
+                            <strong
+                                    th:text="${#temporals.format(chamada.dataInicio, 'dd/MM/yyyy')}"
+                            >dd/MM/aaaa</strong
+                            >
+                            até
+                            <strong
+                                    th:text="${#temporals.format(chamada.dataTermino, 'dd/MM/yyyy')}"
+                            >dd/MM/aaaa</strong
+                            >
+                        </td>
+                        <td>50/50</td>
+                        <td>
+                            <a
+                                    th:href="@{/chamadas/{id}(id=${chamada.id})}"
+                                    class="has-text-weight-medium"
+                            >Acessar chamada</a
+                            >
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    <nav class="pagination" role="navigation" aria-label="pagination">
-      <a class="pagination-previous">Voltar</a>
-      <a class="pagination-next">Próximo</a>
-    </nav>
-    <!-- TableCalls End-->
-  </div>
+        <nav class="pagination" role="navigation" aria-label="pagination">
+            <a class="pagination-previous">Voltar</a>
+            <a class="pagination-next">Próximo</a>
+        </nav>
+        <!-- TableCalls End-->
+    </div>
 </section>
 <!-- PageBody End -->
 
