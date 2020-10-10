@@ -72,8 +72,17 @@ function requestService(tipo, searchString, page) {
   });
 }
 
+function formatData(data) {
+  var dia = data.slice(8);
+  var mes = data.slice(5, 7);
+  var ano = data.slice(0, 4);
+  return "".concat(dia, "/").concat(mes, "/").concat(ano);
+}
+
 function updateTable(data, tbody) {
   var content = data.content;
+  var dataInicio = content.dataInicio;
+  var dataTermino = content.dataTermino;
   var urlId = '';
   tbody.innerHTML = '';
 
@@ -82,7 +91,7 @@ function updateTable(data, tbody) {
   } else {
     content.map(function (chamada) {
       urlId = "/chamadas/".concat(chamada.id);
-      var row = "<tr>\n                <td><a href=\"".concat(urlId, "\" class=\"has-text-weight-medium\">").concat(chamada.titulo, "</a></td>\n                <td><span class=\"").concat(chamada.status !== 'FECHADO' ? 'tag is-spaced is-rounded is-primary' : 'tag is-spaced is-rounded is-black', "\">").concat(chamada.status, "</span></td>\n                <td><strong>").concat(chamada.dataInicio, "</strong> at\xE9 <strong>").concat(chamada.dataTermino, "</strong>\n                <td>41/50</td>\n                <td><a href=\"").concat(urlId, "\" class=\"has-text-weight-medium\">Acessar chamada</a></td>\n            </tr>");
+      var row = "<tr>\n                <td><a href=\"".concat(urlId, "\" class=\"has-text-weight-medium\">").concat(chamada.titulo, "</a></td>\n                <td><span class=\"").concat(chamada.status !== 'FECHADO' ? 'tag is-spaced is-rounded is-primary' : 'tag is-spaced is-rounded is-black', "\">").concat(chamada.status, "</span></td>\n                <td><strong>").concat(formatData(chamada.dataInicio), "</strong> at\xE9 <strong>").concat(formatData(chamada.dataTermino), "</strong>\n                <td>41/50</td>\n                <td><a href=\"").concat(urlId, "\" class=\"has-text-weight-medium\">Acessar chamada</a></td>\n            </tr>");
       tbody.innerHTML += row;
     });
   }
