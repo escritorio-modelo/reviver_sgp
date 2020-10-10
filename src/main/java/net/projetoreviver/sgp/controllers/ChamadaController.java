@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.projetoreviver.sgp.models.Chamada;
 import net.projetoreviver.sgp.repositories.ChamadaRepository;
@@ -33,7 +34,7 @@ public class ChamadaController {
 	}
 
 	@GetMapping("/listar")
-	public ModelAndView listar(@RequestParam(required = false) Boolean deletada) {
+	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("pages/chamadas/listar");
 		mv.addObject("chamadas", chamadaRepository.findAll());
 		return mv;
@@ -74,10 +75,11 @@ public class ChamadaController {
 	}
 	
 	@GetMapping("/{id}/excluir")
-	public ModelAndView excluir(@PathVariable("id") Long id) {
+	public String excluir(@PathVariable("id") final Long id, final RedirectAttributes attributes){
 		Chamada chamada = chamadaService.getChamadaById(id);
 		chamadaService.toRemove(chamada);
-		return new ModelAndView("redirect:/chamadas/listar" + "?deletada=true");
+		attributes.addFlashAttribute("deletada", true);
+		return "redirect:/chamadas/listar";
 	}
 
 	

@@ -8,7 +8,7 @@
 <body>
 <div th:replace="components/header/index.html :: header(content='Todas as chamadas', paginaatual='chamadas')"></div>
 
-<div th:if="${#request.getParameter('deletada')}" class="container" data-notification="show">
+<div th:if="${deletada}" class="container" data-notification="show">
     <div class="columns is-centered">
         <div class="column is-half notification-component">
             <div th:replace="components/notificacao/index.html :: notificacao(tipo='success', mensagem='A chamada foi deletada com sucesso!')"></div>
