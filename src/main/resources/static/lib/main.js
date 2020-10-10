@@ -87,11 +87,11 @@ function updateTable(data, tbody) {
   tbody.innerHTML = '';
 
   if (content.length == 0) {
-    tbody.innerHTML = "<p>Nada encontrado.</p>";
+    tbody.innerHTML = "<p style=\"padding: 20px;\">Nada encontrado.</p>";
   } else {
     content.map(function (chamada) {
       urlId = "/chamadas/".concat(chamada.id);
-      var row = "<tr>\n                <td><a href=\"".concat(urlId, "\" class=\"has-text-weight-medium\">").concat(chamada.titulo, "</a></td>\n                <td><span class=\"").concat(chamada.status !== 'FECHADO' ? 'tag is-spaced is-rounded is-primary' : 'tag is-spaced is-rounded is-black', "\">").concat(chamada.status, "</span></td>\n                <td><strong>").concat(formatData(chamada.dataInicio), "</strong> at\xE9 <strong>").concat(formatData(chamada.dataTermino), "</strong>\n                <td>41/50</td>\n                <td><a href=\"").concat(urlId, "\" class=\"has-text-weight-medium\">Acessar chamada</a></td>\n            </tr>");
+      var row = "<tr>\n                <td><a href=\"".concat(urlId, "\" class=\"has-text-weight-medium\">").concat(chamada.titulo, "</a></td>\n                <td><span class=\"").concat(chamada.status !== 'FECHADO' ? 'tag is-spaced is-rounded is-primary' : 'tag is-spaced is-rounded is-black', "\">").concat(chamada.status == 'EMANDAMENTO' ? chamada.status.slice(0, 1) + '' + chamada.status.slice(1, 2).toLowerCase() + ' ' + chamada.status.slice(2).toLowerCase() : chamada.status.slice(0, 1) + '' + chamada.status.slice(1).toLowerCase(), "</span></td>\n                <td><strong>").concat(formatData(chamada.dataInicio), "</strong> at\xE9 <strong>").concat(formatData(chamada.dataTermino), "</strong>\n                <td>41/50</td>\n                <td><a href=\"").concat(urlId, "\" class=\"has-text-weight-medium\">Acessar chamada</a></td>\n            </tr>");
       tbody.innerHTML += row;
     });
   }
