@@ -1,6 +1,7 @@
 package net.projetoreviver.sgp.controllers;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -83,8 +84,8 @@ public class ChamadaController {
 	@GetMapping("/")
 	@ResponseBody()
 	public Page<Chamada> listarAll(@RequestParam(value = "titulo", required = false, defaultValue = "") String titulo,
-		@RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
-		@RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho)
+		@RequestParam(value = "pagina", required = false , defaultValue = "0") @Min(0) int pagina,
+		@RequestParam(value = "tamanho", required = false, defaultValue = "10") @Min(0) int tamanho)
 	{
 		return chamadaService.procurarPorTitulo(titulo, pagina, tamanho);
 	}
