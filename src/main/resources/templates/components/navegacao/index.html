@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
-<nav th:fragment="navegacao" class="navbar" role="navigation" aria-label="main navigation">
+<nav th:fragment="navegacao (paginaatual)" class="navbar" role="navigation" aria-label="main navigation">
 
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
@@ -16,21 +16,21 @@
 
     <div id="navbarMobileNav" class="navbar-menu">
         <div class="navbar-end">
-            <a href="/chamadas/listar" class="navbar-item">
+            <a href="/chamadas/listar" class="navbar-item"  th:classappend="${paginaatual == 'chamadas' ? 'is-active' : ''}">
             <span class="icon nav-icon">
               <i class="far fa-calendar-alt"></i>
             </span>
                 Chamadas
             </a>
 
-            <a href="/pacientes/listar" class="navbar-item">
+            <a href="/pacientes/listar" class="navbar-item" th:classappend="${paginaatual == 'pacientes' ? 'is-active' : ''}">
             <span class="icon nav-icon">
               <i class="far fa-user"></i>
             </span>
                 Pacientes
             </a>
 
-            <a href="/cuidadores/listar" class="navbar-item">
+            <a href="/cuidadores/listar" class="navbar-item" th:classappend="${paginaatual == 'cuidadores' ? 'is-active' : ''}">
             <span class="icon nav-icon">
               <i class="far fa-user"></i>
             </span>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="navbar-end">
-            <div class="navbar-item">
+            <div class="navbar-item" >
                 <a href="#">Nome Usuário</a>
             </div>
         </div>

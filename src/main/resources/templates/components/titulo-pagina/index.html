@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-  <section th:fragment="titulo-pagina" class="section title-page">
+  <section th:fragment="titulo-pagina (content)" class="section title-page">
     <h1 class="title is-1" th:text="${content}"></h1>
   </section>
 </html>

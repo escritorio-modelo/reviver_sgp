@@ -2,13 +2,11 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Todas as chamadas - Reviver</title>
-    <th:block
-            th:include="components/geral/index.html :: header-files"
-    ></th:block>
+    <th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
 
 <body>
-<div th:replace="components/header/index.html :: header(content='Todas as chamadas')"></div>
+<div th:replace="components/header/index.html :: header(content='Todas as chamadas', paginaatual='chamadas')"></div>
 
 <div th:if="${#request.getParameter('deletada')}" class="container" data-notification="show">
     <div class="columns is-centered">
