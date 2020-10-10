@@ -21,6 +21,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +32,7 @@ import net.projetoreviver.sgp.annotations.ValidChamadaDate;
 @ValidChamadaDate
 @Table(name = "tbl_chamada")
 @Getter @Setter  @NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode
 @ToString(exclude = "id")
 public class Chamada implements Serializable{
 	
@@ -57,40 +59,14 @@ public class Chamada implements Serializable{
 	@Column(name = "data_inicio", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "A chamada deve conter uma data de início.")
-	@FutureOrPresent(message = "Data de Inicio Inválida.")
 	private LocalDate dataInicio;
 
 	@Column(name = "data_termino", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "A chamada deve conter uma data de término.")
-	@FutureOrPresent(message = "Data de Término Inválida.")
 	private LocalDate dataTermino;
 
 	@OneToMany(mappedBy = "chamada")
 	private List<RegistroChamadaPaciente> registrosPacientes;
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Chamada other = (Chamada) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
 }

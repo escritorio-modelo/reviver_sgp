@@ -1,12 +1,9 @@
 package net.projetoreviver.sgp.controllers;
 
-import java.time.LocalDate;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -26,29 +23,24 @@ public class ChamadaController {
 	@Autowired
 	private ChamadaService chamadaService;
 	
+
+	@GetMapping("/{id}")
+	public ModelAndView detalhes(@PathVariable("id") Long id) {
+		ModelAndView mv = new ModelAndView("pages/chamadas/detalhes");
+		mv.addObject("chamada", chamadaService.getChamadaById(id));
+		return mv;
+	}
+
 	@GetMapping("/listar")
 	public ModelAndView listar(@RequestParam(required = false) Boolean deletada) {
 		ModelAndView mv = new ModelAndView("pages/chamadas/listar");
 		mv.addObject("chamadas", chamadaRepository.findAll());
 		return mv;
 	}
-
-	@GetMapping("/")
-	@ResponseBody()
-	public Page<Chamada> listarAll(@RequestParam(value = "titulo", required = false, defaultValue = "") String titulo,
-		@RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
-		@RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho)
-	{
-
-		PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "id");
-		return chamadaRepository.findByTituloContainingIgnoreCase(titulo, pageRequest);
-	}
 	
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Chamada chamada) {
-		ModelAndView mv = new ModelAndView("pages/chamadas/cadastrar");
-		mv.addObject("minDate", LocalDate.now());
-		return mv;
+		return new ModelAndView("pages/chamadas/cadastrar");
 	}
 	
 	@PostMapping("/cadastrar")
@@ -67,13 +59,17 @@ public class ChamadaController {
 		return mv;
 	}
 	
+	
 	@PostMapping("/alterar")
-	public ModelAndView alterar(Chamada chamada, BindingResult result) {
+	public ModelAndView alterar(@Valid Chamada chamada, BindingResult result, ModelAndView mv) {
 		if(result.hasErrors()) {
-			return this.alterar(chamada.getId());
+			mv.setViewName("pages/chamadas/alterar");
+			mv.addObject("chamada", chamada);
+			return mv;
 		}
 		chamadaService.toPersist(chamada);
-		return new ModelAndView("redirect:/chamadas/" + chamada.getId());
+		mv.setViewName("redirect:/chamadas/" + chamada.getId());
+		return mv;		
 	}
 	
 	@GetMapping("/{id}/excluir")
@@ -83,10 +79,13 @@ public class ChamadaController {
 		return new ModelAndView("redirect:/chamadas/listar" + "?deletada=true");
 	}
 
-	@GetMapping("/{id}")
-	public ModelAndView detalhes(@PathVariable("id") Long id) {
-		ModelAndView mv = new ModelAndView("pages/chamadas/detalhes");
-		mv.addObject("chamada", chamadaService.getChamadaById(id));
-		return mv;
+	
+	@GetMapping("/")
+	@ResponseBody()
+	public Page<Chamada> listarAll(@RequestParam(value = "titulo", required = false, defaultValue = "") String titulo,
+		@RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
+		@RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho)
+	{
+		return chamadaService.procurarPorTitulo(titulo, pagina, tamanho);
 	}
 }

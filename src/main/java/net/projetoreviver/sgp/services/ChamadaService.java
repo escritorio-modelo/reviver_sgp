@@ -2,6 +2,9 @@ package net.projetoreviver.sgp.services;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,5 +40,10 @@ public class ChamadaService {
 	public void toRemove(Chamada chamada) {
 		chamadaRepository.deleteById(chamada.getId());
 	}
+
+	public Page<Chamada> procurarPorTitulo(String titulo, int pagina, int tamanho){
+		PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "id");
+		return chamadaRepository.findByTituloContainingIgnoreCase(titulo, pageRequest);
+	} 
 	
 }
