@@ -2,70 +2,96 @@
 
 function searchChamada() {
     let searchInput = document.querySelector('#input-search');
-
     if(searchInput) {
-        var searchString = '';
-        var page = 0;
-        requestChamadaService(searchString, page);
+        let searchString = '';
+        let tbody = document.querySelector('#table-content');
+        let pageNext = document.querySelector('.pagination-next');
+        let pageBack = document.querySelector('.pagination-previous');
+
+        requestService('chamadas', searchString, 0).then(data => {
+            let { pageable, totalPages } = data;
+            updateTable(data, tbody);
+
+            pageNext.addEventListener('click', () => {
+                    if (pageable.pageNumber < totalPages-1){
+                        requestService('chamadas', searchString, pageable.pageNumber+=1, tbody, pageNext, pageBack).then(data => {
+                            updateTable(data, tbody);
+                        });
+                    }
+                });
+
+            pageBack.addEventListener('click', () => {
+                    if (pageable.pageNumber > 0){
+                        requestService('chamadas', searchString, pageable.pageNumber-=1, tbody, pageNext, pageBack).then(data => {
+                            updateTable(data, tbody);
+                        });
+                    }
+                });
+        })
 
         searchInput.addEventListener('input', () => {
             searchString = searchInput.value;
-            requestChamadaService(searchString, 0);
-        });
+            requestService('chamadas', searchString, 0).then((data) => {
+                let { pageable, totalPages } = data;
+                updateTable(data, tbody);
 
-        function requestChamadaService(searchString, page) {
-            let url = 'http://localhost:8080/chamadas/?titulo=' + searchString + '&pagina=' + page;
-
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200)
-                        updateTable(JSON.parse(xhr.responseText));
-
-                        let pageLink = document.querySelectorAll('.pagination-link');
-                        for (let i = 0; i < pageLink.length; i++) {
-                            pageLink[i].addEventListener('click', () => {
-                                page = i
-                                requestChamadaService(searchString, page);
-                            })
-                        }
+                pageNext.addEventListener('click', () => {
+                    if (pageable.pageNumber < totalPages-1){
+                        requestService('chamadas', searchString, pageable.pageNumber+=1, tbody).then(data => {
+                            updateTable(data, tbody);
+                        });
                     }
-                }
-                xhr.send();
-        }
+                });
 
-        function updateTable(data) {
-            let listaChamadas = data.content;
-            let tbody = document.querySelector('#table-content');
-            let paginationList = document.querySelector('.pagination-list');
-            var urlId = '';
-            tbody.innerHTML = '';
-            paginationList.innerHTML = '';
+                pageBack.addEventListener('click', () => {
+                    if (pageable.pageNumber > 0){
+                        equestService('chamadas', searchString, pageable.pageNumber-=1, tbody).then(data => {
+                            updateTable(data, tbody);
+                         });
+                    }
+                });
+            })
+        })
+    }
+}
 
-            if (listaChamadas.length  == 0) {
-                tbody.innerHTML = `<p>Nada encontrado.</p>`
-            } else {
-                listaChamadas.map(chamada => {
-                    urlId = `/chamadas/${chamada.id}`;
-                    let row = `<tr>
-                        <td><a href="${urlId}" class="has-text-weight-medium">${chamada.titulo}</a></td>
-                        <td><span class="${chamada.status !== 'FECHADO' ? 'tag is-spaced is-rounded is-primary' : 'tag is-spaced is-rounded is-black'}">${chamada.status}</span></td>
-                        <td><strong>${chamada.dataInicio}</strong> até <strong>${chamada.dataTermino}</strong>
-                        <td>41/50</td>
-                        <td><a href="${urlId}" class="has-text-weight-medium">Acessar chamada</a></td>
-                    </tr>`
-                    tbody.innerHTML += row;
-                })
-
-                for(let i = 0; i < data.totalPages; i++) {
-                    let pageButton = `
-                        <li><a class="${data.pageable.pageNumber == i ?  'pagination-link is-current' : 'pagination-link'}" aria-label="Página 1" aria-current="page">${i}</a></li>
-                    `;
-                    paginationList.innerHTML += pageButton;
+function requestService(tipo, searchString, page) {
+        let url = `http://localhost:8080/${tipo}/?titulo=${searchString}&pagina=${page}`;
+        console.log(url)
+        return new Promise(function(resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    resolve(JSON.parse(this.responseText));
                 }
             }
         }
+        xhr.onerror = reject;
+        xhr.open('GET', url, true);
+        xhr.send();
+    })
+}
+
+function updateTable(data, tbody) {
+    let {content} = data;
+    var urlId = '';
+    tbody.innerHTML = '';
+
+    if (content.length  == 0) {
+        tbody.innerHTML = `<p>Nada encontrado.</p>`
+    } else {
+        content.map(chamada => {
+            urlId = `/chamadas/${chamada.id}`;
+            let row = `<tr>
+                <td><a href="${urlId}" class="has-text-weight-medium">${chamada.titulo}</a></td>
+                <td><span class="${chamada.status !== 'FECHADO' ? 'tag is-spaced is-rounded is-primary' : 'tag is-spaced is-rounded is-black'}">${chamada.status}</span></td>
+                <td><strong>${chamada.dataInicio}</strong> até <strong>${chamada.dataTermino}</strong>
+                <td>41/50</td>
+                <td><a href="${urlId}" class="has-text-weight-medium">Acessar chamada</a></td>
+            </tr>`
+            tbody.innerHTML += row;
+        });
     }
 }
 
