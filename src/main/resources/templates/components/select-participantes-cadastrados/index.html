@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="select-paticipantes-cadastrados (tipo)">
+        <label>Procurar <strong th:text="${tipo}"></strong></label>
+        <select id="procurar-participante" name="participanteId">
+            <option value="" selected disabled hidden>Procurar...</option>
+        </select>
+    </div>
+
+</html>

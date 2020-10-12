@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Abrir nova chamada - Reviver</title>
+    <th:block th:include="components/geral/index.html :: header-files"></th:block>
+</head>
+
+<body>
+    <div th:replace="components/header/index.html :: header(content='Cadastrar novo participante', paginaatual='chamadas')"></div>
+
+    <!-- Content -->
+    <section class="section">
+        <div class="container">
+
+        <div th:replace="components/select-participantes-cadastrados/index.html :: select-paticipantes-cadastrados(tipo='pacientes')"></div>
+
+        </div>
+    </section>
+    <!-- Content End -->
+
+    <th:block th:include="components/geral/index.html :: scripts"></th:block>
+</body>
+</html>
