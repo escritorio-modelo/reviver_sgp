@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -78,25 +77,5 @@ public class PacienteController {
 		Paciente paciente = pacienteService.getPacienteById(id);
 		pacienteService.toRemove(paciente);
 		return new ModelAndView("redirect:/pacientes/listar");
-	}
-
-
-	@GetMapping("/")
-	@ResponseBody()
-	public Page<Paciente> listarAll(@RequestParam(value = "nome", required = false, defaultValue = "") String nome,
-		@RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
-		@RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho)
-	{
-
-		PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "nome");
-		return pacienteRepository.findByNomeContainingIgnoreCase(nome, pageRequest);
-	}
-
-
-	@PostMapping("/api/cadastrar")
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public void cadastrarAjax(@RequestBody @Valid Paciente paciente){
-		System.out.println(paciente);
-		pacienteService.toPersist(paciente);
 	}
 }

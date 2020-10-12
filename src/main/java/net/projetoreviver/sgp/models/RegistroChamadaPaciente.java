@@ -17,8 +17,15 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "tbl_registro_chamada_paciente")
+@Getter @Setter
+@ToString @EqualsAndHashCode
 public class RegistroChamadaPaciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +38,7 @@ public class RegistroChamadaPaciente implements Serializable {
     @Column(name = "regpac_data_registro", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Registro de Chamada deve conter uma data")
-    private Date dataRegistro;
+    private Date dataRegistro; //LocalDateTime
 
     @ManyToOne(optional = false)
     private Chamada chamada;
@@ -42,54 +49,5 @@ public class RegistroChamadaPaciente implements Serializable {
 
     @OneToMany(mappedBy = "registroPaciente")
     private List<RegistroCuidador> cuidador;
-
-    public Long getId() {
-        return id;
-    }
-
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public Date getDataRegistro() {
-        return dataRegistro;
-    }
-
-
-    public void setDataRegistro(Date dataRegistro) {
-        this.dataRegistro = dataRegistro;
-    }
-
-
-    public Chamada getChamada() {
-        return chamada;
-    }
-
-
-    public void setChamada(Chamada chamada) {
-        this.chamada = chamada;
-    }
-
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-
-    public List<RegistroCuidador> getCuidador() {
-        return cuidador;
-    }
-
-
-    public void setCuidador(List<RegistroCuidador> cuidador) {
-        this.cuidador = cuidador;
-    }
 
 }

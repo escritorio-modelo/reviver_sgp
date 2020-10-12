@@ -76,20 +76,4 @@ public class CuidadorController {
         return new ModelAndView();
     }
 
-
-    @GetMapping("/")
-    @ResponseBody()
-    public Page<Cuidador> listarAll(@RequestParam(value = "nome", required = false, defaultValue = "") String nome,
-        @RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
-        @RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho){
-
-        PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "nome");
-		return cuidadorRepository.findByNomeContainingIgnoreCase(nome, pageRequest);
-    }
-
-    @PostMapping("/api/cadastrar")
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public void cadastrarAjax(@RequestBody @Valid Cuidador cuidador){
-        cuidadorService.toPersist(cuidador);
-    }
 }
