@@ -63,7 +63,8 @@ public class ChamadaController {
 	
 	
 	@PostMapping("/alterar")
-	public ModelAndView alterar(@Valid Chamada chamada, BindingResult result, ModelAndView mv) {
+	public ModelAndView alterar(@Valid Chamada chamada, BindingResult result) {
+		ModelAndView mv = new ModelAndView();
 		if(result.hasErrors()) {
 			mv.setViewName("pages/chamadas/alterar");
 			mv.addObject("chamada", chamada);
