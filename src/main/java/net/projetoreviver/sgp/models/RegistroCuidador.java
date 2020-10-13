@@ -1,7 +1,7 @@
 package net.projetoreviver.sgp.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +10,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 
 @Entity
 @Table(name = "tbl_registro_cuidador")
+@ToString @Getter @Setter
 public class RegistroCuidador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,7 +36,7 @@ public class RegistroCuidador implements Serializable {
     @Column(name = "regpac_data_registro", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Cuidador deve uma data de registro")
-    private Date dataRegistro;
+    private LocalDateTime dataRegistro;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cuidador_id")
@@ -42,43 +48,8 @@ public class RegistroCuidador implements Serializable {
 
     //,private String termoDeCompromisso;
 
-    public Long getId() {
-        return id;
+    @PrePersist
+    public void created(){
+        dataRegistro = LocalDateTime.now();
     }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
- 
-    public Date getDataRegistro() {
-        return dataRegistro;
-    }
-
-
-    public void setDataRegistro(Date dataRegistro) {
-        this.dataRegistro = dataRegistro;
-    }
-
-
-    public Cuidador getCuidador() {
-        return cuidador;
-    }
-
-
-    public void setCuidador(Cuidador cuidador) {
-        this.cuidador = cuidador;
-    }
-
-
-    public RegistroChamadaPaciente getRegistroPaciente() {
-        return registroPaciente;
-    }
-
- 
-    public void setRegistroPaciente(RegistroChamadaPaciente registroPaciente) {
-        this.registroPaciente = registroPaciente;
-    }
-
 }
