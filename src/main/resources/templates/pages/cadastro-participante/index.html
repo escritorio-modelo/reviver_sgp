@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastrar participante - Reviver</title>
+    <th:block th:include="components/geral/index.html :: header-files"></th:block>
+</head>
+
+<body>
+    <div th:replace="components/header/index.html :: header(content='Cadastrar participante', paginaatual='pacientes')"></div>
+
+    <!-- Content -->
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column box box-section is-9">
+
+                        <form method="post" th:action="@{/registrochamada/}">
+                            <input type="hidden" id="chamada" name="chamada" th:value="${chamada.getId()}">
+                            <div th:replace="components/select-participantes-cadastrados/index.html
+                                :: select-paticipantes-cadastrados(tipo='paciente')">
+                            </div>
+
+                            <div th:replace="components/select-participantes-cadastrados/index.html
+                                :: select-paticipantes-cadastrados(tipo='cuidador')">
+                            </div>
+
+                            <button type="submit">Registrar na chamada</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content End -->
+
+    <th:block th:include="components/geral/index.html :: scripts"></th:block>
+    <script>
+        $(document).ready(function() {
+            $(`.procurar-paciente`).select2({
+                ajax: {
+                    url: `/api/pacientes/select/`,
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (response) {
+                        return {
+                            results: response
+                        }
+                    },
+                    cache: true,
+                    data: function (params) {
+                      var queries = {
+                        query: params.term,
+                      }
+                      return queries;
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $(`.procurar-cuidador`).select2({
+                ajax: {
+                    url: `/api/cuidadores/select/`,
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (response) {
+                        return {
+                            results: response
+                        }
+                    },
+                    cache: true,
+                    data: function (params) {
+                      var queries = {
+                        query: params.term,
+                      }
+                      return queries;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
