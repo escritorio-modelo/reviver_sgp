@@ -2,9 +2,11 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
     <div th:fragment="select-paticipantes-cadastrados (tipo)">
-        <label>Procurar <strong th:text="${tipo}"></strong></label>
+        <h2 class="title is-5">O <span th:text="${tipo}">tipo</span> já participou do Projeto Reviver?</h2>
+        <p>Se o <i th:text="${tipo}">tipo</i> já participou do Projeto Reviver anteriormente e possui um cadastro no sistema, então basta procurar pelo nome dele no compo abaixo e ir para o próximo passo.</p>
+
         <select id="procurar-participante" name="participanteId">
-            <option value="" selected disabled hidden>Procurar...</option>
+            <option value="" selected disabled hidden>Procurar pelo nome</option>
         </select>
     </div>
 

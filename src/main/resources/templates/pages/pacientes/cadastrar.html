@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Abrir nova chamada - Reviver</title>
+    <title>Cadastrar participante - Reviver</title>
     <th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
 
 <body>
-    <div th:replace="components/header/index.html :: header(content='Cadastrar novo participante', paginaatual='chamadas')"></div>
+    <div th:replace="components/header/index.html :: header(content='Cadastrar participante', paginaatual='pacientes')"></div>
 
     <!-- Content -->
     <section class="section">
         <div class="container">
-
-        <div th:replace="components/select-participantes-cadastrados/index.html :: select-paticipantes-cadastrados(tipo='pacientes')"></div>
-
+            <div class="columns">
+                <div class="column box box-section is-9">
+                    <div th:replace="components/select-participantes-cadastrados/index.html
+                        :: select-paticipantes-cadastrados(tipo='paciente')"></div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- Content End -->
