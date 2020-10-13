@@ -40,8 +40,9 @@ public class CuidadorController {
     }
 
     @GetMapping("/cadastrar")
-    public ModelAndView cadastrar(Cuidador cuidador){
-        return new ModelAndView();
+    public ModelAndView cadastrar(Cuidador cuidador) {
+        ModelAndView mv = new ModelAndView("pages/cuidadores/cadastrar");
+        return mv;
     }
 
     @PostMapping("/cadastrar")

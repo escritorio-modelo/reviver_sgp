@@ -5,18 +5,14 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import net.projetoreviver.sgp.models.Paciente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import net.projetoreviver.sgp.models.Cuidador;
 import net.projetoreviver.sgp.repositories.CuidadorRepository;
@@ -44,8 +40,9 @@ public class CuidadorRestController {
 
     @PostMapping("/")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void cadastrarAjax(@Valid Cuidador cuidador){
+    public Cuidador cadastrarAjax(@RequestBody @Valid Cuidador cuidador) {
         cuidadorService.toPersist(cuidador);
+        return cuidador;
     }
 
 
