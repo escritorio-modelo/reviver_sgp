@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Todos os Cuidadores - Reviver</title>
+    <th:block th:include="components/geral/index.html :: header-files"></th:block>
+</head>
+
+<body>
+<div th:replace="components/header/index.html :: header(content='Todos os cuidadores', paginaatual='cuidadores')"></div>
+
+<div th:if="${deletada}" class="container" data-notification="show">
+    <div class="columns is-centered">
+        <div class="column is-half notification-component">
+            <div th:replace="components/notificacao/index.html :: notificacao(tipo='success', mensagem='O cuidador foi deletado com sucesso!')"></div>
+        </div>
+    </div>
+</div>
+
+<!-- PageBody -->
+<section class="section">
+    <div class="container">
+
+        <div class="columns">
+            <div class="column is-12">
+                <!-- InputSearch -->
+                <div class="control has-icons-left">
+                    <input
+                            class="input is-medium"
+                            type="text"
+                            placeholder="Buscar chamada"
+                            id="input-search"
+                    />
+                    <span class="icon is-left">
+                <i class="fas fa-search"></i>
+              </span>
+                </div>
+                <!-- InputSearch End -->
+            </div>
+
+           
+        </div>
+
+        <!-- TableCalls -->
+        <div class="container mt-16">
+            <div class="table-section">
+                <table class="table is-hoverable is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
+                        <th>Paciente</th>
+                        <th>Acesso</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="table-content">
+                    <tr th:each="cuidador : ${cuidadores}">
+                        <td>
+                            <a
+                                    th:href="@{/cuidadores/{id}(id=${cuidador.id})}"
+                                    class="has-text-weight-medium"
+                                    th:text="${cuidador.titulo}"
+                            >Nome</a
+                            >
+                        </td>
+                        <td>
+                    <span
+                            
+                            class="tag is-spaced is-rounded"
+                            th:text="${cuidador.cpf}"
+                    >CPF</span
+                    >
+                        </td>
+                        <td>
+                            <span
+                            
+                            class="tag is-spaced is-rounded"
+                            th:text="${cuidador.telefone}"
+                    >CPF</span
+                    >
+                        </td>
+                        <td>50/50</td>
+                        <td>
+                            <a
+                                    th:href="@{/cuidadores/{id}(id=${cuidador.id})}"
+                                    class="has-text-weight-medium"
+                            >Acessar chamada</a
+                            >
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <nav class="pagination" role="navigation" aria-label="pagination">
+            <a class="pagination-previous">Voltar</a>
+            <a class="pagination-next">Próximo</a>
+        </nav>
+        <!-- TableCalls End-->
+    </div>
+</section>
+<!-- PageBody End -->
+
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
+</body>
+</html>

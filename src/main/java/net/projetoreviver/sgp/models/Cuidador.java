@@ -13,7 +13,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "tbl_cuidador")
 @PrimaryKeyJoinColumn(name = "usu_id")
-@Setter @Getter
+@Setter
+@Getter
 public class Cuidador extends Usuario {
     private static final long serialVersionUID = 1L;
 

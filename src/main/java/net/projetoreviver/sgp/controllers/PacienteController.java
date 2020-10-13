@@ -3,10 +3,6 @@ package net.projetoreviver.sgp.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 
@@ -21,57 +17,54 @@ import net.projetoreviver.sgp.models.Paciente;
 import net.projetoreviver.sgp.repositories.PacienteRepository;
 import net.projetoreviver.sgp.services.PacienteService;
 
-
-
 @Controller
 @RequestMapping("/pacientes")
 public class PacienteController {
-	
+
 	@Autowired
 	private PacienteService pacienteService;
-	
+
 	@Autowired
 	private PacienteRepository pacienteRepository;
-	
+
 	@GetMapping("/listar")
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("pacientes/listar");
 		mv.addObject("pacientes", pacienteRepository.findAll());
 		return mv;
 	}
-	
+
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Paciente paciente) {
 		ModelAndView mv = new ModelAndView("pacientes/cadastrar");
 		return mv;
 	}
-	
+
 	@PostMapping("/cadastrar")
 	public ModelAndView cadastrar(@Valid Paciente paciente, BindingResult result) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return this.cadastrar(paciente);
 		}
 		pacienteService.toPersist(paciente);
 		return new ModelAndView("redirect:/pacientes/listar");
 	}
 
-	
 	@GetMapping("/{id}/alterar")
 	public ModelAndView alterar(@PathVariable("id") Long id) {
 		ModelAndView mv = new ModelAndView("pacientes/alterar");
 		mv.addObject("paciente", pacienteService.getPacienteById(id));
 		return mv;
 	}
-	
+
 	@PostMapping("/alterar")
 	public ModelAndView alterar(@Valid Paciente paciente, BindingResult result) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return new ModelAndView("pacientes/alterar").addObject("paciente", paciente);
 		}
 		pacienteService.toPersist(paciente);
 		return new ModelAndView("redirect:/pacientes/listar");
 	}
-	
+
 	@GetMapping("/{id}/excluir")
 	public ModelAndView excluir(@PathVariable("id") Long id) {
 		Paciente paciente = pacienteService.getPacienteById(id);
