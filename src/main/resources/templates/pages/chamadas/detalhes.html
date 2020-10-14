@@ -76,12 +76,12 @@
               <div class="tile is-parent">
                 <article class="tile is-child">
                   <div class="buttons">
-                    <button class="button is-primary is-medium is-fullwidth">
+                    <a th:href="@{/registrochamada/{id}(id=${chamada.id})}" class="button is-primary is-medium is-fullwidth">
                       <span class="icon">
                         <i class="fas fa-user-plus"></i>
                       </span>
                       <span>Cadastrar paciente</span>
-                    </button>
+                    </a>
                     <button
                       class="button is-primary is-outlined is-medium is-fullwidth"
                     >

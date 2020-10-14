@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -65,6 +67,7 @@ public class Chamada implements Serializable{
 	@NotNull(message = "A chamada deve conter uma data de término.")
 	private LocalDate dataTermino;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "chamada")
 	private List<RegistroChamadaPaciente> registrosPacientes;
 
