@@ -29,14 +29,14 @@ public class PacienteController {
 
 	@GetMapping("/listar")
 	public ModelAndView listar() {
-		ModelAndView mv = new ModelAndView("pacientes/listar");
+		ModelAndView mv = new ModelAndView("pages/pacientes/listar");
 		mv.addObject("pacientes", pacienteRepository.findAll());
 		return mv;
 	}
 
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Paciente paciente) {
-		ModelAndView mv = new ModelAndView("pacientes/cadastrar");
+		ModelAndView mv = new ModelAndView("pages/pacientes/cadastrar");
 		return mv;
 	}
 

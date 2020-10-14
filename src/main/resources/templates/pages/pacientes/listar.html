@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Todos os Cuidadores - Reviver</title>
+    <title>Todos os Pacientes - Reviver</title>
     <th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
 
 <body>
-<div th:replace="components/header/index.html :: header(content='Todos os cuidadores', paginaatual='cuidadores')"></div>
+<div th:replace="components/header/index.html :: header(content='Todos os pacientes', paginaatual='pacientes')"></div>
 
 <div th:if="${deletada}" class="container" data-notification="show">
     <div class="columns is-centered">
         <div class="column is-half notification-component">
-            <div th:replace="components/notificacao/index.html :: notificacao(tipo='success', mensagem='O cuidador foi deletado com sucesso!')"></div>
+            <div th:replace="components/notificacao/index.html :: notificacao(tipo='success', mensagem='O paciente foi deletado com sucesso!')"></div>
         </div>
     </div>
 </div>
@@ -27,7 +27,7 @@
                     <input
                             class="input is-medium"
                             type="text"
-                            placeholder="Buscar cuidador"
+                            placeholder="Buscar paciente"
                             id="input-search"
                     />
                     <span class="icon is-left">
@@ -48,19 +48,19 @@
                     <tr>
                         <th>Nome</th>
                         <th>CPF</th>
-                        <th>Telefone</th>
-                        <th>Paciente</th>
+                        <th>Portador de</th>
+                        <th>Cuidador</th>
                         <th>Acesso</th>
                     </tr>
                     </thead>
 
                     <tbody id="table-content">
-                    <tr th:each="cuidador : ${cuidadores}">
+                    <tr th:each="paciente : ${paciente}">
                         <td>
                             <a
-                                    th:href="@{/cuidadores/{id}(id=${cuidador.id})}"
+                                    th:href="@{/pacientes/{id}(id=${paciente.id})}"
                                     class="has-text-weight-medium"
-                                    th:text="${cuidador.titulo}"
+                                    th:text="${paciente.titulo}"
                             >Nome</a
                             >
                         </td>
@@ -68,7 +68,7 @@
                     <span
                             
                             class="tag is-spaced is-rounded"
-                            th:text="${cuidador.cpf}"
+                            th:text="${paciente.cpf}"
                     >CPF</span
                     >
                         </td>
@@ -76,14 +76,14 @@
                             <span
                             
                             class="tag is-spaced is-rounded"
-                            th:text="${cuidador.telefone}"
-                    >Telefone</span
+                            th:text="${paciente.portadorDe}"
+                    >Portador de</span
                     >
                         </td>
                         <td>50/50</td>
                         <td>
                             <a
-                                    th:href="@{/cuidadores/{id}(id=${cuidador.id})}"
+                                    th:href="@{/pacientes/{id}(id=${paciente.id})}"
                                     class="has-text-weight-medium"
                             >Acessar chamada</a
                             >
