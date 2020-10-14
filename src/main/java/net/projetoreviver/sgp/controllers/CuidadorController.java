@@ -27,7 +27,8 @@ public class CuidadorController {
 
     @GetMapping("/listar")
     public ModelAndView listar() {
-        return new ModelAndView();
+        ModelAndView mv = new ModelAndView("pages/cuidadores/listar");
+        return mv;
     }
 
     @GetMapping("/cadastrar")
