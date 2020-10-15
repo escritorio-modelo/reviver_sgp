@@ -47,7 +47,7 @@ public class RegistroEmChamadaController {
         registro.addCuidador(cuidador);
         System.out.println(registro);
         registroChamadaPacienteService.toPersist(registro);
-       return "redirect:/";
+        return ("redirect:/chamadas/"+registro.getChamada().getId());
     }
 }
 
