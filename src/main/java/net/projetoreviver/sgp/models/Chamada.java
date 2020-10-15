@@ -34,7 +34,7 @@ import net.projetoreviver.sgp.annotations.ValidChamadaDate;
 @Table(name = "tbl_chamada")
 @Getter @Setter  @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode
-@ToString(exclude = "id")
+@ToString()
 public class Chamada implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -68,6 +68,7 @@ public class Chamada implements Serializable{
 	private LocalDate dataTermino;
 
 	@JsonIgnore
+	@ToString.Exclude
 	@OneToMany(mappedBy = "chamada")
 	private List<RegistroChamadaPaciente> registrosPacientes;
 

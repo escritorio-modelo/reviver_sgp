@@ -31,6 +31,7 @@ public class Paciente extends Usuario{
     private boolean parkinson;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "paciente")
     private List<RegistroChamadaPaciente> registroChamadaPacientes;
 }
