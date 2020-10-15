@@ -7,11 +7,12 @@
         <p>Se o <i th:text="${tipo}">tipo</i> já participou do Projeto Reviver anteriormente e possui um cadastro no sistema, então basta procurar pelo nome dele no compo abaixo e ir para o próximo passo.</p>
 
         <select th:if="${tipo == 'paciente'}" class="procurar-paciente"
-                th:field="${registro.paciente}">
+                id="paciente" name="paciente">
             <option value="" selected>Procurar pelo nome do paciente</option>
         </select>
 
-        <select th:unless="${tipo == 'paciente'}" class="procurar-cuidador">
+        <select th:unless="${tipo == 'paciente'}" class="procurar-cuidador"
+                id="cuidador" name="cuidador">
             <option value="" selected>Procurar pelo nome do cuidador</option>
         </select>
     </div>

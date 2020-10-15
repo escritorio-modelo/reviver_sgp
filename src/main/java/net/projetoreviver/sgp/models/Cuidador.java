@@ -11,16 +11,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "tbl_cuidador")
 @PrimaryKeyJoinColumn(name = "usu_id")
-@Setter
-@Getter
+@Setter @Getter
+@ToString(callSuper = true)
 public class Cuidador extends Usuario {
     private static final long serialVersionUID = 1L;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "cuidador")
     private List<RegistroCuidador> registros;
 }

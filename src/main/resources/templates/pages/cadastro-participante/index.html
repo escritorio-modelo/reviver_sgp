@@ -14,19 +14,67 @@
             <div class="columns">
                 <div class="column box box-section is-9">
 
-                        <form method="post" th:action="@{/registrochamada/}">
+                        <form method="post" th:action="@{/registrochamada/}" id="regForm">
                             <input type="hidden" id="chamada" name="chamada" th:value="${chamada.getId()}">
-                            <div th:replace="components/select-participantes-cadastrados/index.html
-                                :: select-paticipantes-cadastrados(tipo='paciente')">
+
+                            <div class="tab">
+                                <div th:replace="components/select-participantes-cadastrados/index.html
+                                    :: select-paticipantes-cadastrados(tipo='paciente')">
+                                </div>
                             </div>
-                            <br/>
-                            <div th:replace="components/select-participantes-cadastrados/index.html
-                                :: select-paticipantes-cadastrados(tipo='cuidador')">
+
+                            <div class="tab">
+                                <div th:replace="components/select-participantes-cadastrados/index.html
+                                    :: select-paticipantes-cadastrados(tipo='cuidador')">
+                                </div>
                             </div>
-<br/>
-                            <button class="button is-primary" type="submit">Registrar na chamada</button>
+
+                            <!-- FormTermosCompromisso -->
+                            <div class="tab">
+                                <h1 class="title">Termos de compromisso</h1>
+                            </div>
+                            <!-- FormTermosCompromisso End-->
+
+                            <div class="form-navigation">
+                                <div class="field is-pulled-left">
+                                    <div class="control">
+                                        <a class="button form-navigation-back">
+                                            Voltar
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="field is-pulled-right">
+                                    <div class="control">
+                                        <a class="button is-primary form-navigation-next">
+                                            Próximo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                 </div>
+                <!-- Steps -->
+                <div class="column">
+                    <div class="step-info-section">
+                        <h1 class="is-pulled-left">01</h1>
+                        <p>Passo 01</p>
+                        <strong>Dados do paciente</strong>
+                    </div>
+
+                    <div class="step-info-section">
+                        <h1 class="is-pulled-left">02</h1>
+                        <p>Passo 02</p>
+                        <strong>Dados do cuidador</strong>
+                    </div>
+
+                    <div class="step-info-section">
+                        <h1 class="is-pulled-left">03</h1>
+                        <p>Passo 03</p>
+                        <strong>Termos de compromisso</strong>
+                    </div>
+                </div>
+                <!-- Steps End -->
             </div>
         </div>
     </section>
@@ -35,7 +83,7 @@
     <th:block th:include="components/geral/index.html :: scripts"></th:block>
     <script>
         $(document).ready(function() {
-            $(`.procurar-paciente`).select2({
+            $(`#paciente`).select2({
                 ajax: {
                     url: `/api/pacientes/select/`,
                     dataType: 'json',
@@ -57,7 +105,7 @@
         });
 
         $(document).ready(function() {
-            $(`.procurar-cuidador`).select2({
+            $(`#cuidador`).select2({
                 ajax: {
                     url: `/api/cuidadores/select/`,
                     dataType: 'json',
