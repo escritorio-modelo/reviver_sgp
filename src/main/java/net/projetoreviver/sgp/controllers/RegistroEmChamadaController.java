@@ -45,7 +45,6 @@ public class RegistroEmChamadaController {
     public String cadastrarChamada(@Valid RegistroChamadaPaciente registro, BindingResult result, @RequestParam("cuidador") Long cuidadorId){
         Cuidador cuidador = cuidadorService.getCuidadorById(cuidadorId);
         registro.addCuidador(cuidador);
-        System.out.println(registro);
         registroChamadaPacienteService.toPersist(registro);
         return ("redirect:/chamadas/"+registro.getChamada().getId());
     }

@@ -55,6 +55,7 @@ public class RegistroChamadaPaciente implements Serializable {
     public void addCuidador(Cuidador cuidador){
         RegistroCuidador registroCuidador = new RegistroCuidador();
         registroCuidador.setCuidador(cuidador);
+        registroCuidador.setRegistroPaciente(this);
         this.getCuidadoresList().add(registroCuidador);
     }
 
