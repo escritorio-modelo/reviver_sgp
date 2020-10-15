@@ -53,11 +53,7 @@
                     <p th:text="${chamada.descricao}">Descrição da chamada.</p>
                   </div>
                   <div class="is-pulled-right">
-                    <a
-                      th:href="@{/chamadas/{id}/alterar(id=${chamada.id})}"
-                      class="is-primary"
-                      >Editar chamada</a
-                    >
+                    
 
                     <div class="detalhes-opcoes">
                       <p class="detalhes-opcoes-botao">
@@ -65,8 +61,13 @@
                       </p>
 
                       <div class="detalhes-opcoes-body">
-                        <a th:href="@{/chamadas/{id}/excluir(id=${chamada.id})}"
-                          ><i class="far fa-trash-alt"></i>Deletar chamada</a
+                        <a
+                      th:href="@{/chamadas/{id}/alterar(id=${chamada.id})}"
+                      class="is-primary"
+                      ><i class="fas fa-edit"></i> Editar chamada</a
+                    >
+                        <a onclick="confirmDelete()" 
+                          ><i class="far fa-trash-alt"></i> Deletar chamada</a
                         >
                       </div>
                     </div>
@@ -80,20 +81,21 @@
                       <span class="icon">
                         <i class="fas fa-user-plus"></i>
                       </span>
-                      <span>Cadastrar paciente</span>
+                      <span>Cadastrar participante</span>
                     </a>
-                    <button
+                   <!--  <button
                       class="button is-primary is-outlined is-medium is-fullwidth"
                     >
                       <span class="icon">
                         <i class="fas fa-plus"></i>
                       </span>
                       <span>Cadastrar cuidador</span>
-                    </button>
+                    </button> -->
                   </div>
                 </article>
               </div>
             </div>
+            
             <!-- <div class="tile is-parent">
                   <article class="tile is-child box">
                     <p class="title is-4">Lista de pacientes</p>
@@ -107,8 +109,42 @@
         </div>
       </div>
     </section>
+    <div id="modall" class="modal" >
+      <div id='modal-content' class="modal-background"></div>
+      <div  class="modal-content">
+        <div class="box">
+          <h2 class="subtitle">Tem certeza que deseja excluir esta chamada?</h2>
+          <a th:href="@{/chamadas/{id}/excluir(id=${chamada.id})}" class="button is-primary is-small ">
+            
+            <span>Sim</span>
+          </a>
+          <button onclick="closee()" class="button is-primary is-outlined is-small ">
+            
+            <span >Não</span>
+          </button>
+        </div>
+        
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
     <!-- Content End-->
+    <script>
+      let modal = document.getElementById('modall');
+      let modalf = document.getElementById('modal-content');
+      function closee(){
+        modal.style.display = "none";
+      }
 
+      function confirmDelete() {
+        modal.style.display = "flex";  
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modalf) {
+          modal.style.display = "none";
+        }
+      }
+      </script>
     <th:block th:include="components/geral/index.html :: scripts"></th:block>
   </body>
 </html>
