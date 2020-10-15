@@ -14,6 +14,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -24,6 +25,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "tbl_registro_cuidador")
 @ToString @Getter @Setter
+@EqualsAndHashCode
 public class RegistroCuidador implements Serializable {
 
     private static final long serialVersionUID = 1L;

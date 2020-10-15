@@ -1,5 +1,6 @@
 package net.projetoreviver.sgp.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import net.projetoreviver.sgp.exceptions.TransacaoNaoRealizadaException;
 import net.projetoreviver.sgp.models.Paciente;
 import net.projetoreviver.sgp.repositories.PacienteRepository;
 
+import javax.swing.text.html.Option;
+
 @Service
 public class PacienteService {
     @Autowired
@@ -18,9 +21,16 @@ public class PacienteService {
 
     @Transactional
     public void toPersist(Paciente paciente){
-    	if(pacienteRepository.save(paciente) == null) {
-			throw new TransacaoNaoRealizadaException("Não foi possível salvar essa chamada");
-		}
+        Optional<Paciente> cpf = pacienteRepository.findByCpf(paciente.getCpf());
+        if(cpf.isPresent()){
+            throw  new IllegalArgumentException("CPF já cadastrado");
+        }
+        try{
+            pacienteRepository.save(paciente);
+        }catch (Exception ex){
+            throw new TransacaoNaoRealizadaException("Erro ao salvar Paciente");
+        }
+
     }
 
     public Paciente getPacienteById(Long id){
