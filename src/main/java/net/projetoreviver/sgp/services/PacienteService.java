@@ -1,18 +1,17 @@
 package net.projetoreviver.sgp.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.projetoreviver.sgp.exceptions.NegocioException;
 import net.projetoreviver.sgp.exceptions.RegistroNaoEncontradoException;
 import net.projetoreviver.sgp.exceptions.TransacaoNaoRealizadaException;
 import net.projetoreviver.sgp.models.Paciente;
 import net.projetoreviver.sgp.repositories.PacienteRepository;
 
-import javax.swing.text.html.Option;
 
 @Service
 public class PacienteService {
@@ -23,7 +22,7 @@ public class PacienteService {
     public void toPersist(Paciente paciente){
         Optional<Paciente> cpf = pacienteRepository.findByCpf(paciente.getCpf());
         if(cpf.isPresent()){
-            throw  new IllegalArgumentException("CPF já cadastrado");
+            throw new NegocioException("CPF já cadastrado");
         }
         try{
             pacienteRepository.save(paciente);
