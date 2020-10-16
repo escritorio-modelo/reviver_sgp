@@ -1,52 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Página Inicial - Projeto Reviver</title>
-<th:block th:include="fragmentos/general.html :: headerfiles">
-</th:block>
+	<title>Reviver</title>
+	<th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
 
 <body>
-	<div th:replace="fragmentos/componentes :: theme-loader "></div>
+<div th:replace="components/header/index.html :: header(content='Bem vindo!', paginaatual='')"></div>
 
-	<div id="pcoded" class="pcoded">
-		<div class="pcoded-container">
 
-			<div th:replace="fragmentos/componentes :: header"></div>
-
-			<div class="pcoded-main-container">
-
-				<div th:replace="fragmentos/componentes :: navbar"></div>
-
-				<div class="pcoded-wrapper">
-					<div class="pcoded-content">
-						<div class="pcoded-inner-content">
-							<div class="main-body">
-								<div class="page-wrapper">
-									<div class="page-body">
-										<div class="row m-t-40">
-											<div class="col-lg">
-												<div class="card">
-													<div class="card-header">
-														<h5>Principal</h5>
-													</div>
-													<div class="card-block">
-														<p>Esse é o painel principal feito para a
-															administradora do sistema do projeto.</p>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<th:block th:include="fragmentos/general.html :: scripts-imports"></th:block>
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
 </body>
 </html>
