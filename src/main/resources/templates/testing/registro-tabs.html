@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastrar participante - Reviver</title>
+    <th:block th:include="components/geral/index.html :: header-files"></th:block>
+</head>
+<body>
+    <div th:replace="components/header/index.html :: header(content='Cadastrar participante', paginaatual='chamadas')"></div>
+    <!-- Content -->
+    <section class="section">
+        <div class="container">
+                <form method="post" th:action="@{/registrochamada/}">
+                    <input type="hidden" id="chamada" name="chamada" th:value="${chamada.getId()}">
+
+                        <div class="tab2">
+                            <div class="is-pulled-left box box-section" style="width: 70%">
+                                <div th:replace="components/select-participantes-cadastrados/index.html
+                                     :: select-paticipantes-cadastrados(tipo='paciente')">
+                                </div>
+                                <div th:replace="pages/pacientes/cadastrar :: modal-cadastrar-paciente"></div>
+                            </div>
+                            <div>
+                                <h2 class="title is-5">Cadastrar novo paciente</h2>
+                                <a href="#" class="button is-primary modal-cadastrar-paciente">Cadastrar</a>
+                            </div>
+                        </div>
+
+                        <div class="tab2">
+                            <div class="is-pulled-left box box-section" style="width: 70%">
+                                <div th:replace="components/select-participantes-cadastrados/index.html
+                                         :: select-paticipantes-cadastrados(tipo='cuidador')">
+                                </div>
+                                <div th:replace="pages/cuidadores/cadastrar :: modal-cadastrar-cuidador"></div>
+                            </div>
+                            <div>
+                                <h2 class="title is-5">Cadastrar novo cuidador</h2>
+                                <a href="#" class="button is-primary modal-cadastrar-cuidador">Cadastrar</a>
+                            </div>
+                        </div>
+                    <div class="is-pulled-left box box-section" style="width: 860px">
+                        <button>Finalizar</button>
+                    </div>
+                </form>
+        </div>
+    </section>
+    <!-- content end -->
+
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
+<script>
+    document.querySelector('.modal-cadastrar-paciente').addEventListener('click', () => {
+        document.querySelector('.modal-paciente').style.display = 'block';
+    });
+    document.querySelector('.modal-cadastrar-cuidador').addEventListener('click', () => {
+        document.querySelector('.modal-cuidador').style.display = 'block';
+    });
+    document.querySelectorAll('.delete').forEach(button => button.addEventListener('click', () => {
+        document.querySelector('.modal-cuidador').style.display = 'none';
+        document.querySelector('.modal-paciente').style.display = 'none';
+    }));
+
+    $(document).ready(function() {
+        $('#paciente').select2({
+            ajax: {
+                url: '/api/pacientes/select/',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (response) {
+                    return {
+                        results: response
+                    }
+                },
+                cache: true,
+                data: function (params) {
+                    var queries = {
+                        query: params.term,
+                    }
+                    return queries;
+                }
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        $('#cuidador').select2({
+            ajax: {
+                url: '/api/cuidadores/select/',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (response) {
+                    return {
+                        results: response
+                    }
+                },
+                cache: true,
+                data: function (params) {
+                    var queries = {
+                        query: params.term,
+                    }
+                    return queries;
+                }
+            }
+        });
+    });
+
+    document.querySelector('#cadastrar-cuidador').addEventListener('click', () => {
+        let cuidadorData = {
+            nome: document.querySelector("#nome-cuidador").value,
+            cpf : document.querySelector("#cpf-cuidador").value,
+            dataNascimento : document.querySelector("#nascimento-cuidador").value,
+            email : document.querySelector("#email-cuidador").value,
+            genero : document.querySelector("#genero-cuidador").value,
+            estadoCivil : document.querySelector("#estadocivil-cuidador").value,
+            telefone : [document.querySelector("#telefone-cuidador").value],
+            endereco : {
+         	    numero : document.querySelector("#numero-cuidador").value,
+         	    complemento: document.querySelector("#complemento-cuidador").value,
+         	    cep: document.querySelector("#cep-cuidador").value,
+         	    rua: {
+         		    nome : document.querySelector("#rua-cuidador").value,
+         		    bairro : {
+         	            nome : document.querySelector("#bairro-cuidador").value,
+         		        cidade : {
+         		            nome: document.querySelector("#cidade-cuidador").value,
+         		            estado : {
+         			            nome : document.querySelector("#estado-cuidador").value
+         		            }
+         	            }
+                    }
+                }
+            }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/api/cuidadores/",
+            data: JSON.stringify(cuidadorData),
+            contentType: "application/json",
+            success: function(res){
+                console.log(res);
+                var newState = new Option(res.nome, res.id, true, true);
+                $("#cuidador").append(newState).trigger('change');
+                console.log(res);
+                document.querySelector('.modal-cuidador').style.display = 'none';
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
+    });
+
+    document.querySelector('#cadastrar-paciente').addEventListener('click', () => {
+        let pacienteData = {
+            nome: document.querySelector("#nome-paciente").value,
+            cpf : document.querySelector("#cpf-paciente").value,
+            dataNascimento : document.querySelector("#nascimento-paciente").value,
+            email : document.querySelector("#email-paciente").value,
+            genero : document.querySelector("#genero-paciente").value,
+            estadoCivil : document.querySelector("#estadocivil-paciente").value,
+            parkinson : (document.querySelector("#parkinson").value == "on") ? true : false,
+            alzheimer : (document.querySelector("#alzheimer").value == "on") ? true : false,
+            telefone : [document.querySelector("#telefone-paciente").value],
+            endereco : {
+         	    numero : document.querySelector("#numero-paciente").value,
+         	    complemento: document.querySelector("#complemento-paciente").value,
+         	    cep: document.querySelector("#cep-paciente").value,
+         	    rua: {
+         		    nome : document.querySelector("#rua-paciente").value,
+         		    bairro : {
+         	            nome : document.querySelector("#bairro-paciente").value,
+         		        cidade : {
+         		            nome: document.querySelector("#cidade-paciente").value,
+         		            estado : {
+         			            nome : document.querySelector("#estado-paciente").value
+         		            }
+         	            }
+                    }
+                }
+            }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/api/pacientes/",
+            data: JSON.stringify(pacienteData),
+            contentType: "application/json",
+            success: function(res){
+                console.log(res);
+                var newState = new Option(res.nome, res.id, true, true);
+                $("#paciente").append(newState).trigger('change');
+                console.log(res);
+                document.querySelector('.modal-paciente').style.display = 'none';
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
+    });
+</script>
+</body>
+</html>

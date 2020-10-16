@@ -1,49 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Cadastrar participante - Reviver</title>
-    <th:block th:include="components/geral/index.html :: header-files"></th:block>
-</head>
-
 <body>
-<div th:replace="components/header/index.html :: header(content='Cadastrar participante', paginaatual='cuidadores')"></div>
 
-<!-- Content -->
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column box box-section is-9">
-                <div th:replace="components/select-participantes-cadastrados/index.html
-                        :: select-paticipantes-cadastrados(tipo='cuidador')"></div>
+<div th:fragment="modal-cadastrar-cuidador" class="modal modal-cuidador">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <a class="delete" aria-label="close"></a>
+        </header>
+        <section class="modal-card-body">
+            <h2 class="title is-5">Dados do novo cuidador</h2>
+            <p>Caso o cuidador nunca tenha participado do Projeto Reviver ou não possui um cadastro no sistema, então use o formulário abaixo para cadastrá-lo.</p>
+            <h3 class="title is-6 user-data-section">Dados pessoais</h3>
+
+            <div class="field">
+                <label class="label">Nome completo</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="nome-cuidador">
+                </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- Content End -->
 
-    <th:block th:include="components/geral/index.html :: scripts"></th:block>
-    <script>
-        $(document).ready(function() {
-            $('#procurar-participante').select2({
-                ajax: {
-                    url: '/api/cuidadores/select/',
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function (response) {
-                        return {
-                            results: response
-                        }
-                    },
-                    cache: true,
-                    data: function (params) {
-                        var queries = {
-                            query: params.term,
-                        }
-                            return queries;
-                    }
-                }
-            });
-        });
-    </script>
+            <div class="field">
+                <label class="label">CPF</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="cpf-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Data de nascimento</label>
+                <div class="control">
+                    <input class="input" type="date" placeholder="" id="nascimento-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Gênero</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="genero-cuidador">
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Estado civil</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="estadocivil-cuidador">
+                            <option value="CASADO">Casado</option>
+                            <option value="SOLTEIRO">Solteiro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="title is-6 user-data-section">Contato</h3>
+
+            <div class="field">
+                <label class="label">E-mail</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="email-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Telefone</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="telefone-cuidador">
+                </div>
+            </div>
+
+            <h3 class="title is-6 user-data-section">Endereço</h3>
+
+            <div class="field">
+                <label class="label">CEP</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="cep-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Rua</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="rua-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Número</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="numero-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Bairro</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="bairro-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Complemento</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="complemento-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Cidade</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="cidade-cuidador">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Estado</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="" id="estado-cuidador">
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <a class="button is-primary" id="cadastrar-cuidador">Cadastrar</a>
+            <a class="button">Cancelar</a>
+        </footer>
+    </div>
+</div>
+
 </body>
 </html>

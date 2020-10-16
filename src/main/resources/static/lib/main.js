@@ -133,69 +133,10 @@ function detailsOption() {
   }
 }
 
-function cadastrarParticipante() {
-  var currentTab = 0;
-  showTab(currentTab);
-  document.querySelector(".form-navigation-next").addEventListener("click", function () {
-    return nextPrev(1);
-  });
-  document.querySelector(".form-navigation-back").addEventListener("click", function () {
-    return nextPrev(-1);
-  });
-
-  function showTab(n) {
-    var x = document.getElementsByClassName("tab");
-    x[n].style.display = "block";
-
-    if (n == 0) {
-      document.querySelector(".form-navigation-back").style.visibility = "hidden";
-    } else {
-      document.querySelector(".form-navigation-back").style.visibility = "visible";
-    }
-
-    if (n == x.length - 1) {
-      document.querySelector(".form-navigation-next").innerHTML = "Finalizar";
-    } else {
-      document.querySelector(".form-navigation-next").innerHTML = "Próximo";
-    }
-
-    fixStepIndicator(n);
-  }
-
-  function nextPrev(n) {
-    var x = document.getElementsByClassName("tab");
-    x[currentTab].style.display = "none";
-    currentTab = currentTab + n;
-
-    if (currentTab >= x.length) {
-      document.getElementById("regForm").submit();
-      return false;
-    }
-
-    showTab(currentTab);
-  }
-
-  function fixStepIndicator(n) {
-    var i,
-        x = document.getElementsByClassName("step-info-section");
-
-    for (i = 0; i < x.length; i++) {
-      if (i > n) {
-        x[i].classList.remove("step-info-checked");
-      } else if (i < n) {
-        x[i].classList.add("step-info-checked");
-      }
-    }
-
-    x[n].classList.add("step-info-checked");
-  }
-}
-
 function main() {
   loadDOM();
   searchChamada();
   detailsOption();
-  cadastrarParticipante();
 }
 
 main();
