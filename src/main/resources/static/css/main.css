@@ -7250,84 +7250,67 @@ a {
 .select2-search--dropdown .select2-search__field {
   width: 98%; }
 
-.user-data-section {
-  margin-top: 50px; }
-
-.user-data-section > li:first-child {
-  margin-bottom: 16px; }
-
-.user-data-section > li {
-  line-height: 2; }
-
-.form-divisor {
-  width: 100%;
-  border-bottom: 2px solid #354052;
-  position: relative;
-  margin: 30px 0; }
-
-.form-divisor > h2 {
-  position: absolute;
-  padding: 0 10px;
-  left: 48%;
-  bottom: -13px;
-  background-color: white; }
-
-.form-input-search {
-  margin-top: 16px; }
-
 .tab {
   display: none; }
 
-.step-info-section {
-  position: relative;
-  margin-bottom: 55px; }
+ul.sessions-nav {
+  display: flex;
+  margin: 0 0 40px 0;
+  justify-content: space-around;
+  align-items: center; }
 
-.step-info-section::before {
+li.session-item {
+  position: relative;
+  font-weight: 500;
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 5px;
+  background: #fafafa;
+  color: #6D4784;
+  border: 2px solid #6D4784; }
+
+li.session-item::before {
   content: "_";
   position: absolute;
-  width: 4px;
-  height: 58px;
-  left: 20px;
-  top: -58px;
+  right: 100px;
+  width: 355px;
+  height: 2px;
+  margin-top: 9px;
+  background-color: #6D4784;
   color: transparent;
-  background-color: #354052; }
+  z-index: -1; }
 
-.step-info-section:first-child::before {
+li.session-item:first-child::before {
   display: none; }
 
-.step-info-section > h1 {
-  padding: 8px 11px;
-  border-radius: 7px;
-  border: 3px solid #354052;
-  margin-right: 15px;
-  color: #354052;
-  font-weight: 900; }
+li.item-checked {
+  background-color: #F9A749;
+  color: #ffffff;
+  border: 2px solid #F9A749; }
 
-.step-info-checked {
-  position: relative;
-  margin-bottom: 55px; }
-
-.step-info-checked::before {
-  content: "_";
-  position: absolute;
-  width: 4px;
-  height: 60px;
-  left: 20px;
-  top: -57px;
-  color: transparent;
+li.item-checked::before {
   background-color: #F9A749; }
 
-.step-info-checked > h1 {
-  padding: 8px 11px;
-  border-radius: 7px;
-  border: 3px solid #F9A749;
-  background-color: #F9A749;
-  margin-right: 15px;
-  color: #fff;
-  font-weight: 900; }
+.selecionar-paciente-area {
+  border-radius: 7px 0 0 7px;
+  height: 300px;
+  background-color: white;
+  padding: 25px;
+  border: 2px solid #eee; }
 
-.step-info-checked > p {
-  color: #F9A749; }
+.cadastrar-paciente-area {
+  border-radius: 0 7px 7px 0;
+  height: 300px;
+  background-color: #6D4784;
+  padding: 25px;
+  color: white; }
 
-.step-info-checked > strong {
-  color: #F9A749; }
+.cadastrar-paciente-area > h2 {
+  color: white; }
+
+.button-cadastro {
+  margin-top: 30px; }
+
+.button-cadastro > a {
+  border-color: #6D4784;
+  color: #6D4784; }
