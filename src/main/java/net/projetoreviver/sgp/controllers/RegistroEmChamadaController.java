@@ -17,6 +17,7 @@ import net.projetoreviver.sgp.models.RegistroChamadaPaciente;
 import net.projetoreviver.sgp.services.ChamadaService;
 import net.projetoreviver.sgp.services.CuidadorService;
 import net.projetoreviver.sgp.services.RegistroChamadaPacienteService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/registrochamada")
@@ -42,10 +43,12 @@ public class RegistroEmChamadaController {
     }
 
     @PostMapping("/")
-    public String cadastrarChamada(@Valid RegistroChamadaPaciente registro, BindingResult result, @RequestParam("cuidador") Long cuidadorId){
+    public String cadastrarChamada(@Valid RegistroChamadaPaciente registro, BindingResult result, @RequestParam("cuidador") Long cuidadorId,
+                                   final RedirectAttributes attributes){
         Cuidador cuidador = cuidadorService.getCuidadorById(cuidadorId);
         registro.addCuidador(cuidador);
         registroChamadaPacienteService.toPersist(registro);
+        attributes.addFlashAttribute("novoRegistro", true);
         return ("redirect:/chamadas/"+registro.getChamada().getId());
     }
 }
