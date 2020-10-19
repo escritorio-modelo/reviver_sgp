@@ -182,14 +182,12 @@
             data: JSON.stringify(cuidadorData),
             contentType: "application/json",
             success: function(res){
-                console.log(res);
                 var newState = new Option(res.nome, res.id, true, true);
                 $("#cuidador").append(newState).trigger('change');
-                console.log(res);
                 document.querySelector('.modal-cuidador').style.display = 'none';
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                console.log(textStatus);
+                mostrarErrosCuidador(XMLHttpRequest.responseJSON);
             }
         });
     });
@@ -237,10 +235,36 @@
                 document.querySelector('.modal-paciente').style.display = 'none';
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                console.log(textStatus);
+                mostrarErrosPaciente(XMLHttpRequest.responseJSON);
             }
         });
     });
+
+    function mostrarErrosPaciente(data) {
+        let camposErros = data.campos;
+        let notificationErrorsPaciente = document.querySelector("#noticacao-erros-paciente");
+        notificationErrorsPaciente.innerHTML = '';
+
+        camposErros.map(campo => {
+            let line = `<div class="notification is-light is-danger">
+                <p>${campo.mensagem}</p>
+            </div>`
+            notificationErrorsPaciente.innerHTML += line;
+        });
+    }
+
+    function mostrarErrosCuidador(data) {
+        let camposErros = data.campos;
+        let notificationErrorsCuidador = document.querySelector("#noticacao-erros-cuidador");
+        notificationErrorsCuidador.innerHTML = '';
+
+        camposErros.map(campo => {
+            let line = `<div class="notification is-light is-danger">
+                <p>${campo.mensagem}</p>
+            </div>`
+            notificationErrorsCuidador.innerHTML += line;
+        });
+    }
 </script>
 </body>
 </html>
