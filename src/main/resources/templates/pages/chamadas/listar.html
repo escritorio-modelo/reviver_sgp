@@ -21,8 +21,8 @@
     <div class="container">
 
         <div class="columns">
-            <div class="column is-9">
-                <!-- InputSearch -->
+            <!-- <div class="column is-9">
+               
                 <div class="control has-icons-left">
                     <input
                             class="input is-medium"
@@ -34,11 +34,11 @@
                 <i class="fas fa-search"></i>
               </span>
                 </div>
-                <!-- InputSearch End -->
-            </div>
+               
+            </div> -->
 
             <!-- ButtonNewCall -->
-            <div class="column">
+            <div class="column is-3 " >
                 <a
                         href="/chamadas/cadastrar"
                         class="button is-primary is-medium is-fullwidth"
@@ -53,9 +53,9 @@
         </div>
 
         <!-- TableCalls -->
-        <div class="container mt-16">
-            <div class="table-section">
-                <table class="table is-hoverable is-fullwidth">
+        
+            
+                <table id='chamada' class="dataTable" data-editing="true" style="width:100%">
                     <thead>
                     <tr>
                         <th>Título</th>
@@ -66,8 +66,8 @@
                     </tr>
                     </thead>
 
-                    <tbody id="table-content">
-                    <tr th:each="chamada : ${chamadas}">
+                    <tbody >
+                   <!--  <tr th:each="chamada : ${chamadas}">
                         <td>
                             <a
                                     th:href="@{/chamadas/{id}(id=${chamada.id})}"
@@ -104,15 +104,9 @@
                             >
                         </td>
                     </tr>
-                    </tbody>
+               -->      </tbody>
                 </table>
-            </div>
-        </div>
 
-        <nav class="pagination" role="navigation" aria-label="pagination">
-            <a class="pagination-previous">Voltar</a>
-            <a class="pagination-next">Próximo</a>
-        </nav>
         <!-- TableCalls End-->
     </div>
 </section>
@@ -120,4 +114,60 @@
 
 <th:block th:include="components/geral/index.html :: scripts"></th:block>
 </body>
+<script>
+    function formatData(data) {
+  var dia = data.slice(8);
+  var mes = data.slice(5, 7);
+  var ano = data.slice(0, 4);
+  return "".concat(dia, "/").concat(mes, "/").concat(ano);
+}
+	$(document).ready(function() {
+		$.ajax({
+    'url': "/chamadas/",
+    'method': "GET",
+    'contentType': 'application/json'
+}).done( function(data) {
+	console.log(data.content[0].titulo,'jonathannnnnnnnn')
+	const actualData = data.content
+    $('#chamada').dataTable( {
+        "aaData": actualData,
+        "columns": [
+        { "data": "titulo" ,
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<a class='has-text-weight-medium' href='/chamadas/"+oData.id+"'>"+oData.titulo+"</a>");
+        } },
+            { "data": "status" ,
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            if(oData.status === 'ABERTA'){
+                $(nTd).html("<span class='tag is-spaced is-rounded is-primary'>Aberto</span>");
+            }else if(oData.status === 'FECHADO'){
+                $(nTd).html("<span class='tag is-spaced is-rounded is-black'>Fechado</span>");
+            }else if(oData.status === 'EMANDAMENTO'){
+                $(nTd).html("<span class='tag is-spaced is-rounded is-black'>Em andamento</span>");
+            }
+            
+        } },
+            { "data": "dataInicio",
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<span ><strong>"+formatData(oData.dataInicio)+" a "+formatData(oData.dataTermino)+"</strong></span>");
+            
+        } },
+            { "data": "titulo" ,
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<span >40/50</span>");
+        } },
+            { "data": "titulo" ,
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<a class='has-text-weight-medium' href='/chamadas/"+oData.id+"'>Acessar Chamada</a>");
+        } },
+   
+		
+            
+        ]
+    })
+})
+
+    /* $('#paciente').DataTable(); */
+} );
+</script>
 </html>

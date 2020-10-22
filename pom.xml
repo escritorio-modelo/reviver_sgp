@@ -28,6 +28,11 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		-->
+	<dependency>
+    	<groupId>org.webjars</groupId>
+    	<artifactId>datatables</artifactId>
+    	<version>1.9.4-2</version>
+	</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -68,6 +73,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+	
 		<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -85,7 +91,11 @@
 			<artifactId>select2</artifactId>
 			<version>4.0.13</version>
 		</dependency>
-
+		<!-- <dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.1.1</version>
+		</dependency> -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

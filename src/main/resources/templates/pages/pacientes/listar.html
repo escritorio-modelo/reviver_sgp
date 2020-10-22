@@ -2,7 +2,8 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Todos os Pacientes - Reviver</title>
-    <th:block th:include="components/geral/index.html :: header-files"></th:block>
+    <th:block th:include="components/geral/paciente.html :: header-files"></th:block>
+    
 </head>
 
 <body>
@@ -15,94 +16,125 @@
         </div>
     </div>
 </div>
-
-<!-- PageBody -->
 <section class="section">
-    <div class="container">
-
-        <div class="columns">
-            <div class="column is-12">
-                <!-- InputSearch -->
-                <div class="control has-icons-left">
-                    <input
-                            class="input is-medium"
-                            type="text"
-                            placeholder="Buscar paciente"
-                            id="input-search"
-                    />
-                    <span class="icon is-left">
-                <i class="fas fa-search"></i>
-              </span>
-                </div>
-                <!-- InputSearch End -->
-            </div>
-
-           
-        </div>
-
-        <!-- TableCalls -->
-        <div class="container mt-16">
-            <div class="table-section">
-                <table class="table is-hoverable is-fullwidth">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Portador de</th>
-                        <th>Cuidador</th>
-                        <th>Acesso</th>
-                    </tr>
-                    </thead>
-
-                    <tbody id="table-content">
-                    <tr th:each="paciente : ${paciente}">
-                        <td>
-                            <a
-                                    th:href="@{/pacientes/{id}(id=${paciente.id})}"
-                                    class="has-text-weight-medium"
-                                    th:text="${paciente.nome}"
-                            >Nome</a
-                            >
-                        </td>
-                        <td>
-                    <span
-                            
-                            class="tag is-spaced is-rounded"
-                            th:text="${paciente.cpf}"
-                    >CPF</span
-                    >
-                        </td>
-                        <td>
-                            <span
-                            
-                            class="tag is-spaced is-rounded"
-                            th:text="${paciente.portadorDe}"
-                    >Portador de</span
-                    >
-                        </td>
-                        <td>50/50</td>
-                        <td>
-                            <a
-                                    th:href="@{/pacientes/{id}(id=${paciente.id})}"
-                                    class="has-text-weight-medium"
-                            >Acessar chamada</a
-                            >
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <nav class="pagination" role="navigation" aria-label="pagination">
-            <a class="pagination-previous">Voltar</a>
-            <a class="pagination-next">Próximo</a>
-        </nav>
-        <!-- TableCalls End-->
-    </div>
+	<table id='paciente' class="dataTable" data-editing="true" style="width:100%">
+		 <thead>
+			<tr>
+				
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Portador de</th>
+				<th>Acesso</th>
+			</tr>
+		</thead>
+		<tbody>
+	<!--
+		<tr>
+			<td>2</td>
+			<td>Elodia</td>
+			<td>Weisz</td>
+			<td>Wallpaperer Helper</td>
+		</tr>
+		 <tr>
+			<td>3</td>
+			<td>Raeann</td>
+			<td>Haner</td>
+			<td>Internal Medicine Nurse Practitioner</td>
+			<td>November 28th 2013</td>
+			<td>February 26th 1966</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>Junie</td>
+			<td>Landa</td>
+			<td>Offbearer</td>
+			<td>October 31st 2010</td>
+			<td>March 29th 1966</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Solomon</td>
+			<td>Bittinger</td>
+			<td>Roller Skater</td>
+			<td>December 29th 2011</td>
+			<td>September 22nd 1964</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>Bar</td>
+			<td>Lewis</td>
+			<td>Clown</td>
+			<td>November 12th 2012</td>
+			<td>August 4th 1991</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>Usha</td>
+			<td>Leak</td>
+			<td>Ships Electronic Warfare Officer</td>
+			<td>August 14th 2012</td>
+			<td>November 20th 1979</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>Lorriane</td>
+			<td>Cooke</td>
+			<td>Technical Services Librarian</td>
+			<td>September 21st 2010</td>
+			<td>April 7th 1969</td>
+		</tr> -->
+	</tbody> 
+	</table>
 </section>
-<!-- PageBody End -->
 
-<th:block th:include="components/geral/index.html :: scripts"></th:block>
+
+<th:block th:include="components/geral/paciente.html :: scripts"></th:block>
 </body>
+
+<!-- Add in any FooTable dependencies we may need -->
+
+<!-- Add in FooTable itself -->
+
+<script>
+	$(document).ready(function() {
+		$.ajax({
+    'url': "/api/pacientes/",
+    'method': "GET",
+    'contentType': 'application/json'
+}).done( function(data) {
+	console.log(data.content[0].nome,'jonathannnnnnnnn')
+	const actualData = data.content
+    $('#paciente').dataTable( {
+        "aaData": actualData,
+        "columns": [
+		
+            { "data": "nome",
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<a class='has-text-weight-medium' href='#'>"+oData.nome+"</a>");
+        } },
+            { "data": "cpf" },
+            { "data": "parkinson", "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            if(oData.parkinson && !oData.alzheimer){
+                $(nTd).html("<span >Parkinson</span>");
+            }else if(!oData.parkinson && oData.alzheimer){
+                $(nTd).html("<span >Alzheimer</span>");
+            }else if(oData.parkinson && oData.alzheimer){
+				$(nTd).html("<span >Alzheimer, parkinson</span>");
+			}else if(!oData.parkinson && !oData.alzheimer){
+				$(nTd).html("<span >Não informado</span>");
+			}
+           
+            
+        } },{ "data": "nome" ,
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<a class='has-text-weight-medium' href='#'>Acessar Paciente</a>");
+        } },
+            
+        ]
+    })
+})
+
+    /* $('#paciente').DataTable(); */
+} );
+</script>
 </html>
