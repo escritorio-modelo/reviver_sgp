@@ -4,126 +4,93 @@
     <title>Cadastrar participante - Reviver</title>
     <th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
-
 <body>
-    <div th:replace="components/header/index.html :: header(content='Cadastrar participante', paginaatual='pacientes')"></div>
+<div th:replace="components/header/index.html :: header(content='Cadastrar participante', paginaatual='chamadas')"></div>
+<!-- Content -->
+<section class="section">
+    <div class="container">
+        <ul class="sessions-nav">
+            <li class="session-item">Paciente</li>
+            <li class="session-item">Cuidador</li>
+            <li class="session-item">Termos</li>
+        </ul>
 
-    <!-- Content -->
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column box box-section is-9">
-
-                        <form method="post" th:action="@{/registrochamada/}" id="regForm">
-                            <input type="hidden" id="chamada" name="chamada" th:value="${chamada.getId()}">
-
-                            <div class="tab">
-                                <div th:replace="components/select-participantes-cadastrados/index.html
-                                    :: select-paticipantes-cadastrados(tipo='paciente')">
-                                </div>
-                            </div>
-
-                            <div class="tab">
-                                <div th:replace="components/select-participantes-cadastrados/index.html
-                                    :: select-paticipantes-cadastrados(tipo='cuidador')">
-                                </div>
-                            </div>
-
-                            <!-- FormTermosCompromisso -->
-                            <div class="tab">
-                                <h1 class="title">Termos de compromisso</h1>
-                            </div>
-                            <!-- FormTermosCompromisso End-->
-
-                            <div class="form-navigation">
-                                <div class="field is-pulled-left">
-                                    <div class="control">
-                                        <a class="button form-navigation-back">
-                                            Voltar
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="field is-pulled-right">
-                                    <div class="control">
-                                        <a class="button is-primary form-navigation-next">
-                                            Próximo
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                </div>
-                <!-- Steps -->
-                <div class="column">
-                    <div class="step-info-section">
-                        <h1 class="is-pulled-left">01</h1>
-                        <p>Passo 01</p>
-                        <strong>Dados do paciente</strong>
+        <form method="post" th:action="@{/registrochamada/}" id="regForm">
+            <input type="hidden" id="chamada" name="chamada" th:value="${chamada.getId()}">
+            <div class="tab">
+                <div class="columns">
+                    <div class="column is-three-fifths selecionar-paciente-area">
+                        <h2 class="title is-4">Selecione o paciente</h2>
+                        <p class="block">Caso o paciente já possua um cadastro no sistema, use o campo abaixo para selecionar o paciente procurando
+                            pelo nome dele e depois clique em Continuar.
+                        </p>
+                        <div th:replace="components/select-participantes-cadastrados/index.html
+                                     :: select-paticipantes-cadastrados(tipo='paciente')">
+                        </div>
+                        <div th:replace="pages/pacientes/cadastrar :: modal-cadastrar-paciente"></div>
                     </div>
-
-                    <div class="step-info-section">
-                        <h1 class="is-pulled-left">02</h1>
-                        <p>Passo 02</p>
-                        <strong>Dados do cuidador</strong>
-                    </div>
-
-                    <div class="step-info-section">
-                        <h1 class="is-pulled-left">03</h1>
-                        <p>Passo 03</p>
-                        <strong>Termos de compromisso</strong>
+                    <div class="column cadastrar-paciente-area">
+                        <h2 class="title is-4">Cadastrar novo paciente</h2>
+                        <p class="block">Clique no botão abaixo para cadastrar um novo paciente. Após o cadastro, o
+                            novo paciente será selecionado automaticamente.
+                        </p>
+                        <a class="button is-primary modal-cadastrar-paciente">
+                                    <span class="icon">
+                                      <i class="fas fa-user"></i>
+                                    </span>
+                            <span>Adicionar novo paciente</span>
+                        </a>
                     </div>
                 </div>
-                <!-- Steps End -->
             </div>
-        </div>
-    </section>
-    <!-- Content End -->
+            <div class="tab">
+                <div class="columns">
+                    <div class="column is-three-fifths selecionar-paciente-area">
+                        <h2 class="title is-4">Selecione o cuidador</h2>
+                        <p class="block">Caso o cuidador já possua um cadastro no sistema, use o campo abaixo para selecionar o cuidador para o
+                            novo paciente procurando pelo nome dele e depois clique em Continuar.
+                        </p>
+                        <div th:replace="components/select-participantes-cadastrados/index.html
+                                         :: select-paticipantes-cadastrados(tipo='cuidador')">
+                        </div>
+                        <div th:replace="pages/cuidadores/cadastrar :: modal-cadastrar-cuidador"></div>
+                    </div>
+                    <div class="column cadastrar-paciente-area">
+                        <h2 class="title is-4">Cadastrar novo cuidador</h2>
+                        <p class="block">Clique no botão abaixo para adicionar um novo cuidador ao novo paciente. Após o cadastro, o
+                            novo cuidador será selecionado automaticamente.
+                        </p>
+                        <a class="button is-primary modal-cadastrar-cuidador">
+                                    <span class="icon">
+                                      <i class="fas fa-user-friends"></i>
+                                    </span>
+                            <span>Adicionar novo cuidador</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="columns">
+                    <div class="column is-three-fifths selecionar-paciente-area">
+                        <h2 class="title is-4">Termos de compromisso</h2>
+                        <p class="block">Termos de compromisso
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="button-cadastro has-text-centered">
+                <a class="button button-cadastro-voltar is-rounded" style="margin: 5px 10px 0 0">
+                    Voltar
+                </a>
+                <a class="button button-cadastro-continuar is-rounded is-medium">
+                    Continuar
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- content end -->
 
-    <th:block th:include="components/geral/index.html :: scripts"></th:block>
-    <script>
-        $(document).ready(function() {
-            $(`#paciente`).select2({
-                ajax: {
-                    url: `/api/pacientes/select/`,
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function (response) {
-                        return {
-                            results: response
-                        }
-                    },
-                    cache: true,
-                    data: function (params) {
-                      var queries = {
-                        query: params.term,
-                      }
-                      return queries;
-                    }
-                }
-            });
-        });
-
-        $(document).ready(function() {
-            $(`#cuidador`).select2({
-                ajax: {
-                    url: `/api/cuidadores/select/`,
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function (response) {
-                        return {
-                            results: response
-                        }
-                    },
-                    cache: true,
-                    data: function (params) {
-                      var queries = {
-                        query: params.term,
-                      }
-                      return queries;
-                    }
-                }
-            });
-        });
-    </script>
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
 </body>
+</html>
