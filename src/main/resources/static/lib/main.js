@@ -296,6 +296,8 @@ var Cuidador = /*#__PURE__*/function () {
     key: "add",
     value: function add() {
       var cpfWithoutMask = _utils_masks__WEBPACK_IMPORTED_MODULE_0__.default.removeMask("cpf", this.cpf.value);
+      var cepWithoutMask = _utils_masks__WEBPACK_IMPORTED_MODULE_0__.default.removeMask("cep", this.cep.value);
+      var phoneWithoutMask = _utils_masks__WEBPACK_IMPORTED_MODULE_0__.default.removeMask("phone", this.telefone.value);
       var data = {
         nome: this.nome.value,
         cpf: cpfWithoutMask,
@@ -303,11 +305,11 @@ var Cuidador = /*#__PURE__*/function () {
         email: this.email.value,
         genero: this.genero.value,
         estadoCivil: this.estadoCivil.value,
-        telefone: [this.telefone.value],
+        telefone: [phoneWithoutMask],
         endereco: {
           numero: this.enderecoNumero.value,
           complemento: this.complemento.value,
-          cep: this.cep.value,
+          cep: cepWithoutMask,
           rua: {
             nome: this.rua.value,
             bairro: {
@@ -408,6 +410,8 @@ var Paciente = /*#__PURE__*/function () {
     key: "add",
     value: function add() {
       var cpfWithoutMask = _utils_masks__WEBPACK_IMPORTED_MODULE_0__.default.removeMask("cpf", this.cpf.value);
+      var cepWithoutMask = _utils_masks__WEBPACK_IMPORTED_MODULE_0__.default.removeMask("cep", this.cep.value);
+      var phoneWithoutMask = _utils_masks__WEBPACK_IMPORTED_MODULE_0__.default.removeMask("phone", this.telefone.value);
       var data = {
         nome: this.nome.value,
         cpf: cpfWithoutMask,
@@ -417,11 +421,11 @@ var Paciente = /*#__PURE__*/function () {
         estadoCivil: this.estadoCivil.value,
         parkinson: this.parkinson.value === "on" ? true : false,
         alzheimer: this.alzheimer.value === "on" ? true : false,
-        telefone: [this.telefone.value],
+        telefone: [phoneWithoutMask],
         endereco: {
           numero: this.enderecoNumero.value,
           complemento: this.complemento.value,
-          cep: this.cep.value,
+          cep: cepWithoutMask,
           rua: {
             nome: this.rua.value,
             bairro: {
@@ -508,6 +512,12 @@ var Mascaras = /*#__PURE__*/function () {
         },
         cpf: function cpf(value) {
           return value.replace(/\D/g, "").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})/, "$1-$2").replace(/(-\d{2})\d+?$/, "$1");
+        },
+        phone: function phone(value) {
+          return value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "($1) $2").replace(/(\d{4})(\d)/, "$1-$2").replace(/(\d{4})-(\d)(\d{4})/, "$1$2-$3").replace(/(-\d{4})\d+?$/, "$1");
+        },
+        cep: function cep(value) {
+          return value.replace(/\D/g, "").replace(/(\d{5})(\d)/, "$1-$2").replace(/(-\d{3})\d+?$/, "$1");
         }
       };
       document.querySelectorAll("input").forEach(function ($input) {
@@ -531,6 +541,16 @@ var Mascaras = /*#__PURE__*/function () {
         var threeQuarter = inputValue.slice(8, 11);
         var fourQuarter = inputValue.slice(12);
         return "".concat(oneQuarter).concat(twoQuarter).concat(threeQuarter).concat(fourQuarter);
+      }
+
+      if (mask === "phone") {
+        var ddd = inputValue.slice(1, 3);
+        var number = inputValue.slice(5).replace("-", "");
+        return "".concat(ddd).concat(number);
+      }
+
+      if (mask === "cep") {
+        return inputValue.replace("-", "");
       }
     }
   }]);
