@@ -3409,7 +3409,7 @@ button.dropdown-item {
     .modal-card {
       margin: 0 auto;
       max-height: calc(100vh - 40px);
-      width: 640px; } }
+      width: 920px; } }
 
 .modal-close {
   background: none;
@@ -7879,7 +7879,9 @@ li.item-checked {
   border: 2px solid #f9a749; }
 
 li.item-checked::before {
-  background-color: #f9a749; }
+  background-color: #f9a749;
+  height: 3px;
+  margin-top: 10px; }
 
 .selecionar-paciente-area {
   border-radius: 7px 0 0 7px;
@@ -7903,6 +7905,21 @@ li.item-checked::before {
 
 .button-cadastro > a {
   border-color: #6d4784;
+  color: #6d4784; }
+
+.modal-card-head {
+  background-color: #6d4784;
+  font-weight: 500; }
+
+.modal-card-title {
+  color: #fafafa; }
+
+.modal-card-foot {
+  background-color: #fafafa; }
+
+.user-data-section {
+  border-bottom: 2px solid #6d4784;
+  line-height: 2.5;
   color: #6d4784; }
 
 

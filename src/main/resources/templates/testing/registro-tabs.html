@@ -22,7 +22,7 @@
                             <div class="column is-three-fifths selecionar-paciente-area">
                                 <h2 class="title is-4">Selecione o paciente</h2>
                                 <p class="block">Caso o paciente já possua um cadastro no sistema, use o campo abaixo para selecionar o paciente procurando
-                                    pelo nome dele clique em Continuar.
+                                    pelo nome dele e depois clique em Continuar.
                                 </p>
                                 <div th:replace="components/select-participantes-cadastrados/index.html
                                      :: select-paticipantes-cadastrados(tipo='paciente')">
@@ -31,7 +31,7 @@
                             </div>
                             <div class="column cadastrar-paciente-area">
                                 <h2 class="title is-4">Cadastrar novo paciente</h2>
-                                <p class="block">Clique no botão abaixo para adicionar um novo paciente. Após o cadastro, o
+                                <p class="block">Clique no botão abaixo para cadastrar um novo paciente. Após o cadastro, o
                                     novo paciente será selecionado automaticamente.
                                 </p>
                                 <a class="button is-primary modal-cadastrar-paciente">
@@ -46,9 +46,9 @@
                 <div class="tab">
                         <div class="columns">
                             <div class="column is-three-fifths selecionar-paciente-area">
-                                <h2 class="title is-4">Selecione o paciente</h2>
-                                <p class="block">Caso o paciente já possua um cadastro no sistema, use o campo abaixo para selecionar o paciente procurando
-                                    pelo nome dele clique em Continuar.
+                                <h2 class="title is-4">Selecione o cuidador</h2>
+                                <p class="block">Caso o cuidador já possua um cadastro no sistema, use o campo abaixo para selecionar o cuidador para o
+                                    novo paciente procurando pelo nome dele e depois clique em Continuar.
                                 </p>
                                 <div th:replace="components/select-participantes-cadastrados/index.html
                                          :: select-paticipantes-cadastrados(tipo='cuidador')">
@@ -56,15 +56,15 @@
                                 <div th:replace="pages/cuidadores/cadastrar :: modal-cadastrar-cuidador"></div>
                             </div>
                             <div class="column cadastrar-paciente-area">
-                                <h2 class="title is-4">Cadastrar novo paciente</h2>
-                                <p class="block">Clique no botão abaixo para adicionar um novo paciente. Após o cadastro, o
-                                    novo paciente será selecionado automaticamente.
+                                <h2 class="title is-4">Cadastrar novo cuidador</h2>
+                                <p class="block">Clique no botão abaixo para adicionar um novo cuidador ao novo paciente. Após o cadastro, o
+                                    novo cuidador será selecionado automaticamente.
                                 </p>
                                 <a class="button is-primary modal-cadastrar-cuidador">
                                     <span class="icon">
-                                      <i class="fas fa-user"></i>
+                                      <i class="fas fa-user-friends"></i>
                                     </span>
-                                    <span>Adicionar novo paciente</span>
+                                    <span>Adicionar novo cuidador</span>
                                 </a>
                             </div>
                         </div>

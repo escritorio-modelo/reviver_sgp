@@ -35,7 +35,7 @@ public class RegistroEmChamadaController {
     @GetMapping("/{chamada_id}")
     public ModelAndView cadastrarNaChamada(@PathVariable("chamada_id") Long chamadaId){
         System.out.println(chamadaId);
-        ModelAndView mv = new ModelAndView("testing/registro-tabs"); //Adicionar view
+        ModelAndView mv = new ModelAndView("pages/cadastro-participante/index"); //Adicionar view
         mv.addObject("registro", new RegistroChamadaPaciente()); //Onde chamada, paciente serão relacionados
         mv.addObject("chamada", chamadaService.getChamadaById(chamadaId)); //Aqui vai a chamada onde o paciente está sendo cadastrado.
         //Como acessar cuidador? registro.cuidadoresList
