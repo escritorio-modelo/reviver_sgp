@@ -55,7 +55,7 @@
         <!-- TableCalls -->
         
             
-                <table id='chamada' class="dataTable" data-editing="true" style="width:100%">
+                <table id='chamada' class="dataTable"  style="width:100%">
                     <thead>
                     <tr>
                         <th>Título</th>
@@ -67,7 +67,7 @@
                     </thead>
 
                     <tbody >
-                   <!--  <tr th:each="chamada : ${chamadas}">
+                    <tr th:each="chamada : ${chamadas}">
                         <td>
                             <a
                                     th:href="@{/chamadas/{id}(id=${chamada.id})}"
@@ -104,7 +104,7 @@
                             >
                         </td>
                     </tr>
-               -->      </tbody>
+                    </tbody>
                 </table>
 
         <!-- TableCalls End-->
@@ -122,14 +122,16 @@
   return "".concat(dia, "/").concat(mes, "/").concat(ano);
 }
 	$(document).ready(function() {
-		$.ajax({
+
+        $('#chamada').DataTable();
+		/* $.ajax({
     'url': "/chamadas/",
     'method': "GET",
     'contentType': 'application/json'
 }).done( function(data) {
 	console.log(data.content[0].titulo,'jonathannnnnnnnn')
 	const actualData = data.content
-    $('#chamada').dataTable( {
+    $('#chamada').dataTable( {paging: true,
         "aaData": actualData,
         "columns": [
         { "data": "titulo" ,
@@ -165,9 +167,9 @@
             
         ]
     })
-})
+}) */
 
-    /* $('#paciente').DataTable(); */
+    
 } );
 </script>
 </html>

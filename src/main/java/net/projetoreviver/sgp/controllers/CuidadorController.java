@@ -28,6 +28,7 @@ public class CuidadorController {
     @GetMapping("/listar")
     public ModelAndView listar() {
         ModelAndView mv = new ModelAndView("pages/cuidadores/listar");
+        mv.addObject("cuidadores", cuidadorRepository.findAll());
         return mv;
     }
 
