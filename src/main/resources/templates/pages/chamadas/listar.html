@@ -55,7 +55,7 @@
         <!-- TableCalls -->
         
             
-                <table id='chamada' class="dataTable"  style="width:100%">
+                <table id='chamada' class="dataTable"  style="width:100%; border-radius: 7px;">
                     <thead>
                     <tr>
                         <th>Título</th>
@@ -115,61 +115,13 @@
 <th:block th:include="components/geral/index.html :: scripts"></th:block>
 </body>
 <script>
-    function formatData(data) {
-  var dia = data.slice(8);
-  var mes = data.slice(5, 7);
-  var ano = data.slice(0, 4);
-  return "".concat(dia, "/").concat(mes, "/").concat(ano);
-}
-	$(document).ready(function() {
-
-        $('#chamada').DataTable();
-		/* $.ajax({
-    'url': "/chamadas/",
-    'method': "GET",
-    'contentType': 'application/json'
-}).done( function(data) {
-	console.log(data.content[0].titulo,'jonathannnnnnnnn')
-	const actualData = data.content
-    $('#chamada').dataTable( {paging: true,
-        "aaData": actualData,
-        "columns": [
-        { "data": "titulo" ,
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<a class='has-text-weight-medium' href='/chamadas/"+oData.id+"'>"+oData.titulo+"</a>");
-        } },
-            { "data": "status" ,
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            if(oData.status === 'ABERTA'){
-                $(nTd).html("<span class='tag is-spaced is-rounded is-primary'>Aberto</span>");
-            }else if(oData.status === 'FECHADO'){
-                $(nTd).html("<span class='tag is-spaced is-rounded is-black'>Fechado</span>");
-            }else if(oData.status === 'EMANDAMENTO'){
-                $(nTd).html("<span class='tag is-spaced is-rounded is-black'>Em andamento</span>");
-            }
-            
-        } },
-            { "data": "dataInicio",
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<span ><strong>"+formatData(oData.dataInicio)+" a "+formatData(oData.dataTermino)+"</strong></span>");
-            
-        } },
-            { "data": "titulo" ,
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<span >40/50</span>");
-        } },
-            { "data": "titulo" ,
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<a class='has-text-weight-medium' href='/chamadas/"+oData.id+"'>Acessar Chamada</a>");
-        } },
-   
-		
-            
-        ]
-    })
-}) */
-
-    
-} );
+$('#chamada')
+    .dataTable({
+        "language" : {
+		    "search": "",
+		    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+		},
+		"dom":' <"top"f>rt<"bottom"ip><"clear">',
+	});
 </script>
 </html>
