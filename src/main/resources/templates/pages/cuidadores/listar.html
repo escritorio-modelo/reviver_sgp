@@ -1,94 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Todos os Cuidadores - Reviver</title>
-    <th:block th:include="components/geral/index.html :: header-files"></th:block>
+	<title>Todos os cuidadores - Reviver</title>
+	<th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
 
 <body>
 <div th:replace="components/header/index.html :: header(content='Todos os cuidadores', paginaatual='cuidadores')"></div>
 
-<div th:if="${deletada}" class="container" data-notification="show">
-    <div class="columns is-centered">
-        <div class="column is-half notification-component">
-            <div th:replace="components/notificacao/cuidador.html :: notificacao(tipo='success', mensagem='O cuidador foi deletado com sucesso!')"></div>
-        </div>
-    </div>
-</div>
-
 <!-- PageBody -->
 <section class="section">
-	<table id="cuidadorr" class="dataTable" style="width:100%">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Telefone</th>
-                <th>Acesso</th>
-               
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="cuidador : ${cuidadores}">
-				<td>
-					<a
-							th:href="@{#}"
-							class="has-text-weight-medium"
-							th:text="${cuidador.nome}"
-					></a
-					>
-				</td>
-				<td><span th:text="${cuidador.cpf}">
+	<div class="container">
 
-				</span></td>
-				<td><span th:text="${cuidador.telefone}">
+		<!-- TableCuidadores -->
+		<div class="container mt-16">
+			<table id='cuidadores' class="dataTable"  style="width:100%; border-radius: 7px;">
+				<thead>
+				<tr>
+					<th>Nome</th>
+					<th>CPF</th>
+					<th>Telefone</th>
+					<th>Paciente</th>
+					<th>Acesso</th>
+				</tr>
+				</thead>
 
-				</span></td>
-				<td>
-					<a
-							th:href="@{#}"
-							class="has-text-weight-medium"
-					>Acessar cuidador</a
-					>
-				</td>
-			</tr>
-        </tbody>
-       
-    </table>
+				<tbody id="table-content">
+				<tr th:each="cuidador : ${cuidadores}">
+					<td>
+						<a href="#" class="has-text-weight-medium" th:text="${cuidador.nome}">
+							Nome cuidador
+						</a>
+					</td>
+					<td>
+						<p th:text="${cuidador.cpf}">Cpf cuidador</p>
+					</td>
+					<td>
+						<p th:text="${cuidador.telefone[0]}">Telefone cuidador</p>
+					</td>
+					<td>
+						<a href="#">Nome Paciente</a>
+					</td>
+					<td>
+						<a href="#" class="has-text-weight-medium">
+							Acessar cuidador
+						</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- TableCuidador End-->
+
+	</div>
 </section>
 <!-- PageBody End -->
 
-<th:block th:include="components/geral/cuidador.html :: scripts"></th:block>
-</body>
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
 <script>
-	$(document).ready(function() {
-		$('#cuidadorr').DataTable();
-		/* $.ajax({
-    'url': "/api/cuidadores/",
-    'method': "GET",
-    'contentType': 'application/json'
-}).done( function(data) {
-	console.log(data.content[0].nome,'jonathannnnnnnnn')
-	const actualData = data.content
-    $('#cuidador').dataTable( {
-        "aaData": actualData,
-        "columns": [
-		
-        { "data": "nome" ,
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<a class='has-text-weight-medium' href='#'>"+oData.nome+"</a>");
-        } },
-            { "data": "cpf" },
-            { "data": "telefone"},
-            { "data": "nome" ,
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<a class='has-text-weight-medium' href='#'>Acessar Cuidador</a>");
-        } },
-        ]
-    })
-})
-
-     */
-} );
+$('#cuidadores')
+	.dataTable({
+		"language" : {
+		"search": "",
+		"info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+	},
+		"dom":' <"top"f>rt<"bottom"ip><"clear">',
+	});
 </script>
+</body>
 </html>
