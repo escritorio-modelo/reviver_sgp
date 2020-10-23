@@ -1,117 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Todos os Pacientes - Reviver</title>
-    <th:block th:include="components/geral/paciente.html :: header-files"></th:block>
-    
+	<title>Todas os pacientes - Reviver</title>
+	<th:block th:include="components/geral/index.html :: header-files"></th:block>
 </head>
 
 <body>
 <div th:replace="components/header/index.html :: header(content='Todos os pacientes', paginaatual='pacientes')"></div>
 
-<div th:if="${deletada}" class="container" data-notification="show">
-    <div class="columns is-centered">
-        <div class="column is-half notification-component">
-            <div th:replace="components/notificacao/index.html :: notificacao(tipo='success', mensagem='O paciente foi deletado com sucesso!')"></div>
-        </div>
-    </div>
-</div>
+<!-- PageBody -->
 <section class="section">
-	<table id='paciente' class="dataTable" data-editing="true" style="width:100%">
-		 <thead>
-			<tr>
-				
-				<th>Nome</th>
-				<th>CPF</th>
-				<th>Portador de</th>
-				<th>Acesso</th>
-			</tr>
-		</thead>
-		<tbody>
-	
-		<tr th:each="paciente : ${pacientes}">
-			<td>
-				<a
-						th:href="@{#}"
-						class="has-text-weight-medium"
-						th:text="${paciente.nome}"
-				></a
-				>
-			</td>
-			<td><span th:text="${paciente.cpf}">
+	<div class="container">
 
-			</span></td>
-			<td>  <span th:classappend="${paciente.parkinson ? 'tag is-spaced is-rounded is-primary' : ''}"   th:text="${paciente.parkinson?'Parkinson':''}"  >
+		<!-- TablePacientes -->
+		<div class="container mt-16">
+				<table id='pacientes' class="dataTable"  style="width:100%; border-radius: 7px;">
+					<thead>
+					<tr>
+						<th>Nome</th>
+						<th>CPF</th>
+						<th>Portador de</th>
+						<th>Cuidador</th>
+						<th>Acesso</th>
+					</tr>
+					</thead>
 
-			</span><span  th:classappend="${paciente.alzheimer ? 'tag is-spaced is-rounded is-link' : ''}" th:text="${paciente.alzheimer?'Alzheimer':''}">
+					<tbody id="table-content">
+					<tr th:each="paciente : ${pacientes}">
+						<td>
+							<a href="#" class="has-text-weight-medium" th:text="${paciente.nome}">
+								Nome paciente
+							</a>
+						</td>
+						<td>
+							<p th:text="${paciente.cpf}">Cpf paciente</p>
+						</td>
+						<td>
+							<p>
+								<i th:text="${paciente.alzheimer ? 'Alzheimer' : ''}">Alzheimer</i>
+								<i th:text="${paciente.parkinson ? 'Parkinson' : ''}">Parkinson</i>
+							</p>
+						</td>
+						<td>
+							<a href="#">Nome Cuidador</a>
+						</td>
+						<td>
+							<a href="#" class="has-text-weight-medium">
+								Acessar paciente
+							</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		<!-- TablePacientes End-->
 
-			</span></td>
-			<td>
-				<a
-						th:href="@{#}"
-						class="has-text-weight-medium"
-				>Acessar paciente</a
-				>
-			</td>
-		</tr>
-	
-	</tbody> 
-	</table>
+	</div>
 </section>
+<!-- PageBody End -->
 
-
-<th:block th:include="components/geral/paciente.html :: scripts"></th:block>
-</body>
-
-<!-- Add in any FooTable dependencies we may need -->
-
-<!-- Add in FooTable itself -->
-
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
 <script>
-	$(document).ready(function() {
-
-		$('#paciente').DataTable();
-
-		
-
-		/* $.ajax({
-    'url': "/api/pacientes/",
-    'method': "GET",
-    'contentType': 'application/json'
-}).done( function(data) {
-	console.log(data.content[0].nome,'jonathannnnnnnnn')
-	const actualData = data.content
-    $('#paciente').dataTable( {
-        "aaData": actualData,
-        "columns": [
-		
-            { "data": "nome",
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<a class='has-text-weight-medium' href='#'>"+oData.nome+"</a>");
-        } },
-            { "data": "cpf" },
-            { "data": "parkinson", "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            if(oData.parkinson && !oData.alzheimer){
-                $(nTd).html("<span >Parkinson</span>");
-            }else if(!oData.parkinson && oData.alzheimer){
-                $(nTd).html("<span >Alzheimer</span>");
-            }else if(oData.parkinson && oData.alzheimer){
-				$(nTd).html("<span >Alzheimer, parkinson</span>");
-			}else if(!oData.parkinson && !oData.alzheimer){
-				$(nTd).html("<span >Não informado</span>");
-			}
-           
-            
-        } },{ "data": "nome" ,
-        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<a class='has-text-weight-medium' href='#'>Acessar Paciente</a>");
-        } },
-            
-        ]
-    })
-})
- */
-    
-} );
+$('#pacientes')
+	.dataTable({
+		"language" : {
+		"search": "",
+		"info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+	},
+		"dom":' <"top"f>rt<"bottom"ip><"clear">',
+	});
 </script>
+</body>
 </html>
