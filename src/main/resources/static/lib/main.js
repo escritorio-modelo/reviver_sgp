@@ -2,6 +2,68 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/_javascript/components/DataTablesListFilter/index.js":
+/*!******************************************************************!*\
+  !*** ./src/_javascript/components/DataTablesListFilter/index.js ***!
+  \******************************************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DataTablesListFilter = /*#__PURE__*/function () {
+  function DataTablesListFilter() {
+    _classCallCheck(this, DataTablesListFilter);
+  }
+
+  _createClass(DataTablesListFilter, null, [{
+    key: "bind",
+    value: function bind() {
+      $("#pacientes").dataTable({
+        language: {
+          search: "",
+          searchPlaceholder: "Procurar paciente",
+          info: "Mostrando de _START_ até _END_ de _TOTAL_ registros"
+        },
+        dom: ' <"top"f>rt<"bottom"ip><"clear">'
+      });
+      $("#cuidadores").dataTable({
+        language: {
+          search: "",
+          searchPlaceholder: "Procurar cuidador",
+          info: "Mostrando de _START_ até _END_ de _TOTAL_ registros"
+        },
+        dom: ' <"top"f>rt<"bottom"ip><"clear">'
+      });
+      $("#chamadas").dataTable({
+        language: {
+          search: "",
+          searchPlaceholder: "Procurar chamada",
+          info: "Mostrando de _START_ até _END_ de _TOTAL_ registros"
+        },
+        dom: ' <"top"f>rt<"bottom"ip><"clear">'
+      });
+    }
+  }]);
+
+  return DataTablesListFilter;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DataTablesListFilter);
+
+/***/ }),
+
 /***/ "./src/_javascript/components/DetailsOptions/index.js":
 /*!************************************************************!*\
   !*** ./src/_javascript/components/DetailsOptions/index.js ***!
@@ -576,7 +638,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _javascript_components_Notificacao__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_javascript/components/Notificacao */ "./src/_javascript/components/Notificacao/index.js");
 /* harmony import */ var _javascript_components_DetailsOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_javascript/components/DetailsOptions */ "./src/_javascript/components/DetailsOptions/index.js");
 /* harmony import */ var _javascript_utils_masks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./_javascript/utils/masks */ "./src/_javascript/utils/masks.js");
+/* harmony import */ var _javascript_components_DataTablesListFilter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./_javascript/components/DataTablesListFilter */ "./src/_javascript/components/DataTablesListFilter/index.js");
 __webpack_require__(/*! ./_sass/main.scss */ "./src/_sass/main.scss");
+
 
 
 
@@ -595,6 +659,10 @@ document.addEventListener("DOMContentLoaded", function () {
     var participanteController = new _javascript_controllers_ParticipanteController__WEBPACK_IMPORTED_MODULE_0__.default();
     participanteController.bind();
     _javascript_utils_masks__WEBPACK_IMPORTED_MODULE_3__.default.bind();
+  }
+
+  if (document.querySelector("#chamadas,#pacientes,#cuidadores")) {
+    _javascript_components_DataTablesListFilter__WEBPACK_IMPORTED_MODULE_4__.default.bind();
   }
 });
 

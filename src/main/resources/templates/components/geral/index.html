@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-
 <header th:fragment="header-files">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,13 +13,8 @@
 
 <div th:fragment="scripts">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/lib/main.js}"></script>
-    
-
     <script type="text/javascript" src="/webjars/select2/js/select2.min.js"></script>
-    
     <script type="text/javascript" th:src="@{/DataTables-1.10.22/datatables.min.js}"></script>
-
+    <script type="text/javascript" th:src="@{/lib/main.js}"></script>
 </div>
-
 </html>

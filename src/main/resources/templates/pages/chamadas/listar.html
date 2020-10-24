@@ -21,22 +21,6 @@
     <div class="container">
 
         <div class="columns">
-            <!-- <div class="column is-9">
-               
-                <div class="control has-icons-left">
-                    <input
-                            class="input is-medium"
-                            type="text"
-                            placeholder="Buscar chamada"
-                            id="input-search"
-                    />
-                    <span class="icon is-left">
-                <i class="fas fa-search"></i>
-              </span>
-                </div>
-               
-            </div> -->
-
             <!-- ButtonNewCall -->
             <div class="column is-3 " >
                 <a
@@ -53,9 +37,7 @@
         </div>
 
         <!-- TableCalls -->
-        
-            
-                <table id='chamada' class="dataTable"  style="width:100%; border-radius: 7px;">
+                <table id='chamadas' class="dataTable"  style="width:100%; border-radius: 7px;">
                     <thead>
                     <tr>
                         <th>Título</th>
@@ -106,22 +88,12 @@
                     </tr>
                     </tbody>
                 </table>
-
         <!-- TableCalls End-->
     </div>
 </section>
 <!-- PageBody End -->
 
 <th:block th:include="components/geral/index.html :: scripts"></th:block>
-</body>
-<script>
-$('#chamada')
-    .dataTable({
-        "language" : {
-		    "search": "",
-		    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-		},
-		"dom":' <"top"f>rt<"bottom"ip><"clear">',
-	});
 </script>
+</body>
 </html>
