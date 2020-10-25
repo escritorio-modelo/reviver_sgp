@@ -2,12 +2,14 @@ package net.projetoreviver.sgp.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -69,7 +73,7 @@ public class Chamada implements Serializable{
 
 	@JsonIgnore
 	@ToString.Exclude
-	@OneToMany(mappedBy = "chamada")
-	private List<RegistroChamadaPaciente> registrosPacientes;
+	@OneToMany(mappedBy = "chamada", fetch = FetchType.EAGER)
+	private List<RegistroChamadaPaciente> registrosPacientes = new ArrayList<>();
 
 }

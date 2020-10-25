@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +50,7 @@ public class RegistroChamadaPaciente implements Serializable {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @OneToMany(mappedBy = "registroPaciente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "registroPaciente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<RegistroCuidador> cuidadoresList = new ArrayList<>();
 
     public void addCuidador(Cuidador cuidador){

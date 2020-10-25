@@ -8,18 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 
 @Entity
 @Table(name = "tbl_cuidador_frequencia")
+@Setter @Getter @EqualsAndHashCode @ToString
+@NoArgsConstructor
 public class CuidadorFrequencia {
     
+    public CuidadorFrequencia(Atendimento atendimento, Cuidador cuidador){
+        this.atendimento = atendimento;
+        this.cuidador = cuidador;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cf_id")
     private Long id;
 
     @ManyToOne
-    private Cuidador paciente;
+    private Cuidador cuidador;
 
     @ManyToOne
     private Atendimento atendimento;

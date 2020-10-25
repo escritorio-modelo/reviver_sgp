@@ -8,11 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 
 @Entity
 @Table(name = "tbl_paciente_frequencia")
+@Setter @Getter @EqualsAndHashCode @ToString
+@NoArgsConstructor
 public class PacienteFrequencia {
     
+
+    public PacienteFrequencia(Atendimento atendimento, Paciente paciente){
+        this.atendimento = atendimento;
+        this.paciente = paciente;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pacf_id")
@@ -23,7 +37,6 @@ public class PacienteFrequencia {
 
     @ManyToOne
     private Atendimento atendimento;
-
 
     @Column(name = "pf_presente")
     private boolean presente;
