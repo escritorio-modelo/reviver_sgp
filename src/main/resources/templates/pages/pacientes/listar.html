@@ -28,7 +28,7 @@
 					<tbody id="table-content">
 					<tr th:each="paciente : ${pacientes}">
 						<td>
-							<a href="#" class="has-text-weight-medium" th:text="${paciente.nome}">
+							<a th:href="@{/pacientes/{id}(id=${paciente.id})}" class="has-text-weight-medium" th:text="${paciente.nome}">
 								Nome paciente
 							</a>
 						</td>
@@ -45,7 +45,7 @@
 							<a href="#">Nome Cuidador</a>
 						</td>
 						<td>
-							<a href="#" class="has-text-weight-medium">
+							<a th:href="@{/pacientes/{id}(id=${paciente.id})}" class="has-text-weight-medium">
 								Acessar paciente
 							</a>
 						</td>

@@ -34,6 +34,13 @@ public class PacienteController {
 		return mv;
 	}
 
+	@GetMapping("/{id}")
+	public ModelAndView detalhes(@PathVariable("id") Long id) {
+		ModelAndView mv = new ModelAndView("pages/pacientes/detalhes");
+		mv.addObject("paciente", pacienteService.getPacienteById(id));
+		return mv;
+	}
+
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Paciente paciente) {
 		ModelAndView mv = new ModelAndView("pages/pacientes/cadastrar");

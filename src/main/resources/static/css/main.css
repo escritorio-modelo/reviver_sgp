@@ -7922,5 +7922,38 @@ li.item-checked::before {
   line-height: 2.5;
   color: #6d4784; }
 
+.title-info-details {
+  margin-top: 20px;
+  position: relative; }
+
+.title-info-details::before {
+  content: "";
+  width: 20px;
+  height: 2px;
+  margin-top: 20px;
+  top: 0;
+  position: absolute;
+  background-color: #f9a749; }
+
+.label-info-details {
+  margin-left: 10px; }
+
+.text-info-details {
+  margin-left: 10px;
+  line-height: 1.7rem;
+  font-weight: 400; }
+
+.title-info-details-tile {
+  position: relative; }
+
+.title-info-details-tile::before {
+  content: "";
+  width: 20px;
+  height: 3px;
+  margin-top: 20px;
+  top: 0;
+  position: absolute;
+  background-color: #f9a749; }
+
 
 /*# sourceMappingURL=main.css.map*/

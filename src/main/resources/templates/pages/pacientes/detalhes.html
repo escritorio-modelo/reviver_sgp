@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Informações do paciente - Reviver</title>
+    <th:block th:include="components/geral/index.html :: header-files"></th:block>
+</head>
+
+<body>
+<div th:replace="components/header/index.html :: header(content='Informações do paciente', paginaatual='pacientes')"></div>
+
+<!-- PageBody -->
+<section class="section">
+    <div class="container">
+
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-12">
+                <div class="tile">
+                    <div class="tile is-parent is-vertical is-7">
+                        <article class="tile is-child box">
+                            <div class="is-pulled-left">
+                                <h2 class="title is-4">
+                                    <i class="fas fa-user" style="margin-right: 10px"></i>
+                                    <strong th:text="${paciente.nome}">Nome do paciente</strong>
+                                </h2>
+                                <p class="has-text-weight-medium">
+                                    Portador de:
+                                    <strong class="text-info-details">
+                                        <i th:text="${paciente.alzheimer ? 'Alzheimer' : ''}">Alzheimer</i>
+                                        <i th:text="${paciente.parkinson ? 'Parkinson' : ''}">Parkinson</i>
+                                    </strong>
+                                </p>
+
+                                <h3 class="title is-6 has-text-weight-medium title-info-details">
+                                    Dados pessoais
+                                </h3>
+                                <p class="has-text-weight-medium label-info-details">
+                                    Gênero:
+                                    <strong class="text-info-details" th:text="${paciente.genero}">
+                                    </strong>
+                                </p>
+                                <p class="has-text-weight-medium label-info-details">
+                                    CPF:
+                                    <strong class="text-info-details" th:text="${paciente.cpf}">
+                                    </strong>
+                                </p>
+                                <p class="has-text-weight-medium label-info-details">
+                                    Data de nascimento:
+                                    <strong class="text-info-details" th:text="${paciente.dataNascimento}">
+                                    </strong>
+                                </p>
+
+                                <h3 class="title is-6 has-text-weight-medium title-info-details">
+                                    Contato
+                                </h3>
+                                <p class="has-text-weight-medium label-info-details">
+                                    Telefone:
+                                    <strong class="text-info-details" th:text="${paciente.telefone}">
+                                    </strong>
+                                </p>
+                                <p class="has-text-weight-medium label-info-details">
+                                    E-mail:
+                                    <strong class="text-info-details" th:text="${paciente.email}">
+                                    </strong>
+                                </p>
+
+                                <h3 class="title is-6 has-text-weight-medium title-info-details">
+                                    Endereço
+                                </h3>
+                                <p class="has-text-weight-medium label-info-details">
+                                    CEP:
+                                    <strong class="text-info-details" th:text="${paciente.endereco.cep}">
+                                    </strong>
+                                </p>
+                                <p class="has-text-weight-medium label-info-details">
+                                    Rua:
+                                    <strong class="text-info-details" th:text="${paciente.endereco.rua.nome}"
+                                    >rua</strong
+                                    >
+                                </p>
+                                <p class="has-text-weight-medium label-info-details">
+                                    Número:
+                                    <strong class="text-info-details" th:text="${paciente.endereco.numero}">
+                                    </strong>
+                                </p>
+                                <p class="has-text-weight-medium label-info-details">
+                                    Bairro
+                                    <strong class="text-info-details" th:text="${paciente.endereco.rua.bairro.nome}">
+                                    </strong>
+                                </p>
+                                <p class="has-text-weight-medium label-info-details">
+                                    Cidade:
+                                    <strong class="text-info-details" th:text="${paciente.endereco.rua.bairro.cidade.nome}">
+                                    </strong>
+                                </p>
+                                <p class="has-text-weight-medium label-info-details">
+                                    Estado:
+                                    <strong class="text-info-details" th:text="${paciente.endereco.rua.bairro.cidade.estado.nome}">
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="is-pulled-right">
+                                <div class="detalhes-opcoes">
+                                    <p class="detalhes-opcoes-botao">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </p>
+
+                                    <div class="detalhes-opcoes-body">
+                                        <a th:href="@{/pacientes/{id}/alterar(id=${paciente.id})}" class="is-primary">
+                                            <i class="fas fa-edit"></i> Editar paciente
+                                        </a>
+                                        <a onclick="confirmDelete()">
+                                            <i class="far fa-trash-alt"></i> Deletar paciente
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="tile is-parent">
+                        <div class="tile is-vertical">
+                            <article class="tile is-child box">
+                                <div class="columns">
+                                    <div class="column">
+                                        <h3 class="title is-6 has-text-weight-medium title-info-details-tile">
+                                            <i class="fas fa-user-friends"></i> Cuidador
+                                        </h3>
+                                    </div>
+
+                                    <div class="column">
+                                        <a href="#" class="has-text-weight-medium is-pulled-right">
+                                            Acessar cuidador
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="is-pulled-left">
+                                    <p class="has-text-weight-medium label-info-details">
+                                        Nome:
+                                        <strong class="text-info-details">
+                                        </strong>
+                                    </p>
+                                    <p class="has-text-weight-medium label-info-details">
+                                        Telefone:
+                                        <strong class="text-info-details">
+                                        </strong>
+                                    </p>
+                                </div>
+                            </article>
+                            <article class="tile is-child"></article>
+                            <article class="tile is-child"></article>
+                            <article class="tile is-child"></article>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="tile is-parent">
+                  <article class="tile is-child box">
+                    <p class="title is-4">Lista de pacientes</p>
+                    <p class="subtitle">Aligned with the right tile</p>
+                    <div class="content">
+
+                    </div>
+                  </article>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
+</body>
+</html>
