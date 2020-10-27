@@ -34,16 +34,6 @@ public class PacienteRestController {
     @Autowired
 	private PacienteService pacienteService;
 
-    @GetMapping("/")
-    public Page<Paciente> listarAll(@RequestParam(value = "nome", required = false, defaultValue = "") String nome,
-		@RequestParam(value = "pagina", required = false , defaultValue = "0")int pagina,
-		@RequestParam(value = "tamanho", required = false, defaultValue = "10") int tamanho)
-	{
-
-		PageRequest pageRequest = PageRequest.of(pagina, tamanho, Sort.Direction.DESC, "nome");
-		return pacienteRepository.findByNomeContainingIgnoreCase(nome, pageRequest);
-    }
-    
 
     @PostMapping("/")
 	@ResponseStatus(value = HttpStatus.CREATED)

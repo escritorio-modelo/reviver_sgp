@@ -5,23 +5,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import net.projetoreviver.sgp.groups.ValidationGroups;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -44,6 +34,7 @@ public class Chamada implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@NotNull(groups = ValidationGroups.ChamadaId.class)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long id;
@@ -73,7 +64,12 @@ public class Chamada implements Serializable{
 
 	@JsonIgnore
 	@ToString.Exclude
-	@OneToMany(mappedBy = "chamada", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "chamada", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<RegistroChamadaPaciente> registrosPacientes = new ArrayList<>();
 
+
+	@PrePersist
+	public void prePersist(){
+		this.setStatus(StatusChamada.ABERTA);
+	}
 }

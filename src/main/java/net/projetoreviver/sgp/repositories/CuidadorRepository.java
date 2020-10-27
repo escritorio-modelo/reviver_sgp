@@ -12,6 +12,5 @@ import net.projetoreviver.sgp.models.Cuidador;
 
 @Repository
 public interface CuidadorRepository extends JpaRepository<Cuidador, Long> {
-    Page<Cuidador> findByNomeContainingIgnoreCase(String query, Pageable pageable);
     List<Cuidador> findByNomeContainingIgnoreCase(String query);
 }

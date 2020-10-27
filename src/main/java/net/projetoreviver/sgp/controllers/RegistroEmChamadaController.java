@@ -34,11 +34,9 @@ public class RegistroEmChamadaController {
 
     @GetMapping("/{chamada_id}")
     public ModelAndView cadastrarNaChamada(@PathVariable("chamada_id") Long chamadaId){
-        System.out.println(chamadaId);
-        ModelAndView mv = new ModelAndView("pages/cadastro-participante/index"); //Adicionar view
-        mv.addObject("registro", new RegistroChamadaPaciente()); //Onde chamada, paciente serão relacionados
-        mv.addObject("chamada", chamadaService.getChamadaById(chamadaId)); //Aqui vai a chamada onde o paciente está sendo cadastrado.
-        //Como acessar cuidador? registro.cuidadoresList
+        ModelAndView mv = new ModelAndView("pages/cadastro-participante/index");
+        mv.addObject("registro", new RegistroChamadaPaciente());
+        mv.addObject("chamada", chamadaService.getChamadaById(chamadaId));
         return mv;
     }
 
@@ -49,7 +47,7 @@ public class RegistroEmChamadaController {
         registro.addCuidador(cuidador);
         registroChamadaPacienteService.toPersist(registro);
         attributes.addFlashAttribute("novoRegistro", true);
-        return ("redirect:/chamadas/"+registro.getChamada().getId());
+        return ("redirect:/chamadas/" + registro.getChamada().getId());
     }
 }
 

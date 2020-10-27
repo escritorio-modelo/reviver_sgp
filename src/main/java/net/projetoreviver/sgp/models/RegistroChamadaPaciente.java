@@ -50,7 +50,7 @@ public class RegistroChamadaPaciente implements Serializable {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @OneToMany(mappedBy = "registroPaciente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "registroPaciente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RegistroCuidador> cuidadoresList = new ArrayList<>();
 
     public void addCuidador(Cuidador cuidador){

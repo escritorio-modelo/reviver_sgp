@@ -6,23 +6,13 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import net.projetoreviver.sgp.models.*;
+import net.projetoreviver.sgp.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.projetoreviver.sgp.exceptions.NegocioException;
 import net.projetoreviver.sgp.exceptions.RegistroNaoEncontradoException;
-import net.projetoreviver.sgp.models.Atendimento;
-import net.projetoreviver.sgp.models.Chamada;
-import net.projetoreviver.sgp.models.Cuidador;
-import net.projetoreviver.sgp.models.CuidadorFrequencia;
-import net.projetoreviver.sgp.models.Paciente;
-import net.projetoreviver.sgp.models.PacienteFrequencia;
-import net.projetoreviver.sgp.models.RegistroChamadaPaciente;
-import net.projetoreviver.sgp.models.RegistroCuidador;
-import net.projetoreviver.sgp.models.StatusChamada;
-import net.projetoreviver.sgp.repositories.AtendimentoRepository;
-import net.projetoreviver.sgp.repositories.CuidadorFrequenciaRepository;
-import net.projetoreviver.sgp.repositories.PacienteFrequenciaRepository;
 
 @Service
 public class AtendimentoService {
@@ -36,13 +26,32 @@ public class AtendimentoService {
     @Autowired
     private CuidadorFrequenciaRepository cuidadorFrequenciaRepository;
 
+    @Autowired
+    private ChamadaRepository chamadaRepository;
+
+    @Autowired
+    private AreaRepository areaRepository;
+
     @Transactional
     public Atendimento toPersist(Atendimento atendimento){
+        Chamada chamada = chamadaRepository.findById(atendimento.getChamada().getId())
+                .orElseThrow(() -> new NegocioException("Chamada não encontrada."));
+
+        if(chamada.getStatus() != StatusChamada.EMANDAMENTO){
+            throw new NegocioException("Atendimento só podem ser marcados para chamadas em andamento.");
+        }
+
+        Area area = areaRepository.findById(atendimento.getArea().getId())
+                .orElseThrow(() -> new NegocioException("Area não encontrada."));
+
+        atendimento.setArea(area);
+        atendimento.setChamada(chamada);
+
         return atendimentoRepository.save(atendimento);
     }
 
     
-
+/*
     public void toPersist(Atendimento atendimento, Chamada chamada) {
         
         if(chamada.getStatus() != StatusChamada.EMANDAMENTO){
@@ -66,6 +75,7 @@ public class AtendimentoService {
         cuidadorFrequenciaRepository.saveAll(cuidadorFrequenciaList);
         
     }
+*/
 
     public Atendimento getAtendimentoById(Long id){
         Optional<Atendimento> atendimentoOptional = atendimentoRepository.findById(id);
