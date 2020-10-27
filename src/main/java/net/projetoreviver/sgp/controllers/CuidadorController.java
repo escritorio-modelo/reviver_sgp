@@ -32,6 +32,13 @@ public class CuidadorController {
         return mv;
     }
 
+    @GetMapping("/{id}")
+    public ModelAndView detalhes(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("pages/cuidadores/detalhes");
+        mv.addObject("cuidador", cuidadorService.getCuidadorById(id));
+        return mv;
+    }
+
     @GetMapping("/cadastrar")
     public ModelAndView cadastrar(Cuidador cuidador) {
         ModelAndView mv = new ModelAndView("pages/cuidadores/cadastrar");
