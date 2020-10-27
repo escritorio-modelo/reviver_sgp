@@ -2,30 +2,36 @@ package net.projetoreviver.sgp.services;
 
 import java.util.Optional;
 
+import net.projetoreviver.sgp.exceptions.NegocioException;
+import net.projetoreviver.sgp.models.StatusChamada;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.RequiredArgsConstructor;
 import net.projetoreviver.sgp.exceptions.RegistroNaoEncontradoException;
 import net.projetoreviver.sgp.exceptions.TransacaoNaoRealizadaException;
 import net.projetoreviver.sgp.models.Chamada;
 import net.projetoreviver.sgp.repositories.ChamadaRepository;
 
 @Service
-@RequiredArgsConstructor
 public class ChamadaService {
 	
-	private final ChamadaRepository chamadaRepository;
+	@Autowired
+	private ChamadaRepository chamadaRepository;
 	
 	@Transactional
 	public Chamada toPersist(Chamada chamada) {
-		if(chamadaRepository.save(chamada) == null) {
-			throw new TransacaoNaoRealizadaException("Não foi possível salvar essa chamada");
+		Chamada chamadaSalva;
+		try{
+			chamadaSalva = chamadaRepository.save(chamada);
+		}catch(Exception ex){
+			throw new TransacaoNaoRealizadaException("Não foi possível salvar chamada");
 		}
-		return chamada;
+
+		return chamadaSalva;
 	}
 	
 	public Chamada getChamadaById(Long id) {
@@ -38,6 +44,9 @@ public class ChamadaService {
 	
 	@Transactional
 	public void toRemove(Chamada chamada) {
+		if(chamada.getStatus() != StatusChamada.ABERTA) {
+			throw new TransacaoNaoRealizadaException("Somente chamadas abertas podem ser deletadas");
+		}
 		chamadaRepository.deleteById(chamada.getId());
 	}
 
