@@ -9,10 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import net.projetoreviver.sgp.groups.ValidationGroups;
 
 @Entity
 @Table(name = "tbl_area")
@@ -23,6 +25,7 @@ public class Area implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
+    @NotNull(groups = ValidationGroups.AreaId.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="area_id")
     private Long id;
