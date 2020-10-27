@@ -29,7 +29,6 @@ public class PacienteService {
         }catch (Exception ex){
             throw new TransacaoNaoRealizadaException("Erro ao salvar Paciente");
         }
-
     }
 
     public Paciente getPacienteById(Long id){
