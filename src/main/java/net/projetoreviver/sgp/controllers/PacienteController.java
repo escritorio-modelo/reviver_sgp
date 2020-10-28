@@ -58,7 +58,7 @@ public class PacienteController {
 
 	@GetMapping("/{id}/alterar")
 	public ModelAndView alterar(@PathVariable("id") Long id) {
-		ModelAndView mv = new ModelAndView("pacientes/alterar");
+		ModelAndView mv = new ModelAndView("pages/pacientes/alterar");
 		mv.addObject("paciente", pacienteService.getPacienteById(id));
 		return mv;
 	}
@@ -66,7 +66,7 @@ public class PacienteController {
 	@PostMapping("/alterar")
 	public ModelAndView alterar(@Valid Paciente paciente, BindingResult result) {
 		if (result.hasErrors()) {
-			return new ModelAndView("pacientes/alterar").addObject("paciente", paciente);
+			return new ModelAndView("pages/pacientes/alterar").addObject("paciente", paciente);
 		}
 		pacienteService.toPersist(paciente);
 		return new ModelAndView("redirect:/pacientes/listar");
