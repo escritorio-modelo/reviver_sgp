@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tbl_paciente")
 @PrimaryKeyJoinColumn(name="usu_id")
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true) 
 @ToString(callSuper = true)
 @Setter @Getter
 public class Paciente extends Usuario{
