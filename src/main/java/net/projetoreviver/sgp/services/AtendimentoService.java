@@ -1,7 +1,5 @@
 package net.projetoreviver.sgp.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -19,12 +17,6 @@ public class AtendimentoService {
     
     @Autowired
     private AtendimentoRepository atendimentoRepository;
-
-    @Autowired
-    private PacienteFrequenciaRepository pacienteFrequenciaRepository;
-
-    @Autowired
-    private CuidadorFrequenciaRepository cuidadorFrequenciaRepository;
 
     @Autowired
     private ChamadaRepository chamadaRepository;

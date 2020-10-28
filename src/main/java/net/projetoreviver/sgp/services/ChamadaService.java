@@ -2,7 +2,6 @@ package net.projetoreviver.sgp.services;
 
 import java.util.Optional;
 
-import net.projetoreviver.sgp.exceptions.NegocioException;
 import net.projetoreviver.sgp.models.StatusChamada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
