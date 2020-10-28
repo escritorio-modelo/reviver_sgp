@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tbl_paciente")
 @PrimaryKeyJoinColumn(name="usu_id")
-@EqualsAndHashCode @ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true) 
+@ToString(callSuper = true)
 @Setter @Getter
 public class Paciente extends Usuario{
 
@@ -34,4 +35,5 @@ public class Paciente extends Usuario{
     @ToString.Exclude
     @OneToMany(mappedBy = "paciente")
     private List<RegistroChamadaPaciente> registroChamadaPacientes;
+
 }

@@ -41,7 +41,7 @@ import net.projetoreviver.sgp.annotations.ValidEmail;
 @Entity
 @Table(name = "tbl_usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) @ToString
 @Getter @Setter
 public abstract class Usuario implements Serializable{
 
@@ -49,7 +49,8 @@ public abstract class Usuario implements Serializable{
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "usu_id")
+    @Column(name = "usu_id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "usu_nome", nullable = false)
