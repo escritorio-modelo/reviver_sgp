@@ -18,7 +18,7 @@ import net.projetoreviver.sgp.groups.ValidationGroups;
 
 @Entity
 @Table(name = "tbl_area")
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Setter @Getter
 public class Area implements Serializable{
     
@@ -28,6 +28,7 @@ public class Area implements Serializable{
     @NotNull(groups = ValidationGroups.AreaId.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="area_id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "area_desc")

@@ -23,7 +23,7 @@ import net.projetoreviver.sgp.groups.ValidationGroups;
 
 @Entity
 @Table(name = "tbl_atendimento")
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @Getter @Setter
 public class Atendimento {
@@ -31,6 +31,7 @@ public class Atendimento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "atend_id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @ManyToOne(optional = false)

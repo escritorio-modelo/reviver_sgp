@@ -41,7 +41,8 @@ import net.projetoreviver.sgp.annotations.ValidEmail;
 @Entity
 @Table(name = "tbl_usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true) @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 @Getter @Setter
 public abstract class Usuario implements Serializable{
 

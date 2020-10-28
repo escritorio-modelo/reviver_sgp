@@ -17,7 +17,8 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tbl_estado")
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 @Setter @Getter
 public class Estado implements Serializable {
 
@@ -26,6 +27,7 @@ public class Estado implements Serializable {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "est_id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "est_nome", length = 20)

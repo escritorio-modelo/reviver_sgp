@@ -25,7 +25,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "tbl_registro_cuidador")
 @ToString @Getter @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class RegistroCuidador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,6 +33,7 @@ public class RegistroCuidador implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "regpac_data_registro", nullable = false)

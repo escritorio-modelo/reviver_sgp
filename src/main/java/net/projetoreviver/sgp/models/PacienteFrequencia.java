@@ -17,7 +17,9 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "tbl_paciente_frequencia")
-@Setter @Getter @EqualsAndHashCode @ToString
+@Setter @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 @NoArgsConstructor
 public class PacienteFrequencia {
     
@@ -30,6 +32,7 @@ public class PacienteFrequencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pacf_id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @ManyToOne
