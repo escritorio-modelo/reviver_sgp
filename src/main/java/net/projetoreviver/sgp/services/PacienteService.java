@@ -21,9 +21,9 @@ public class PacienteService {
     @Transactional
     public void toPersist(Paciente paciente){
         
-        Optional<Paciente> pacienteCPF = pacienteRepository.findByCpf(paciente.getCpf());
-        
-        if(pacienteCPF.isPresent() && !paciente.equals(paciente)){
+        Optional<Paciente> pacienteExistente = pacienteRepository.findByCpf(paciente.getCpf());
+
+        if(pacienteExistente.isPresent() && !pacienteExistente.get().equals(paciente)){
             throw new NegocioException("CPF já cadastrado");
         }
 
