@@ -56,7 +56,7 @@ public class CuidadorController {
 
     @GetMapping("/{id}/alterar")
     public ModelAndView alterar(@PathVariable("id") Long id) {
-        ModelAndView mv = new ModelAndView();
+        ModelAndView mv = new ModelAndView("pages/cuidadores/alterar");
         mv.addObject("cuidador", cuidadorService.getCuidadorById(id));
         return mv;
     }
@@ -67,7 +67,7 @@ public class CuidadorController {
             return new ModelAndView().addObject("cuidador", cuidador);
         }
         cuidadorService.toPersist(cuidador);
-        return new ModelAndView();
+        return new ModelAndView("redirect:/cuidadores/listar");
     }
 
     @GetMapping("/{id}/excluir")

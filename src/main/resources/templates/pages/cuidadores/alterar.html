@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar chamada - Reviver</title>
+    <th:block
+            th:include="components/geral/index.html :: header-files"
+    ></th:block>
+</head>
+<body>
+<div
+        th:replace="components/header/index.html :: header(content='Editar paciente', paginaatual='pacientes')"
+></div>
+
+<!-- Content -->
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column box box-section is-9">
+
+                <form method="post" action="/cuidadores/alterar" th:object="${cuidador}" autocomplete="off">
+                    <div th:if="${#fields.hasErrors('*')}">
+                        <div th:each="error : ${#fields.errors('*')}" >
+                            <div th:replace="components/notificacao/index.html :: notificacao(tipo='danger', mensagem=${error})">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" class="form-control form-control-sm" th:field="*{id}" />
+
+                    <h2 class="title is-5">Dados pessoais</h2>
+
+                    <div class="field">
+                        <label class="label">Nome completo</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{nome}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">CPF</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{cpf}" data-mask="cpf">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Data de nascimento</label>
+                        <div class="control">
+                            <input class="input" type="date" th:field="*{dataNascimento}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Gênero</label>
+                        <div class="control">
+                            <div class="select">
+                                <select id="genero-paciente" th:field="*{genero}">
+                                    <option th:value="M">Masculino</option>
+                                    <option th:value="F">Feminino</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Estado civil</label>
+                        <div class="control">
+                            <div class="select">
+                                <select th:field="*{estadoCivil}">
+                                    <option th:each="estadoCivilOpt : ${T(net.projetoreviver.sgp.models.EstadoCivil).values()}"
+                                            th:value="${estadoCivilOpt}" th:text="${estadoCivilOpt.displayValue}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="title is-5">Contato</h2>
+
+                    <div class="field">
+                        <label class="label">E-mail</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{email}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Telefone</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{telefone}" data-mask="phone">
+                        </div>
+                    </div>
+
+                    <h2 class="title is-5">Endereço</h2>
+
+                    <div class="field">
+                        <label class="label">CEP</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{endereco.cep}" data-mask="cep">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Rua</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{endereco.rua.nome}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Número</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{endereco.numero}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Bairro</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{endereco.rua.bairro.nome}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Complemento</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{endereco.complemento}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Cidade</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{endereco.rua.bairro.cidade.nome}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Estado</label>
+                        <div class="control">
+                            <input class="input" type="text" th:field="*{endereco.rua.bairro.cidade.estado.nome}">
+                        </div>
+                    </div>
+
+                    <div class="field is-pulled-right">
+                        <div class="control">
+                            <button type="submit" class="button is-primary form-navigation-next">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block th:include="components/geral/index.html :: scripts"></th:block>
+</body>
+</html>

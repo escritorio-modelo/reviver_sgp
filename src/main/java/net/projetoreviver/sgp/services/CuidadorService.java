@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import net.projetoreviver.sgp.exceptions.NegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,17 @@ public class CuidadorService {
 
     @Transactional
     public void toPersist(Cuidador cuidador){
-        if(cuidadorRepository.save(cuidador) == null){
-            throw new TransacaoNaoRealizadaException("Não foi possível salvar essa chamada");
-        }
+    	Optional<Cuidador> cuidadorExistente = cuidadorRepository.findByCpf(cuidador.getCpf());
+
+		if(cuidadorExistente.isPresent() && !cuidadorExistente.get().equals(cuidador)){
+			throw new NegocioException("CPF já cadastrado");
+		}
+
+		try{cuidadorRepository.save(cuidador);}
+		catch (Exception ex){
+			throw new TransacaoNaoRealizadaException("Erro ao salvar cuidador");
+		}
+
     }
 
     public Cuidador getCuidadorById (Long id) {
