@@ -423,6 +423,7 @@ var Cuidador = /*#__PURE__*/function () {
         var line = "<div class=\"notification is-light is-danger\">\n              <p>".concat(campo.mensagem, "</p>\n          </div>");
         notificationErrorsCuidador.innerHTML += line;
       });
+      notificationErrorsCuidador.scrollIntoView();
     }
   }]);
 
@@ -541,6 +542,7 @@ var Paciente = /*#__PURE__*/function () {
         var line = "<div class=\"notification is-light is-danger\">\n              <p>".concat(campo.mensagem, "</p>\n          </div>");
         notificationErrorsPaciente.innerHTML += line;
       });
+      notificationErrorsPaciente.scrollIntoView();
     }
   }]);
 
@@ -624,6 +626,27 @@ var Mascaras = /*#__PURE__*/function () {
 
       if (mask === "cep") {
         return inputValue.replace("-", "");
+      }
+    }
+  }, {
+    key: "addMask",
+    value: function addMask(mask, value) {
+      if (mask === "cpf") {
+        var oneQuarter = value.slice(0, 3);
+        var twoQuarter = value.slice(4, 7);
+        var threeQuarter = value.slice(8, 11);
+        var fourQuarter = value.slice(12);
+        return "".concat(oneQuarter, ".").concat(twoQuarter, ".").concat(threeQuarter, "-").concat(fourQuarter);
+      }
+
+      if (mask === "phone") {
+        var ddd = value.slice(1, 3);
+        var number = value.slice(5);
+        return "(".concat(ddd, ") ").concat(number);
+      }
+
+      if (mask === "cep") {
+        return "".concat(value.slice(0, 4), "-").concat(value.slice(5));
       }
     }
   }]);
