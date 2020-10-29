@@ -104,15 +104,55 @@
               </div>
             </div>
             
-            <!-- <div class="tile is-parent">
-                  <article class="tile is-child box">
-                    <p class="title is-4">Lista de pacientes</p>
-                    <p class="subtitle">Aligned with the right tile</p>
-                    <div class="content">
+            <div class="tile is-parent">
+              <article class="tile is-child box">
+                <p class="title is-5">Pacientes cadastrados na chamada</p>
+                <div class="content">
 
-                    </div>
-                  </article>
-                </div> -->
+                  <table id='pacientes' class="dataTable" style="border-radius: 7px;">
+                    <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>CPF</th>
+                      <th>Portador de</th>
+                      <th>Cuidador</th>
+                      <th>Acesso</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="table-content">
+                    <tr th:each="registroPaciente : ${chamada.getRegistrosPacientes()}">
+                      <td>
+                        <a th:href="@{/pacientes/{id}(id=${registroPaciente.paciente.id})}" class="has-text-weight-medium"
+                           th:text="${registroPaciente.paciente.nome}">
+                          Nome paciente
+                        </a>
+                      </td>
+                      <td>
+                        <p th:text="${registroPaciente.paciente.cpf}">Cpf paciente</p>
+                      </td>
+                      <td>
+                        <p>
+                          <i th:text="${registroPaciente.paciente.alzheimer ? 'Alzheimer' : ''}">Alzheimer</i>
+                          <i th:text="${registroPaciente.paciente.parkinson ? 'Parkinson' : ''}">Parkinson</i>
+                        </p>
+                      </td>
+                      <td>
+                        <a href="#">Nome Cuidador</a>
+                      </td>
+                      <td>
+                        <a th:href="@{/pacientes/{id}(id=${registroPaciente.paciente.id})}" class="has-text-weight-medium">
+                          Acessar paciente
+                        </a>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </article>
+            </div>
+
           </div>
         </div>
       </div>

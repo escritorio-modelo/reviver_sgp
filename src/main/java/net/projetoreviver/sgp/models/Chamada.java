@@ -64,7 +64,7 @@ public class Chamada implements Serializable{
 
 	@JsonIgnore
 	@ToString.Exclude
-	@OneToMany(mappedBy = "chamada", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "chamada", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<RegistroChamadaPaciente> registrosPacientes = new ArrayList<>();
 
 
