@@ -67,7 +67,7 @@ public class CuidadorController {
             return new ModelAndView().addObject("cuidador", cuidador);
         }
         cuidadorService.toPersist(cuidador);
-        return new ModelAndView("redirect:/cuidadores/listar");
+        return new ModelAndView("redirect:/cuidadores/" + cuidador.getId());
     }
 
     @GetMapping("/{id}/excluir")

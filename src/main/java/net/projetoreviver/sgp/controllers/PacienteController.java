@@ -69,7 +69,7 @@ public class PacienteController {
 			return new ModelAndView("pages/pacientes/alterar").addObject("paciente", paciente);
 		}
 		pacienteService.toPersist(paciente);
-		return new ModelAndView("redirect:/pacientes/listar");
+		return new ModelAndView("redirect:/pacientes/" + paciente.getId());
 	}
 
 	@GetMapping("/{id}/excluir")
