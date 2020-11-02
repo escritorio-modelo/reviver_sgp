@@ -321,6 +321,82 @@ var ParticipanteController = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/_javascript/domain/Chamada/Atendimento.js":
+/*!*******************************************************!*\
+  !*** ./src/_javascript/domain/Chamada/Atendimento.js ***!
+  \*******************************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Atendimento = /*#__PURE__*/function () {
+  function Atendimento() {
+    _classCallCheck(this, Atendimento);
+
+    var $ = document.querySelector.bind(document);
+    this.nome = $("#area");
+    this.cpf = $("#data-hora");
+    this.buttonModalAddAtendimento = $(".modal-cadastrar-atendimento");
+    this.closeModal = document.querySelectorAll(".delete,.close-modal,.modal-background");
+    this.submitAtendimento = $("#cadastrar-atendimento");
+    this.bind();
+  }
+
+  _createClass(Atendimento, [{
+    key: "bind",
+    value: function bind() {
+      var _this = this;
+
+      this.buttonModalAddAtendimento.addEventListener("click", function () {
+        document.querySelector(".modal-atendimento").style.display = "block";
+      });
+      this.submitAtendimento.addEventListener("click", function () {
+        return _this.addAtendimento();
+      });
+      this.closeModal.forEach(function (button) {
+        return button.addEventListener("click", function () {
+          document.querySelector(".modal-atendimento").style.display = "none";
+        });
+      });
+    }
+  }, {
+    key: "addAtendimento",
+    value: function addAtendimento() {
+      console.log('ainda faremos');
+    }
+  }, {
+    key: "showErrors",
+    value: function showErrors(data) {
+      var inputErrors = data.campos;
+      var notificationErrorsCuidador = document.querySelector("#noticacao-erros-cuidador");
+      notificationErrorsCuidador.innerHTML = "";
+      inputErrors.map(function (campo) {
+        var line = "<div class=\"notification is-light is-danger\">\n              <p>".concat(campo.mensagem, "</p>\n          </div>");
+        notificationErrorsCuidador.innerHTML += line;
+      });
+      notificationErrorsCuidador.scrollIntoView();
+    }
+  }]);
+
+  return Atendimento;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Atendimento);
+
+/***/ }),
+
 /***/ "./src/_javascript/domain/Cuidador/Cuidador.js":
 /*!*****************************************************!*\
   !*** ./src/_javascript/domain/Cuidador/Cuidador.js ***!
@@ -671,9 +747,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _javascript_controllers_ParticipanteController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_javascript/controllers/ParticipanteController */ "./src/_javascript/controllers/ParticipanteController.js");
 /* harmony import */ var _javascript_components_Notificacao__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_javascript/components/Notificacao */ "./src/_javascript/components/Notificacao/index.js");
 /* harmony import */ var _javascript_components_DetailsOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_javascript/components/DetailsOptions */ "./src/_javascript/components/DetailsOptions/index.js");
-/* harmony import */ var _javascript_utils_masks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./_javascript/utils/masks */ "./src/_javascript/utils/masks.js");
-/* harmony import */ var _javascript_components_DataTablesListFilter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./_javascript/components/DataTablesListFilter */ "./src/_javascript/components/DataTablesListFilter/index.js");
+/* harmony import */ var _javascript_utils_masks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./_javascript/utils/masks */ "./src/_javascript/utils/masks.js");
+/* harmony import */ var _javascript_components_DataTablesListFilter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./_javascript/components/DataTablesListFilter */ "./src/_javascript/components/DataTablesListFilter/index.js");
+/* harmony import */ var _javascript_domain_Chamada_Atendimento__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./_javascript/domain/Chamada/Atendimento */ "./src/_javascript/domain/Chamada/Atendimento.js");
 __webpack_require__(/*! ./_sass/main.scss */ "./src/_sass/main.scss");
+
 
 
 
@@ -687,16 +765,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (document.querySelector(".detalhes-opcoes-botao")) {
     _javascript_components_DetailsOptions__WEBPACK_IMPORTED_MODULE_2__.default.bind();
+
+    if (document.querySelector(".modal-cadastrar-atendimento")) {
+      var atendimento = new _javascript_domain_Chamada_Atendimento__WEBPACK_IMPORTED_MODULE_3__.default();
+    }
   }
 
   if (document.querySelector(".button-cadastro-continuar")) {
     var participanteController = new _javascript_controllers_ParticipanteController__WEBPACK_IMPORTED_MODULE_0__.default();
     participanteController.bind();
-    _javascript_utils_masks__WEBPACK_IMPORTED_MODULE_3__.default.bind();
+    _javascript_utils_masks__WEBPACK_IMPORTED_MODULE_4__.default.bind();
   }
 
   if (document.querySelector("#chamadas,#pacientes,#cuidadores")) {
-    _javascript_components_DataTablesListFilter__WEBPACK_IMPORTED_MODULE_4__.default.bind();
+    _javascript_components_DataTablesListFilter__WEBPACK_IMPORTED_MODULE_5__.default.bind();
   }
 });
 
