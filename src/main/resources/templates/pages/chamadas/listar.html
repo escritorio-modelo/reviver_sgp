@@ -77,7 +77,7 @@
                             >dd/MM/aaaa</strong
                             >
                         </td>
-                        <td>50/50</td>
+                        <td><span th:text="${chamada.numeroPacientesCadastrados}"></span>/50</td>
                         <td>
                             <a
                                     th:href="@{/chamadas/{id}(id=${chamada.id})}"

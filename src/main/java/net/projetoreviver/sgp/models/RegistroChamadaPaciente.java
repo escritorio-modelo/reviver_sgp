@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.persistence.CascadeType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -54,12 +55,21 @@ public class RegistroChamadaPaciente implements Serializable {
     @OneToMany(mappedBy = "registroPaciente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RegistroCuidador> cuidadoresList = new ArrayList<>();
 
+    @Transient
+    private RegistroCuidador ultimoCuidadorCadastrado;
+
+    public RegistroCuidador getUltimoCuidadorCadastrado(){
+        return cuidadoresList.get(cuidadoresList.size() - 1);
+    }
+
     public void addCuidador(Cuidador cuidador){
         RegistroCuidador registroCuidador = new RegistroCuidador();
         registroCuidador.setCuidador(cuidador);
         registroCuidador.setRegistroPaciente(this);
         this.getCuidadoresList().add(registroCuidador);
     }
+
+
 
     @PrePersist
     public void created(){

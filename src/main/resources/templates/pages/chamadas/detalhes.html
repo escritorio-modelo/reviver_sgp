@@ -156,7 +156,8 @@
                         </p>
                       </td>
                       <td>
-                        <a th:href="@{/cuidadores/{id}(id=${registroPaciente.cuidadoresList[0].cuidador.id})}" th:text="${registroPaciente.cuidadoresList[0].cuidador.nome}">Nome Cuidador</a>
+                        <a th:href="@{/cuidadores/{id}(id=${registroPaciente.ultimoCuidadorCadastrado.cuidador.id})}" 
+                        th:text="${registroPaciente.ultimoCuidadorCadastrado.cuidador.nome}">Nome Cuidador</a>
                       </td>
                       <td>
                         <a th:href="@{/pacientes/{id}(id=${registroPaciente.paciente.id})}" class="has-text-weight-medium">
