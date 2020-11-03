@@ -7,9 +7,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.projetoreviver.sgp.exceptions.NegocioException;
 import net.projetoreviver.sgp.exceptions.RegistroNaoEncontradoException;
 import net.projetoreviver.sgp.exceptions.TransacaoNaoRealizadaException;
 import net.projetoreviver.sgp.models.RegistroChamadaPaciente;
+import net.projetoreviver.sgp.models.StatusChamada;
 import net.projetoreviver.sgp.repositories.RegistroChamadaPacienteRepository;
 
 
@@ -20,7 +22,14 @@ public class RegistroChamadaPacienteService {
 
     @Transactional
 	public void toPersist(RegistroChamadaPaciente registroChamadaPaciente) {
-		if(registroChamadaPacienteRepository.save(registroChamadaPaciente) == null) {
+		if(registroChamadaPaciente.getChamada().getStatus() != StatusChamada.ABERTA){
+			throw new NegocioException("Chamada não aceita novos pacientes.");
+		}
+		
+		try{
+			registroChamadaPacienteRepository.save(registroChamadaPaciente);
+		}
+		catch(Exception ex){
 			throw new TransacaoNaoRealizadaException("Não foi possível registrar cuidador");
 		}
 	}
