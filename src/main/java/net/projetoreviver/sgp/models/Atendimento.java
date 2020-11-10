@@ -48,7 +48,7 @@ public class Atendimento {
 
     @Column(name = "atend_data_hora", nullable = false)
     @NotNull(message = "Atendimento deve ter uma data e um horário")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(pattern="yyyy-MM-dd@HH:mm")
     private LocalDateTime dataHora;
 
 }
