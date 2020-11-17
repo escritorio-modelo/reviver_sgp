@@ -196,6 +196,39 @@
     </div>
     <!-- Content End-->
     <script>
+
+function cadastrar(id){
+  console.log('jonatannnnn',id)
+
+    $.ajax({
+    url:'/atendimento/',
+    type:'POST',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify(  {
+      "area": {
+		    "id":document.getElementById('area').value
+	  },
+	    "chamada": {
+		    "id":id
+	  },
+	    "dataHora":document.getElementById('data-hora').value
+    }
+
+    ) 
+,
+     success: console.log('success',document.getElementById('area').value,id,document.getElementById('data-hora').value),
+     
+     error:function(error){
+       console.log(error,'hhhhhhhh')
+     }
+
+  }).done(function(data){
+        
+        console.log(data,'ddddddddddd')
+        //data is now an array with all the data you echod in the a.php which is json encoded
+    }); 
+}
       let modal = document.getElementById('modall');
       let modalf = document.getElementById('modal-content');
       function closee(){
@@ -211,6 +244,9 @@
           modal.style.display = "none";
         }
       }
+
+     
+
       </script>
     <th:block th:include="components/geral/index.html :: scripts"></th:block>
   </body>

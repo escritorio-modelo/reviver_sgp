@@ -4,7 +4,7 @@
 
 <div th:fragment="modal-cadastrar-atendimento" class="modal modal-atendimento">
     <div class="modal-background"></div>
-    <div class="modal-card">
+    <div class="modal-card" id="cadastro">
         <header class="modal-card-head">
             <p class="modal-card-title">Agendar novo atendimento</p>
             <a class="delete" aria-label="close"></a>
@@ -12,11 +12,12 @@
         <section class="modal-card-body">
             <div id="noticacao-erros-atendimento"></div>
 
-            <h3 class="title is-6 user-data-section">Dados do atendimento</h3>
+            <h3 class="title is-6 user-data-section" >Dados do atendimento</h3>
 
             <div class="field">
                 <label class="label">Área</label>
                 <div class="control">
+                    <input type="hidden" th:field="${chamada.id}" id='idd' />
                     <input class="input" type="text" placeholder="" id="area">
                 </div>
             </div>
@@ -30,7 +31,7 @@
 
         </section>
         <footer class="modal-card-foot">
-            <a class="button is-primary" id="cadastrar-atendimento">Salvar</a>
+            <a class="button is-primary" id="cadastrar-atendimento" onclick="cadastrar(document.getElementById('idd').value)" >Salvar</a>
             <a class="close-modal button">Cancelar</a>
         </footer>
     </div>
