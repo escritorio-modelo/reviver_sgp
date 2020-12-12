@@ -109,7 +109,7 @@
                 <article class="tile is-child box">
                   <h3 class="title is-5">Atendimentos</h3>
 
-                  <button class="button modal-cadastrar-atendimento">Agendar atendimento</button>
+                  <button class="button modal-cadastrar-atendimento" onclick="getAreas()" >Agendar atendimento</button>
 
                   <div th:replace="pages/chamadas/atendimento-formulario :: modal-cadastrar-atendimento"></div>
                 </article>
@@ -196,10 +196,34 @@
     </div>
     <!-- Content End-->
     <script>
+function getAreas(){
+  $.ajax({
+    url:'/area/',
+    type:'GET',
+    dataType: 'json',
+    contentType: 'application/json',
+   
+  
+     
+     error:function(error){
+       console.log(error,'hhhhhhhh')
+     }
 
+  }).done(function(data){
+        
+        console.log(data[0].id,'ddddddddddd')
+        var sel = document.getElementById('areass')
+    
+    for (var i=0; i<data.length; i++) {
+      console.log('jonathhhhhhhhhhhhhhhhhhhh')
+      $("#areass").append('<option value="' + data[i].id + '">' + data[i].descricao + '</option>');
+    }
+        //data is now an array with all the data you echod in the a.php which is json encoded
+    });
+}
 function cadastrar(id){
-  console.log('jonatannnnn',id)
-
+  console.log('jonatannnnn')
+  if(document.getElementById('areass').value !== '' && document.getElementById('data-hora').value !== ''){
     $.ajax({
     url:'/atendimento/',
     type:'POST',
@@ -207,7 +231,7 @@ function cadastrar(id){
     contentType: 'application/json',
     data: JSON.stringify(  {
       "area": {
-		    "id":document.getElementById('area').value
+		    "id":document.getElementById('areass').value
 	  },
 	    "chamada": {
 		    "id":id
@@ -220,14 +244,21 @@ function cadastrar(id){
      success: console.log('success',document.getElementById('area').value,id,document.getElementById('data-hora').value),
      
      error:function(error){
+      
        console.log(error,'hhhhhhhh')
      }
 
   }).done(function(data){
-        
+    document.getElementById('areass').value = '';
+    document.getElementById('data-hora').value = '';
+    alert("Agendado com sucesso!!")
         console.log(data,'ddddddddddd')
         //data is now an array with all the data you echod in the a.php which is json encoded
     }); 
+  }else{
+alert('Preencha todos os campos corretamente!!')
+  }
+    
 }
       let modal = document.getElementById('modall');
       let modalf = document.getElementById('modal-content');

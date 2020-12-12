@@ -18,7 +18,14 @@
                 <label class="label">Área</label>
                 <div class="control">
                     <input type="hidden" th:field="${chamada.id}" id='idd' />
-                    <input class="input" type="text" placeholder="" id="area">
+                    <!-- <input class="input" type="text" placeholder="" id="area"> -->
+                    <div class="control">
+                        <div class="select">
+                          <select class="is-hovered" id='areass'>
+                            <option selected>Escolha uma Área</option>
+                          </select>
+                        </div>
+                      </div>
                 </div>
             </div>
 
